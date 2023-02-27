@@ -1,1 +1,3 @@
-const func = () => {};
+const func = () => {
+  const test;
+};
