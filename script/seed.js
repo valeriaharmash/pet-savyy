@@ -66,8 +66,7 @@ module.exports = seed;
 const USER_SEED_DATA = [
   {
     id: 1,
-    username: "rmacdavitt0",
-    password: "3533 Sherman Trail",
+    password: "passWord123",
     firstName: "Rhoda",
     lastName: "MacDavitt",
     email: "rmacdavitt0@paginegialle.it",
@@ -76,8 +75,7 @@ const USER_SEED_DATA = [
   },
   {
     id: 2,
-    username: "ghaysom1",
-    password: "532 Pennsylvania Circle",
+    password: "lamp432",
     firstName: "Glendon",
     lastName: "Haysom",
     email: "ghaysom1@cdbaby.com",
@@ -86,8 +84,7 @@ const USER_SEED_DATA = [
   },
   {
     id: 3,
-    username: "shuikerby2",
-    password: "1 Farwell Terrace",
+    password: "secretword",
     firstName: "Sela",
     lastName: "Huikerby",
     email: "shuikerby2@godaddy.com",
@@ -96,8 +93,7 @@ const USER_SEED_DATA = [
   },
   {
     id: 4,
-    username: "blogsdail3",
-    password: "96671 Orin Park",
+    password: "hiddenText",
     firstName: "Barbee",
     lastName: "Logsdail",
     email: "blogsdail3@hibu.com",
@@ -106,8 +102,7 @@ const USER_SEED_DATA = [
   },
   {
     id: 5,
-    username: "narckoll4",
-    password: "1 Hauk Center",
+    password: "leash",
     firstName: "Nevile",
     lastName: "Arckoll",
     email: "narckoll4@patch.com",
@@ -116,8 +111,7 @@ const USER_SEED_DATA = [
   },
   {
     id: 6,
-    username: "hchapleo5",
-    password: "7 Browning Plaza",
+    password: "puppyLover",
     firstName: "Herschel",
     lastName: "Chapleo",
     email: "hchapleo5@latimes.com",
@@ -126,8 +120,7 @@ const USER_SEED_DATA = [
   },
   {
     id: 7,
-    username: "rkeedy6",
-    password: "14066 Calypso Hill",
+    password: "MarineCorpRules",
     firstName: "Rochette",
     lastName: "Keedy",
     email: "rkeedy6@360.cn",
@@ -136,8 +129,7 @@ const USER_SEED_DATA = [
   },
   {
     id: 8,
-    username: "ksinnat7",
-    password: "96401 Alpine Park",
+    password: "NavyDrools",
     firstName: "Kore",
     lastName: "Sinnat",
     email: "ksinnat7@xrea.com",
@@ -146,8 +138,7 @@ const USER_SEED_DATA = [
   },
   {
     id: 9,
-    username: "janders8",
-    password: "55 Artisan Place",
+    password: "CoolKid",
     firstName: "Juli",
     lastName: "Anders",
     email: "janders8@opensource.org",
@@ -156,8 +147,7 @@ const USER_SEED_DATA = [
   },
   {
     id: 10,
-    username: "kjessop9",
-    password: "01 Bunker Hill Crossing",
+    password: "guitars",
     firstName: "Kerri",
     lastName: "Jessop",
     email: "kjessop9@gravatar.com",
