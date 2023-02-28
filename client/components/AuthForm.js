@@ -8,8 +8,10 @@ const AuthForm = ({ mode }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [authMode, setAuthMode] = useState(mode);
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
   useEffect(() => {
     setAuthMode(mode);
@@ -17,10 +19,12 @@ const AuthForm = ({ mode }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (username && password) {
-      await dispatch(authenticate({ username, password, method: authMode }));
+    if (email && password) {
+      await dispatch(
+        authenticate({ firstName, lastName, email, password, method: authMode })
+      );
       await dispatch(getUserByToken(getUserToken()));
-      setUsername('');
+      setEmail('');
       setPassword('');
       navigate('/home');
     }
@@ -31,14 +35,41 @@ const AuthForm = ({ mode }) => {
   return (
     <div>
       <form onSubmit={handleSubmit} name={name}>
+        {authMode === 'signup' && (
+          <div>
+            <label htmlFor="firstName">
+              <small>First name</small>
+            </label>
+            <input
+              name="firstName"
+              type="text"
+              value={firstName}
+              onChange={(event) => setFirstName(event.target.value)}
+            />
+          </div>
+        )}
+        {authMode === 'signup' && (
+          <div>
+            <label htmlFor="lastName">
+              <small>Last name</small>
+            </label>
+            <input
+              name="lastName"
+              type="text"
+              value={lastName}
+              onChange={(event) => setLastName(event.target.value)}
+            />
+          </div>
+        )}
         <div>
-          <label htmlFor="username">
-            <small>Username</small>
+          <label htmlFor="email">
+            <small>Email</small>
           </label>
           <input
-            name="username"
-            type="text"
-            onChange={(event) => setUsername(event.target.value)}
+            name="email"
+            type="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
           />
         </div>
         <div>
@@ -48,6 +79,7 @@ const AuthForm = ({ mode }) => {
           <input
             name="password"
             type="password"
+            value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
         </div>

@@ -20,13 +20,15 @@ const getUserByToken = createAsyncThunk('getUserByToken', async (authToken) => {
 
 const authenticate = createAsyncThunk(
   'authenticate',
-  async ({ username, password, method }) => {
+  async ({ email, password, method, firstName, lastName }) => {
     try {
       const {
         data: { token },
       } = await axios.post(`/auth/${method}`, {
-        username,
+        email,
         password,
+        firstName,
+        lastName,
       });
 
       setUserToken(token);
