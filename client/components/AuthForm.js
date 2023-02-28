@@ -24,8 +24,11 @@ const AuthForm = ({ mode }) => {
         authenticate({ firstName, lastName, email, password, method: authMode })
       );
       await dispatch(getUserByToken(getUserToken()));
+      setFirstName('');
+      setLastName('');
       setEmail('');
       setPassword('');
+
       navigate('/home');
     }
   };
