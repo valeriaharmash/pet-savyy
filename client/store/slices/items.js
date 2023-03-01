@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = {
   allItems: [],
@@ -7,18 +7,35 @@ const initialState = {
   error: null,
 };
 
+export const fetchItems = createAsyncThunk("getItems", async () => {
+  try {
+    const { data } = await axios.get("/api/items");
+    return data;
+  } catch (err) {
+    //console.log(err)
+    return [];
+  }
+});
+
 const itemsSlice = createSlice({
-  name: 'items',
+  name: "items",
   initialState,
   reducers: {
     setError: (state, { payload: error }) => {
       state.error = error;
     },
   },
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchItems.fulfilled, (state, action) => {
+      return action.payload;
+    });
+  },
 });
 
-const { setError } = itemsSlice.actions;
-export { setError };
+export const { setError } = itemsSlice.actions;
+
+export const selectItems = (state) => {
+  return state.items;
+};
 
 export default itemsSlice.reducer;
