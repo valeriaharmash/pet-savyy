@@ -1,5 +1,98 @@
 import React, { useState, useEffect } from "react";
 
+const Cart = () => {
+  const [item, setItem] = useState({});
+  const [cart, setCart] = useState([]);
+  const [user, setUser] = useState({ userId: 5 });
+  const [total, setTotal] = useState(0);
+  const qtyOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+  useEffect(() => {
+    const currCart = orders.filter(
+      (order) => order.userId === user.userId && order.status === "in progress"
+    );
+    setCart(currCart);
+    const subTotal = currCart.reduce((total, item) => {
+      return total + item.price * item.qty;
+    }, 0);
+
+    setTotal(subTotal);
+  }, []);
+
+  const handleDelete = async (itemId) => {
+    const updatedCart = cart.filter((item) => item.itemId !== itemId);
+    setCart(updatedCart);
+    const subTotal = updatedCart.reduce((total, item) => {
+      return total + item.price * item.qty;
+    }, 0);
+
+    setTotal(subTotal);
+  };
+
+  const handleQuantityChange = (itemId, quantity) => {
+    const updatedCart = cart.map((item) => {
+      if (item.itemId === itemId) {
+        return { ...item, qty: quantity };
+      }
+      return item;
+    });
+    setCart(updatedCart);
+
+    const subTotal = updatedCart.reduce((total, item) => {
+      return total + item.price * item.qty;
+    }, 0);
+
+    setTotal(subTotal);
+  };
+
+  return (
+    <div className="content">
+      <div className="container">
+        <h1>Shopping Cart</h1>
+        <h3 className="flex-end-column">{`Total: $${total.toFixed(2)}`}</h3>
+      </div>
+      <div>
+        {cart.map((item) => {
+          return (
+            <div key={item.itemId} className="cart-items">
+              <img
+                src={item.imageUrl}
+                alt={item.name}
+                height="150"
+                width="175"
+              />
+              <div className="item-description">
+                <h4>Item: {item.name}</h4>
+                <p>{item.stock > 0 ? "In Stock" : "Out of Stock"}</p>
+                <select
+                  style={{ marginBottom: "1rem" }}
+                  value={item.qty}
+                  onChange={(event) =>
+                    handleQuantityChange(item.itemId, event.target.value)
+                  }
+                >
+                  {qtyOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+                <button onClick={() => handleDelete(item.itemId)}>
+                  Remove from Cart
+                </button>
+              </div>
+              <div>{`$ ${(item.price * item.qty).toFixed(2)}`}</div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+export default Cart;
+
+
 const orders = [
   {
     itemId: 97,
@@ -352,95 +445,3 @@ const orders = [
     userId: 1,
   },
 ];
-
-const Cart = () => {
-  const [item, setItem] = useState({});
-  const [cart, setCart] = useState([]);
-  const [user, setUser] = useState({ userId: 5 });
-  const [total, setTotal] = useState(0);
-  const qtyOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-  useEffect(() => {
-    const currCart = orders.filter(
-      (order) => order.userId === user.userId && order.status === "in progress"
-    );
-    setCart(currCart);
-    const subTotal = currCart.reduce((total, item) => {
-      return total + item.price * item.qty;
-    }, 0);
-
-    setTotal(subTotal);
-  }, []);
-
-  const handleDelete = async (itemId) => {
-    const updatedCart = cart.filter((item) => item.itemId !== itemId);
-    setCart(updatedCart);
-    const subTotal = updatedCart.reduce((total, item) => {
-      return total + item.price * item.qty;
-    }, 0);
-
-    setTotal(subTotal);
-  };
-
-  const handleQuantityChange = (itemId, quantity) => {
-    const updatedCart = cart.map((item) => {
-      if (item.itemId === itemId) {
-        return { ...item, qty: quantity };
-      }
-      return item;
-    });
-    setCart(updatedCart);
-
-    const subTotal = updatedCart.reduce((total, item) => {
-      return total + item.price * item.qty;
-    }, 0);
-
-    setTotal(subTotal);
-  };
-
-  return (
-    <div className="content">
-      <div className="container">
-        <h1>Shopping Cart</h1>
-        <h3 className="flex-end-column">{`Total: $${total.toFixed(2)}`}</h3>
-      </div>
-      <div>
-        {cart.map((item) => {
-          return (
-            <div key={item.itemId} className="cart-items">
-              <img
-                src={item.imageUrl}
-                alt={item.name}
-                height="150"
-                width="175"
-              />
-              <div className="item-description">
-                <h4>Item: {item.name}</h4>
-                <p>{item.stock > 0 ? "In Stock" : "Out of Stock"}</p>
-                <select
-                  style={{ marginBottom: "1rem" }}
-                  value={item.qty}
-                  onChange={(event) =>
-                    handleQuantityChange(item.itemId, event.target.value)
-                  }
-                >
-                  {qtyOptions.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-                <button onClick={() => handleDelete(item.itemId)}>
-                  Remove from Cart
-                </button>
-              </div>
-              <div>{`$ ${(item.price * item.qty).toFixed(2)}`}</div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-};
-
-export default Cart;
