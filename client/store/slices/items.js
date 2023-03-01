@@ -32,7 +32,7 @@ const itemsSlice = createSlice({
   },
 });
 
-//export const { setError } = item.Slice.actions;
+export const { setError } = itemsSlice.actions;
 
 export const selectItems = (state) => {
   return state.items;

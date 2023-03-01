@@ -23,7 +23,9 @@ async function seed() {
   const orders = await Order.bulkCreate(ORDER_SEED_DATA, { validate: true });
 
   //Filling some carts
-  const itemOrders = await Item_Order.bulkCreate(CART_SEED_DATA, { validate: true });
+  const itemOrders = await Item_Order.bulkCreate(CART_SEED_DATA, {
+    validate: true,
+  });
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded ${items.length} items`);
@@ -196,7 +198,7 @@ const ITEM_SEED_DATA = [
     description:
       "Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.",
     price: 51.58,
-    qty: 7,
+    stock: 7,
   },
   {
     id: 2,
@@ -204,7 +206,7 @@ const ITEM_SEED_DATA = [
     description:
       "Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.",
     price: 32.93,
-    qty: 91,
+    stock: 91,
   },
   {
     id: 3,
@@ -212,7 +214,7 @@ const ITEM_SEED_DATA = [
     description:
       "Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.",
     price: 93.13,
-    qty: 90,
+    stock: 90,
   },
   {
     id: 4,
@@ -220,7 +222,7 @@ const ITEM_SEED_DATA = [
     description:
       "Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.",
     price: 59.06,
-    qty: 23,
+    stock: 23,
   },
   {
     id: 5,
@@ -228,7 +230,7 @@ const ITEM_SEED_DATA = [
     description:
       "Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.",
     price: 98.06,
-    qty: 8,
+    stock: 8,
   },
   {
     id: 6,
@@ -236,7 +238,7 @@ const ITEM_SEED_DATA = [
     description:
       "Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.",
     price: 32.49,
-    qty: 62,
+    stock: 62,
   },
   {
     id: 7,
@@ -244,7 +246,7 @@ const ITEM_SEED_DATA = [
     description:
       "Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.",
     price: 56.05,
-    qty: 71,
+    stock: 71,
   },
   {
     id: 8,
@@ -252,7 +254,7 @@ const ITEM_SEED_DATA = [
     description:
       "Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.",
     price: 86.57,
-    qty: 40,
+    stock: 40,
   },
   {
     id: 9,
@@ -260,7 +262,7 @@ const ITEM_SEED_DATA = [
     description:
       "Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.",
     price: 38.13,
-    qty: 71,
+    stock: 71,
   },
   {
     id: 10,
@@ -268,7 +270,7 @@ const ITEM_SEED_DATA = [
     description:
       "Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.",
     price: 59.53,
-    qty: 40,
+    stock: 40,
   },
   {
     id: 11,
@@ -276,7 +278,7 @@ const ITEM_SEED_DATA = [
     description:
       "Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.",
     price: 42.18,
-    qty: 58,
+    stock: 58,
   },
   {
     id: 12,
@@ -284,7 +286,7 @@ const ITEM_SEED_DATA = [
     description:
       "Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.",
     price: 79.93,
-    qty: 89,
+    stock: 89,
   },
   {
     id: 13,
@@ -292,14 +294,14 @@ const ITEM_SEED_DATA = [
     description:
       "Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.",
     price: 74.63,
-    qty: 100,
+    stock: 100,
   },
   {
     id: 14,
     name: "Bread - White, Unsliced",
     description: "Fusce consequat. Nulla nisl. Nunc nisl.",
     price: 44.37,
-    qty: 81,
+    stock: 81,
   },
   {
     id: 15,
@@ -307,14 +309,14 @@ const ITEM_SEED_DATA = [
     description:
       "Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.",
     price: 53.78,
-    qty: 7,
+    stock: 7,
   },
   {
     id: 16,
     name: "Salmon - Fillets",
     description: "Fusce consequat. Nulla nisl. Nunc nisl.",
     price: 12.65,
-    qty: 60,
+    stock: 60,
   },
   {
     id: 17,
@@ -322,7 +324,7 @@ const ITEM_SEED_DATA = [
     description:
       "Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.",
     price: 62.33,
-    qty: 77,
+    stock: 77,
   },
   {
     id: 18,
@@ -330,7 +332,7 @@ const ITEM_SEED_DATA = [
     description:
       "Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.",
     price: 49.18,
-    qty: 92,
+    stock: 92,
   },
   {
     id: 19,
@@ -338,7 +340,7 @@ const ITEM_SEED_DATA = [
     description:
       "Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.",
     price: 63.31,
-    qty: 46,
+    stock: 46,
   },
   {
     id: 20,
@@ -346,7 +348,7 @@ const ITEM_SEED_DATA = [
     description:
       "Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.",
     price: 11.77,
-    qty: 76,
+    stock: 76,
   },
 ];
 
@@ -356,51 +358,51 @@ const CART_SEED_DATA = [
     orderId: 2,
     itemId: 1,
   },
-   {
-     qty: 2,
-     orderId: 2,
-     itemId: 17,
-   },
-   {
-     qty: 3,
-     orderId: 4,
-     itemId: 10,
-   },
-   {
-     qty: 4,
-     orderId: 2,
-     itemId: 16,
-   },
-   {
-     qty: 2,
-     orderId: 4,
-     itemId: 16,
-   },
-   {
-     qty: 2,
-     orderId: 2,
-     itemId: 19,
-   },
-   {
-     qty: 1,
-     orderId: 1,
-     itemId: 18,
-   },
-   {
-     qty: 3,
-     orderId: 2,
-     itemId: 20,
-   },
-   {
-     qty: 4,
-     orderId: 4,
-     itemId: 17,
-   },
-   {
-     qty: 3,
-     orderId: 3,
-     itemId: 14,
-   },
+  {
+    qty: 2,
+    orderId: 2,
+    itemId: 17,
+  },
+  {
+    qty: 3,
+    orderId: 4,
+    itemId: 10,
+  },
+  {
+    qty: 4,
+    orderId: 2,
+    itemId: 16,
+  },
+  {
+    qty: 2,
+    orderId: 4,
+    itemId: 16,
+  },
+  {
+    qty: 2,
+    orderId: 2,
+    itemId: 19,
+  },
+  {
+    qty: 1,
+    orderId: 1,
+    itemId: 18,
+  },
+  {
+    qty: 3,
+    orderId: 2,
+    itemId: 20,
+  },
+  {
+    qty: 4,
+    orderId: 4,
+    itemId: 17,
+  },
+  {
+    qty: 3,
+    orderId: 3,
+    itemId: 14,
+  },
   {
     qty: 4,
     orderId: 4,
