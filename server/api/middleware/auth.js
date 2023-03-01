@@ -8,7 +8,10 @@ const { decodeToken } = require('../../utils');
 const requireToken = async (req, res, next) => {
   try {
     const { authorization } = req.headers;
-    const { id } = decodeToken(authorization);
+
+    let id = decodeToken(authorization, 'customer').id;
+    if (!id) id = decodeToken(authorization, 'admin').id;
+
     const user = await User.findByPk(id);
     if (user) {
       req.user = user;

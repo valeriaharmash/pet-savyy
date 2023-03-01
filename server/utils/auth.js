@@ -11,10 +11,20 @@ const hashPassword = async (password) =>
 const verifyPassword = async (target, actual) =>
   await bcrypt.compare(actual, target);
 
-const generateToken = (userId) => jwt.sign({ id: userId }, process.env.JWT);
+const generateToken = (userId, type) => {
+  if (type === 'admin') {
+    return jwt.sign({ id: userId }, process.env.ADMIN_SECRET);
+  } else {
+    return jwt.sign({ id: userId }, process.env.CUSTOMER_SECRET);
+  }
+};
 
-const decodeToken = (token) => {
-  return jwt.verify(token, process.env.JWT);
+const decodeToken = (token, type) => {
+  if (type === 'admin') {
+    return jwt.verify(token, process.env.ADMIN_SECRET);
+  } else {
+    return jwt.verify(token, process.env.CUSTOMER_SECRET);
+  }
 };
 
 module.exports = { hashPassword, verifyPassword, generateToken, decodeToken };
