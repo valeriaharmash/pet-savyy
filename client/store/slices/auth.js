@@ -1,14 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { use } from 'chai';
-import history from '../../history';
-import { removeUserToken, setUserToken } from '../../utils';
+import { setUserToken } from '../../utils';
 
 const initialState = { user: null, error: null };
 
 const getUserByToken = createAsyncThunk('getUserByToken', async (authToken) => {
   if (authToken) {
-    const { data: user } = await axios.get('/auth/me', {
+    const { data: user } = await axios.get('/api/auth/me', {
       headers: {
         authorization: authToken,
       },
@@ -24,7 +22,7 @@ const authenticate = createAsyncThunk(
     try {
       const {
         data: { token },
-      } = await axios.post(`/auth/${method}`, {
+      } = await axios.post(`/api/auth/${method}`, {
         email,
         password,
         firstName,
