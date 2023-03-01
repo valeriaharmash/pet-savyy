@@ -10,6 +10,7 @@ const requireToken = async (req, res, next) => {
     const { authorization } = req.headers;
     const { id } = decodeToken(authorization);
     const user = await User.findByPk(id);
+    // attach user data to req if successfully authenticated.
     if (user) {
       req.user = user;
       next();
