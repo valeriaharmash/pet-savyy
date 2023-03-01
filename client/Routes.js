@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import {AuthForm, Home, Items} from "./components"
+import Cart from "./features/cart";
 import { getUserByToken } from "./store";
 import { getUserToken, isLoggedIn } from "./utils";
 
@@ -21,6 +22,7 @@ const Router = ({}) => {
         <Routes>
           <Route path="/home" element={<Home />} />
           <Route path="/items" element={<Items />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="*" element={<Home />} />
         </Routes>
       ) : (
@@ -28,6 +30,7 @@ const Router = ({}) => {
           <Route exact path="/login" element={<AuthForm mode="login" />} />
           <Route exact path="/signup" element={<AuthForm mode="signup" />} />
           <Route path="*" element={<AuthForm mode="login" />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/items" element={<Items />} />
         </Routes>
       )}
