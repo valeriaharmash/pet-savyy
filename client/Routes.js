@@ -5,6 +5,7 @@ import { AuthForm } from './components/AuthForm';
 import Home from './components/Home';
 import { getUserByToken } from './store';
 import { getUserToken, isLoggedIn } from './utils';
+import SingleItem from './components/SingleItem';
 
 const Router = ({}) => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const Router = ({}) => {
       {user ? (
         <Routes>
           <Route path="/home" element={<Home />} />
+          <Route exact path="/items/:itemId" element={<SingleItem />} />
           <Route path="*" element={<Home />} />
         </Routes>
       ) : (

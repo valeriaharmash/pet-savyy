@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  background-color: #cfdff7;
 }
 
 a {
@@ -10,9 +11,29 @@ label {
   display: block;
 }
 
+h1 {
+  color: rgb(77, 103, 151);
+}
+
+h3 {
+  color: rgb(20, 57, 127);
+}
+
+nav {
+  background-color: rgb(125, 163, 234);
+  padding: 0.5em;
+}
+
 nav a {
   display: inline-block;
-  margin: 1em;
+  margin: 0 1em;
+  color: #2b06d1;
+  font-weight: bold;
+  padding: 0.5em;
+}
+
+nav a:hover {
+  color: #04046b;
 }
 
 form div {
@@ -40,4 +61,19 @@ form div {
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.apart {
+  display: flex;
+  justify-content: space-between;
+}
+
+.item-img {
+  width: 15rem;
+  height: 15rem;
 }
