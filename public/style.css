@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  background-color: #cfdff7;
 }
 
 a {
@@ -10,15 +11,41 @@ label {
   display: block;
 }
 
+h1 {
+  color:rgb(77, 103, 151)
+}
+
+h3 {
+  color:rgb(20, 57, 127)
+}
+
+/*^^^^^^^^ Main ^^^^^^^^^^*/
+
+nav {
+  background-color:rgb(125, 163, 234);
+  padding: 0.5em;
+}
+
 nav a {
   display: inline-block;
-  margin: 1em;
+  margin: 0 1em;
+  color: #2b06d1;
+  font-weight: bold;
+  padding: 0.5em;
 }
+
+nav a:hover {
+  color: #04046b;
+}
+
+/*^^^^^^^^ Nav ^^^^^^^^^^*/
 
 form div {
   margin: 1em;
   display: inline-block;
 }
+
+/*^^^^^^^^ Form ^^^^^^^^^^*/
 
 .container {
   display: flex;
@@ -41,3 +68,109 @@ form div {
   align-items: center;
   justify-content: space-around;
 }
+
+/*^^^^^^^^ Cart ^^^^^^^^^^*/
+
+.itemsHeader {
+  text-align: center;
+}
+
+.items {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  background-color: #cfdff7;
+}
+
+.itemContainer {
+  display: flex;
+  flex-flow: column;
+  width: 160px;
+  height: 300px;
+  margin-top: 10px;
+  border: 1px solid black;
+  background-color: rgb(125, 163, 234);
+}
+
+#itemImage > img {
+  width: 100%;
+  height: 100%;
+  border-bottom: 1px solid black;
+}
+
+#itemDetails {
+  height: 93px;
+}
+
+#itemDetails ul {
+  list-style-type: none;
+  padding-left: 5px;
+  margin: 5px;
+}
+
+#itemDetails img {
+  width: 15px;
+  height: 15px;
+}
+
+#itemFooter {
+  display: contents;
+  flex: 0 1 20px;
+}
+
+#itemFooter a {
+  text-align: center;
+  border-top: 1px solid black;
+  padding-top: 16px;
+  width: 100%;
+  height: 100%;
+  background-color: #728372;
+}
+
+/* unvisited item */
+.itemContainer a:link {
+  color: black;
+  text-decoration: none;
+}
+
+/* visited item */
+.itemContainer a:visited {
+  color: black;
+  text-decoration: none;
+}
+
+/* mouse over item */
+.itemContainer a:hover {
+  color: #cfdff7;
+  background-color: #2b06d1;
+  text-decoration: none;
+}
+
+/* mouse over add to cart*/
+
+#itemFooter a:link {
+  color:aliceblue;
+  text-decoration: none;
+}
+
+/* visited item */
+#itemFooter a:visited {
+  color:aliceblue;
+  text-decoration: none;
+}
+
+/* mouse over item */
+#itemFooter a:hover {
+  color: rgb(137, 179, 190);
+  background-color: #4f594f;
+  text-decoration: none;
+}
+
+
+/* selected link */
+.items a:active {
+  color: red;
+  text-decoration: none;
+}
+
+/*^^^^^^^^ ItemsPage (Store) ^^^^^^^^^^*/

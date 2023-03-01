@@ -75,7 +75,7 @@ const Cart = () => {
               />
               <div className="item-description">
                 <h4>Item: {item.item.name}</h4>
-                <p>{item.item.qty > 0 ? "In Stock" : "Out of Stock"}</p>
+                <p>{item.item.stock > 0 ? "In Stock" : "Out of Stock"}</p>
                 <select
                   style={{ marginBottom: "1rem" }}
                   value={item.qty}
