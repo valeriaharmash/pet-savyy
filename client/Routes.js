@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
-import { AuthForm } from './components/AuthForm';
-import Home from './components/Home';
-import { getUserByToken } from './store';
-import { getUserToken, isLoggedIn } from './utils';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Route, Routes } from "react-router-dom";
+import {AuthForm, Home, Items} from "./components"
+import { getUserByToken } from "./store";
+import { getUserToken, isLoggedIn } from "./utils";
 
 const Router = ({}) => {
   const dispatch = useDispatch();
@@ -21,6 +20,7 @@ const Router = ({}) => {
       {user ? (
         <Routes>
           <Route path="/home" element={<Home />} />
+          <Route path="/items" element={<Items />} />
           <Route path="*" element={<Home />} />
         </Routes>
       ) : (
@@ -28,6 +28,7 @@ const Router = ({}) => {
           <Route exact path="/login" element={<AuthForm mode="login" />} />
           <Route exact path="/signup" element={<AuthForm mode="signup" />} />
           <Route path="*" element={<AuthForm mode="login" />} />
+          <Route path="/items" element={<Items />} />
         </Routes>
       )}
     </div>

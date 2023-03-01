@@ -10,12 +10,13 @@ const Navbar = () => {
   const user = useSelector((state) => state.auth.user);
   return (
     <div>
-      <h1>FS-App-Template</h1>
+      <h1>Grace Shopper Pet Store</h1>
       <nav>
         {user ? (
           <div>
             {/* The navbar will show these links after you log in */}
             <Link to="/home">Home</Link>
+            <Link to="/items">Store</Link>
             <a
               onClick={() => {
                 dispatch(setUser(null));
@@ -31,6 +32,7 @@ const Navbar = () => {
             {/* The navbar will show these links before you log in */}
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
+            <Link to="/items">Store</Link>
           </div>
         )}
       </nav>
