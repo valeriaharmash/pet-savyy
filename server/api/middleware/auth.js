@@ -8,15 +8,24 @@ const { decodeToken } = require('../../utils');
 const requireToken = async (req, res, next) => {
   try {
     const { authorization } = req.headers;
-    const { id } = decodeToken(authorization);
+
+    let id;
+    try {
+      // try to decode auth token with "customer" signature
+      id = decodeToken(authorization, 'customer').id;
+    } catch (error) {
+      // retry decode auth token with "admin" signature
+      id = decodeToken(authorization, 'admin').id;
+    }
+
     const user = await User.findByPk(id);
+    // attach user data to req if successfully authenticated.
     if (user) {
       req.user = user;
       next();
       return;
     }
     res.sendStatus(401);
-    return;
   } catch (error) {
     next(error);
   }
