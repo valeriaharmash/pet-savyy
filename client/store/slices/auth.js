@@ -2,16 +2,18 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { getUserToken, setUserToken } from "../../utils";
 
+// Add user auth token to every axios request.
+axios.interceptors.request.use((config) => {
+	config.headers.authorization = getUserToken();
+	return config;
+});
+
 const initialState = { user: null, error: null };
 
 const getUserByToken = createAsyncThunk("getUserByToken", async () => {
 	const authToken = getUserToken();
 	if (authToken) {
-		const { data: user } = await axios.get("/api/auth/me", {
-			headers: {
-				authorization: authToken,
-			},
-		});
+		const { data: user } = await axios.get("/api/auth/me");
 		return user;
 	}
 	return null;
