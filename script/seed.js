@@ -10,7 +10,7 @@ const {
  *      match the models, and populates the database.
  */
 async function seed() {
-  await db.sync(); // clears db and matches models to tables
+  await db.sync({force: true}); // clears db and matches models to tables
   console.log('db synced!');
 
   // Creating Users
@@ -156,6 +156,14 @@ const USER_SEED_DATA = [
     address: '5 Lerdahl Hill',
     role: 'customer',
   },
+	{
+		id: 12,
+		password: 'shallnotpass',
+		firstName: 'Funky',
+		lastName: 'Edd',
+		email: 'fedd9@gmail.com',
+		role: 'admin',
+	}
 ];
 
 const ORDER_SEED_DATA = [
