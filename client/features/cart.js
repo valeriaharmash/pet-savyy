@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import {
   fetchUserOrder,
   selectUserCart,
@@ -33,7 +33,6 @@ const Cart = () => {
   }, []);
 
   const handleDelete = async (itemId) => {
-    await dispatch(deleteItem({ userId, itemId }));
     const updatedCart = cart.filter((item) => item.itemId !== itemId);
     setCart(updatedCart);
     const subTotal = updatedCart.reduce((total, item) => {
@@ -41,10 +40,11 @@ const Cart = () => {
     }, 0);
 
     setTotal(subTotal);
+    await dispatch(deleteItem({ userId, itemId, subTotal }));
   };
 
   const handleQuantityChange = async (itemId, quantity) => {
-    await dispatch(setOrderQty({ userId, itemId, quantity }));
+    // await dispatch(setOrderQty({ userId, itemId, quantity }));
     const updatedCart = cart.map((item) => {
       if (item.itemId === itemId) {
         return { ...item, qty: quantity };
@@ -58,6 +58,7 @@ const Cart = () => {
     }, 0);
 
     setTotal(subTotal);
+    await dispatch(setOrderQty({ userId, itemId, quantity, subTotal }));
   };
 
   return (
@@ -65,6 +66,9 @@ const Cart = () => {
       <div className="container">
         <h1>Shopping Cart</h1>
         <h3 className="flex-end-column">{`Total: $${total.toFixed(2)}`}</h3>
+        <Link to="/home">
+          <button>Checkout</button>
+        </Link>
       </div>
       <div>
         {cart.map((item) => {

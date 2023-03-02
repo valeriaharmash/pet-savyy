@@ -77,7 +77,9 @@ router.put("/:userId", async (req, res, next) => {
         },
       ],
     });
-    res.status(202).send(await userOrder.update({ qty: req.body.qty }));
+    await userOrder.update({ qty: req.body.qty });
+    await userOrder.order.update({ total: req.body.total });
+    res.status(202).send(userOrder);
   } catch (err) {
     next(err);
   }
@@ -85,7 +87,6 @@ router.put("/:userId", async (req, res, next) => {
 
 router.delete("/:userId", async (req, res, next) => {
   try {
-    console.log("req.body---->", req.body);
     const userOrder = await Item_Order.findOne({
       include: [
         {
@@ -107,6 +108,7 @@ router.delete("/:userId", async (req, res, next) => {
         },
       ],
     });
+    await userOrder.order.update({ total: req.body.total });
     res.status(204).send(await userOrder.destroy());
   } catch (err) {
     next(err);

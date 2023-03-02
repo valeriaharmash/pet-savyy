@@ -15,11 +15,12 @@ export const fetchUserOrder = createAsyncThunk(
 
 export const setOrderQty = createAsyncThunk(
   "cart/updateUserCart",
-  async ({ userId, itemId, quantity }) => {
+  async ({ userId, itemId, quantity, subTotal }) => {
     try {
       const { data } = await axios.put(`/api/cart/${userId}`, {
         itemId: itemId,
         qty: quantity,
+        total: subTotal,
       });
       return data;
     } catch (err) {
@@ -30,10 +31,10 @@ export const setOrderQty = createAsyncThunk(
 
 export const deleteItem = createAsyncThunk(
   "cart/deleteItem",
-  async ({ userId, itemId }) => {
+  async ({ userId, itemId, subTotal }) => {
     try {
       const { data } = await axios.delete(`/api/cart/${userId}`, {
-        data: { itemId: itemId },
+        data: { itemId: itemId, total: subTotal },
       });
       return data;
     } catch (err) {
