@@ -21,8 +21,8 @@ const Router = ({}) => {
       {user ? (
         <Routes>
           <Route path="/home" element={<Home />} />
-          <Route exact path="/items/:itemId" element={<SingleItem />} />
           <Route path="/items" element={<Items />} />
+          <Route exact path="/items/:itemId" element={<SingleItem />} />
           <Route path="/user/:userId/cart" element={<Cart />} />
           <Route path="*" element={<Home />} />
         </Routes>

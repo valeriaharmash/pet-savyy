@@ -30,6 +30,26 @@ export const fetchItems = createAsyncThunk('getItems', async () => {
   }
 });
 
+export const updateItem = createAsyncThunk('updateItem', async (item) => {
+  try {
+    const { data } = await axios.put(`/api/item/${item.id}`, item);
+    return data;
+  } catch (error) {
+    console.error('Unable to update item.', error);
+    return { error };
+  }
+});
+
+export const deleteItem = createAsyncThunk('deleteItem', async (id) => {
+  try {
+    const { data } = await axios.delete(`/api/items/${id}`);
+    return { id, data };
+  } catch (error) {
+    console.error('Unable to delete item.', error);
+    return { error };
+  }
+});
+
 const itemsSlice = createSlice({
   name: 'items',
   initialState,
@@ -51,6 +71,12 @@ const itemsSlice = createSlice({
     });
     builder.addCase(fetchItems.fulfilled, (state, action) => {
       return action.payload;
+    });
+    builder.addCase(updateItem.fulfilled, (state, { payload }) => {
+      state.singleItem = payload;
+    });
+    builder.addCase(deleteItem.fulfilled, (state, { payload }) => {
+      state.allItems = state.allItems.filter((item) => item.id !== payload.id);
     });
   },
 });
