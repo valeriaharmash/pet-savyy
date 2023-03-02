@@ -32,7 +32,7 @@ export const fetchItems = createAsyncThunk('getItems', async () => {
 
 export const updateItem = createAsyncThunk('updateItem', async (item) => {
   try {
-    const { data } = await axios.put(`/api/item/${item.id}`, item);
+    const { data } = await axios.put(`/api/items/${item.id}`, item);
     return data;
   } catch (error) {
     console.error('Unable to update item.', error);
