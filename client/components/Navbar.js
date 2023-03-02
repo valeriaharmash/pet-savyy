@@ -1,8 +1,8 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { setUser } from "../store";
-import { removeUserToken } from "../utils";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { setUser } from '../store';
+import { removeUserToken } from '../utils';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const Navbar = () => {
               onClick={() => {
                 dispatch(setUser(null));
                 removeUserToken();
-                navigate("/");
+                navigate('/');
               }}
             >
               Logout

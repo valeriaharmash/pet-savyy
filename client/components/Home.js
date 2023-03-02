@@ -1,15 +1,16 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react';
+import { connect, useSelector } from 'react-redux';
+import Items from './Items';
 
 /**
  * COMPONENT
  */
-export const Home = (props) => {
-  const { firstName } = props;
-
+export const Home = () => {
+  const firstName = useSelector((state) => state.auth.user.firstName);
   return (
     <div>
-      <h3>Welcome, {firstName}</h3>
+      <h3>Welcome back, {firstName}!</h3>
+      <Items />
     </div>
   );
 };
@@ -19,7 +20,7 @@ export const Home = (props) => {
  */
 const mapState = (state) => {
   return {
-    firstName: state.auth.user ? state.auth.user.firstName : "",
+    firstName: state.auth.user.firstName,
   };
 };
 
