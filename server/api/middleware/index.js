@@ -1,3 +1,3 @@
-const { requireToken } = require('./auth');
+const { requireToken, requireAdminToken } = require("./auth");
 
-module.exports = { requireToken };
+module.exports = { requireToken, requireAdminToken };

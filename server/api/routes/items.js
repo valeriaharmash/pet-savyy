@@ -37,8 +37,7 @@ router.get('/:itemId', async (req, res, next) => {
 // POST /api/items/
 router.post('/', async (req, res, next) => {
   try {
-    const it = { ...req.body };
-    const newItem = await Item.create(it);
+    const newItem = await Item.create(req.body);
     res.status(201).json(newItem);
   } catch (e) {
     next(e);
