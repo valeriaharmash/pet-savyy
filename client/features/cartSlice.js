@@ -13,6 +13,35 @@ export const fetchUserOrder = createAsyncThunk(
   }
 );
 
+export const setOrderQty = createAsyncThunk(
+  "cart/updateUserCart",
+  async ({ userId, itemId, quantity }) => {
+    try {
+      const { data } = await axios.put(`/api/cart/${userId}`, {
+        itemId: itemId,
+        qty: quantity,
+      });
+      return data;
+    } catch (err) {
+      throw err.message;
+    }
+  }
+);
+
+export const deleteItem = createAsyncThunk(
+  "cart/deleteItem",
+  async ({ userId, itemId }) => {
+    try {
+      const { data } = await axios.delete(`/api/cart/${userId}`, {
+        data: { itemId: itemId },
+      });
+      return data;
+    } catch (err) {
+      throw err.message;
+    }
+  }
+);
+
 const initialState = {
   order: [],
   status: "idle", // loading, succeeded, failed
@@ -38,6 +67,12 @@ export const userOrderSlice = createSlice({
         state.status = "failed";
         state.error = new Error(action.error.message);
         console.log(action.error.message);
+      })
+      .addCase(setOrderQty.fulfilled, (state, action) => {
+        state.status = "succeeded";
+      })
+      .addCase(deleteItem.fulfilled, (state, action) => {
+        state.status = "succeeded";
       });
   },
 });

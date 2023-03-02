@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchUserOrder, selectUserCart } from "./cartSlice";
+import {
+  fetchUserOrder,
+  selectUserCart,
+  setOrderQty,
+  deleteItem,
+} from "./cartSlice";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const { userId } = useParams();
-  console.log("userId param----->", userId);
 
   const orders = useSelector(selectUserCart);
-  console.log("orders--->", orders);
 
-  const [item, setItem] = useState({});
+  // const [item, setItem] = useState({});
   const [cart, setCart] = useState([]);
-  const [user, setUser] = useState();
+  // const [user, setUser] = useState();
   const [total, setTotal] = useState(0);
   const qtyOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -29,9 +32,8 @@ const Cart = () => {
     getOrder();
   }, []);
 
-  console.log("cart---->", cart);
-
   const handleDelete = async (itemId) => {
+    await dispatch(deleteItem({ userId, itemId }));
     const updatedCart = cart.filter((item) => item.itemId !== itemId);
     setCart(updatedCart);
     const subTotal = updatedCart.reduce((total, item) => {
@@ -41,7 +43,8 @@ const Cart = () => {
     setTotal(subTotal);
   };
 
-  const handleQuantityChange = (itemId, quantity) => {
+  const handleQuantityChange = async (itemId, quantity) => {
+    await dispatch(setOrderQty({ userId, itemId, quantity }));
     const updatedCart = cart.map((item) => {
       if (item.itemId === itemId) {
         return { ...item, qty: quantity };
