@@ -24,6 +24,10 @@ h3 {
 nav {
   background-color: rgb(125, 163, 234);
   padding: 0.5em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 99%;
 }
 
 nav a {
@@ -188,3 +192,6 @@ form div {
 }
 
 /*^^^^^^^^ ItemsPage (Store) ^^^^^^^^^^*/
+
+
+
