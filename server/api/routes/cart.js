@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const Sequelize = require("sequelize");
 // const { Item_Order, Order, Item, User } = require("../../db");
 const {
   models: { User, Item_Order, Order, Item },
@@ -38,7 +39,7 @@ router.get("/:userId", async (req, res, next) => {
           model: Order,
           include: {
             model: User,
-            attributes: ["id", "firstName", "lastName"],
+            attributes: ["id", "firstName", "lastName", "address"],
           },
           where: {
             userId: req.params.userId,
@@ -48,6 +49,67 @@ router.get("/:userId", async (req, res, next) => {
       ],
     });
     res.json(userOrder);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put("/:userId", async (req, res, next) => {
+  try {
+    const userOrder = await Item_Order.findOne({
+      include: [
+        {
+          model: Item,
+          where: {
+            id: req.body.itemId,
+          },
+        },
+        {
+          model: Order,
+          include: {
+            model: User,
+            attributes: ["id", "firstName", "lastName", "address"],
+          },
+          where: {
+            userId: req.params.userId,
+            status: "in progress",
+          },
+        },
+      ],
+    });
+    await userOrder.update({ qty: req.body.qty });
+    await userOrder.order.update({ total: req.body.total });
+    res.status(202).send(userOrder);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.delete("/:userId", async (req, res, next) => {
+  try {
+    const userOrder = await Item_Order.findOne({
+      include: [
+        {
+          model: Item,
+          where: {
+            id: req.body.itemId,
+          },
+        },
+        {
+          model: Order,
+          include: {
+            model: User,
+            attributes: ["id", "firstName", "lastName", "address"],
+          },
+          where: {
+            userId: req.params.userId,
+            status: "in progress",
+          },
+        },
+      ],
+    });
+    await userOrder.order.update({ total: req.body.total });
+    res.status(204).send(await userOrder.destroy());
   } catch (err) {
     next(err);
   }

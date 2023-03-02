@@ -88,6 +88,12 @@ form div {
   height: 15rem;
 }
 
+.shopping-header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
 /*^^^^^^^^ Cart ^^^^^^^^^^*/
 
 .itemsHeader {
