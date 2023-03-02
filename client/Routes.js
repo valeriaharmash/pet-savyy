@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
-import { AuthForm, Home, Items, SingleItem } from './components';
+import { AuthForm, Home, Items, SingleItem, UpdateItem } from './components';
 import { getUserByToken } from './store';
 import { getUserToken, isLoggedIn } from './utils';
 import Cart from './features/cart';
@@ -21,8 +21,9 @@ const Router = ({}) => {
       {user ? (
         <Routes>
           <Route path="/home" element={<Home />} />
-          <Route exact path="/items/:itemId" element={<SingleItem />} />
           <Route path="/items" element={<Items />} />
+          <Route exact path="/items/:itemId" element={<SingleItem />} />
+          <Route exact path="/items/add" element={<UpdateItem />} />
           <Route path="/user/:userId/cart" element={<Cart />} />
           <Route path="*" element={<Home />} />
         </Routes>

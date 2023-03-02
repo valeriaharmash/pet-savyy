@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchSingleItem } from '../store/slices/items';
+import UpdateItem from './UpdateItem';
 
 const SingleItem = () => {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ const SingleItem = () => {
         </div>
         <p>Price: {`${item.price}$`}</p>
         <button>Add to cart</button>
+        <UpdateItem />
       </div>
     </div>
   );
