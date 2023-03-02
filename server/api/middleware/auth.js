@@ -9,15 +9,14 @@ const requireToken = async (req, res, next) => {
   try {
     const { authorization } = req.headers;
 
-		let id
-		try {
-			// try to decode auth token with "customer" signature
-			id = decodeToken(authorization, 'customer').id;
-
-		} catch (error) {
-			// retry decode auth token with "admin" signature
-			id = decodeToken(authorization, 'admin').id;
-		}
+    let id;
+    try {
+      // try to decode auth token with "customer" signature
+      id = decodeToken(authorization, 'customer').id;
+    } catch (error) {
+      // retry decode auth token with "admin" signature
+      id = decodeToken(authorization, 'admin').id;
+    }
 
     const user = await User.findByPk(id);
     // attach user data to req if successfully authenticated.

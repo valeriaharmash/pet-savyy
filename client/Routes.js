@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Route, Routes } from "react-router-dom";
-import { AuthForm, Home, Items, SingleItem } from "./components";
-import { getUserByToken } from "./store";
-import { getUserToken, isLoggedIn } from "./utils";
-import Cart from "./features/cart";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
+import { AuthForm, Home, Items, SingleItem } from './components';
+import { getUserByToken } from './store';
+import { getUserToken, isLoggedIn } from './utils';
+import Cart from './features/cart';
 
 const Router = ({}) => {
   const dispatch = useDispatch();

@@ -1,8 +1,6 @@
 import React from 'react';
-import {Navbar} from './components';
+import { Navbar } from './components';
 import Router from './Routes';
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import SingleItem from './components/SingleItem';
 
 const App = () => {
   return (
