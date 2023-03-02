@@ -115,4 +115,50 @@ router.delete("/:userId", async (req, res, next) => {
   }
 });
 
+// add item to cart /api/cart/:userId/:itemId
+router.put("/:userId/:itemId", async (req, res, next) => {
+  try {
+    const userOrder = await Item_Order.findOne({
+      include: [
+        {
+          model: Item,
+          where: {
+            id: req.body.itemId,
+          },
+        },
+        {
+          model: Order,
+          include: {
+            model: User,
+            attributes: ["id", "firstName", "lastName", "address"],
+          },
+          where: {
+            userId: req.params.userId,
+            status: "in progress",
+          },
+        },
+      ],
+    });
+    if(userOrder){
+      await userOrder.increment('qty', { by: req.body.qty });
+    }else{
+      const order = await Order.findOne({
+        where: {
+          userId: req.params.userId,
+          status: "in progress",
+        },
+      });
+      const item = await Item.findOne({
+        where: {
+          id: req.body.itemId,
+        },
+      });
+      order.addItem(item);
+    }
+    res.status(202).send();
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;

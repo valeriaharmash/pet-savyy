@@ -8,7 +8,7 @@ const { requireAdminToken } = require("../middleware");
 router.get("/", async (req, res, next) => {
 	try {
 		const items = await Item.findAll({});
-		res.json(items);
+		res.send(items);
 	} catch (err) {
 		next(err);
 	}
