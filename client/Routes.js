@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import { AuthForm, Home, SingleItem, UpdateItem, Main } from "./components";
 import { getUserByToken } from "./store";
 import { isLoggedIn } from "./utils";
-import Cart from "./features/cart";
+import {Cart, Checkout} from "./features";
 
 const Router = ({}) => {
 	const dispatch = useDispatch();
@@ -31,6 +31,7 @@ const Router = ({}) => {
 				<Route exact path="/login" element={<AuthForm mode="login" />} />
 				<Route exact path="/signup" element={<AuthForm mode="signup" />} />
 				<Route path="/home" element={<Home />} />
+				<Route path="/checkout" element={<Checkout />} />
 				<Route exact path="/items/:itemId" element={<SingleItem />} />
 				<Route path="/user/:userId/cart" element={<Cart />} />
 				<Route path="*" element={<Main />} />
