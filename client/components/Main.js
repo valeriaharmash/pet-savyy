@@ -1,18 +1,17 @@
-import React from "react";
-import Items from "../features/Items";
-import { AuthForm } from "./AuthForm";
+import React from 'react';
+import Items from '../features/Items';
 
 const Main = () => {
-	return (
-		<div className="main">
-			<div className="item-list">
-				<div className="banner">
-					<h2>Your pet deserves the best, and so do you.</h2>
-				</div>
-				<Items />
-			</div>
-		</div>
-	);
+  return (
+    <div className="main">
+      <div className="item-list">
+        <div className="banner">
+          <h2>Your pet deserves the best, and so do you.</h2>
+        </div>
+        <Items />
+      </div>
+    </div>
+  );
 };
 
 export default Main;

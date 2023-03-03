@@ -58,7 +58,7 @@ const Cart = () => {
     }, 0);
 
     setTotal(subTotal);
-    await dispatch(setOrderQty({ userId, itemId, quantity, subTotal }));
+    await dispatch(setOrderQty({ userId, itemId, quantity }));
   };
 
   return (
@@ -66,7 +66,7 @@ const Cart = () => {
       <div className="container">
         <h1>Shopping Cart</h1>
         <h3 className="flex-end-column">{`Total: $${total.toFixed(2)}`}</h3>
-        <Link to="/home">
+        <Link to="/checkout">
           <button>Checkout</button>
         </Link>
       </div>
@@ -81,7 +81,9 @@ const Cart = () => {
                 width="175"
               />
               <div className="item-description">
-                <h4>Item: {item.item.name}</h4>
+                <Link to={`/items/${item.itemId}`}>
+                  <h4>Item: {item.item.name}</h4>
+                </Link>
                 <p>{item.item.stock > 0 ? "In Stock" : "Out of Stock"}</p>
                 <select
                   style={{ marginBottom: "1rem" }}

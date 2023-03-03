@@ -5,5 +5,7 @@ import SingleItem from "./SingleItem";
 import UpdateItem from "./UpdateItem";
 import CreateItem from "./CreateItem";
 import Main from "./Main";
+import AllUsers from './AllUsers';
 
-export { AuthForm, Home, Navbar, SingleItem, UpdateItem, Main, CreateItem };
+
+export { AuthForm, Home, Navbar, SingleItem, UpdateItem, Main, AllUsers, CreateItem };
