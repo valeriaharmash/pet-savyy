@@ -4,7 +4,6 @@ import { Route, Routes } from 'react-router-dom';
 import {
   AuthForm,
   Home,
-  Items,
   SingleItem,
   UpdateItem,
   Main,
@@ -28,7 +27,6 @@ const Router = ({}) => {
       {user ? (
         <Routes>
           <Route path="/home" element={<Home />} />
-          <Route path="/items" element={<Items />} />
           <Route exact path="/items/:itemId" element={<SingleItem />} />
           <Route exact path="/items/:itemId/update" element={<UpdateItem />} />
           <Route path="/user/:userId/cart" element={<Cart />} />
@@ -40,7 +38,6 @@ const Router = ({}) => {
           <Route exact path="/signup" element={<AuthForm mode="signup" />} />
           <Route path="/user/:userId/cart" element={<Cart />} />
           <Route path="*" element={<Main />} />
-          <Route path="/items" element={<Items />} />
         </Routes>
       )}
     </div>

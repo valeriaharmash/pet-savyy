@@ -1,6 +1,6 @@
-import React from 'react';
-import { connect, useSelector } from 'react-redux';
-import Items from './Items';
+import React from "react";
+import { connect, useSelector } from "react-redux";
+import Items from "../features/Items";
 
 /**
  * COMPONENT
@@ -9,7 +9,9 @@ export const Home = () => {
   const firstName = useSelector((state) => state.auth.user.firstName);
   return (
     <div>
-      <h3>Welcome back, {firstName}!</h3>
+      <div className="banner">
+        <h2>Welcome back, {firstName}!</h2>
+      </div>
       <Items />
     </div>
   );
