@@ -16,8 +16,6 @@ import Cart from './features/cart';
 const Router = ({}) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     if (isLoggedIn()) {
