@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { fetchSingleItem, addItemToCart } from '../store/slices/items';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { fetchSingleItem, addItemToCart } from "../store/slices/items";
+import { Link } from "react-router-dom";
 
 const SingleItem = () => {
   const dispatch = useDispatch();
@@ -14,6 +14,8 @@ const SingleItem = () => {
     userId = user.id;
   }
 
+  const [qty, setQty] = useState(0);
+
   useEffect(() => {
     if (itemId) {
       dispatch(fetchSingleItem(itemId));
@@ -21,7 +23,12 @@ const SingleItem = () => {
   }, [itemId]);
 
   const handleAddToCart = async (itemId) => {
-    await dispatch(addItemToCart({ userId, itemId }));
+    const quantity = parseInt(qty, 10);
+    await dispatch(addItemToCart({ userId, itemId, quantity }));
+  };
+
+  const handleQuantityChange = async (quantity) => {
+    setQty(quantity);
   };
 
   if (!item.id) return null;
@@ -29,15 +36,17 @@ const SingleItem = () => {
   return (
     <div className="row apart">
       <img className="item-img" src={item.imageUrl} />
-      <div style={{ flex: 2, padding: '2rem' }}>
+      <div style={{ flex: 2, padding: "2rem" }}>
         <h3>{item.name}</h3>
         <p>{item.description}</p>
         <div>
           {item.stock
-            ? 'In Stock' && (
+            ? "In Stock" && (
                 <div>
                   <label htmlFor="qty">Qty</label>
-                  <select>
+                  <select
+                    onChange={(e) => handleQuantityChange(e.target.value)}
+                  >
                     {new Array(item.stock >= 5 ? 5 : item.stock)
                       .fill(0)
                       .map((val, idx) => (
@@ -48,14 +57,13 @@ const SingleItem = () => {
                   </select>
                 </div>
               )
-            : 'Out of Stock'}
+            : "Out of Stock"}
         </div>
-        <p>Price: {`${item.price}$`}</p>
+        <p>Price: {`$ ${item.price}`}</p>
         <button onClick={() => handleAddToCart(item.id)}>
           Add to cart
-        </button>{' '}
-        {/*just need to be able to pass a qty as a second argument in handleAddToCart to fix only adding one to cart*/}
-        {user.role === 'admin' && (
+        </button>{" "}
+        {user.role === "admin" && (
           <Link to={`/items/${item.id}/update`}>
             <button type="button">Update</button>
           </Link>
