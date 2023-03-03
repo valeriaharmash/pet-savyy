@@ -11,14 +11,16 @@ const Navbar = () => {
   return (
     <div>
       <h1>Grace Shopper Pet Store</h1>
-      <nav>
-        <Link to="/home">Home</Link>
-        <Link to="/home">Costumes</Link>
-        <Link to="/home">Supplies</Link>
-        {/* We have to get rid of user.id here in order to support :guest" experience. */}
-        {user && user.role !== 'admin' && (
-          <Link to={`/user/${user.id}/cart`}>Cart</Link>
-        )}
+      <nav className="apart">
+        <div>
+          <Link to="/home">Home</Link>
+          <Link to="/home">Costumes</Link>
+          <Link to="/home">Supplies</Link>
+          {/* We have to get rid of user.id here in order to support :guest" experience. */}
+          {user && user.role !== 'admin' && (
+            <Link to={`/user/${user.id}/cart`}>Cart</Link>
+          )}
+        </div>
         {user && user.role === 'admin' && <Link to={`/users`}>Users</Link>}
         {user ? (
           <div>

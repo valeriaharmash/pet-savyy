@@ -54,6 +54,7 @@ router.get("/:userId", async (req, res, next) => {
   }
 });
 
+// update the qty in cart
 router.put("/:userId", async (req, res, next) => {
   try {
     const userOrder = await Item_Order.findOne({
@@ -77,8 +78,11 @@ router.put("/:userId", async (req, res, next) => {
         },
       ],
     });
+    const priorQty = userOrder.previous("qty");
     await userOrder.update({ qty: req.body.qty });
-    await userOrder.order.update({ total: req.body.total });
+    const changeInQty = userOrder.qty - priorQty;
+    const currTotal = changeInQty * userOrder.item.price;
+    await userOrder.order.increment("total", { by: currTotal });
     res.status(202).send(userOrder);
   } catch (err) {
     next(err);
@@ -139,9 +143,11 @@ router.put("/:userId/:itemId", async (req, res, next) => {
         },
       ],
     });
-    if(userOrder){
-      await userOrder.increment('qty', { by: req.body.qty });
-    }else{
+    if (userOrder) {
+      await userOrder.increment("qty", { by: req.body.qty });
+      const currTotal = userOrder.qty * userOrder.item.price;
+      await userOrder.order.increment("total", { by: currTotal });
+    } else {
       const order = await Order.findOne({
         where: {
           userId: req.params.userId,
@@ -153,7 +159,10 @@ router.put("/:userId/:itemId", async (req, res, next) => {
           id: req.body.itemId,
         },
       });
-      order.addItem(item);
+      let cartItem = await order.addItem(item);
+      await cartItem[0].update({ qty: req.body.qty });
+      const currTotal = req.body.qty * item.price;
+      await order.increment("total", { by: currTotal });
     }
     res.status(202).send();
   } catch (err) {

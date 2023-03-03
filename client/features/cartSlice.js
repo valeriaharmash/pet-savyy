@@ -15,12 +15,11 @@ export const fetchUserOrder = createAsyncThunk(
 
 export const setOrderQty = createAsyncThunk(
   "cart/updateUserCart",
-  async ({ userId, itemId, quantity, subTotal }) => {
+  async ({ userId, itemId, quantity }) => {
     try {
       const { data } = await axios.put(`/api/cart/${userId}`, {
         itemId: itemId,
         qty: quantity,
-        total: subTotal,
       });
       return data;
     } catch (err) {
@@ -71,6 +70,7 @@ export const userOrderSlice = createSlice({
       })
       .addCase(setOrderQty.fulfilled, (state, action) => {
         state.status = "succeeded";
+        state.order = action.payload;
       })
       .addCase(deleteItem.fulfilled, (state, action) => {
         state.status = "succeeded";
