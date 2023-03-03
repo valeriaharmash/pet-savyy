@@ -38,7 +38,14 @@ router.get("/:itemId", async (req, res, next) => {
 // POST /api/items/
 router.post("/", requireAdminToken, async (req, res, next) => {
 	try {
-		const newItem = await Item.create(req.body);
+		const { name, description, price, stock, imageUrl } = req.body;
+		const newItem = await Item.create({
+			name,
+			description,
+			price,
+			stock,
+			imageUrl,
+		});
 		res.status(201).json(newItem);
 	} catch (e) {
 		next(e);
@@ -48,9 +55,13 @@ router.post("/", requireAdminToken, async (req, res, next) => {
 // PUT /api/items/:itemId
 router.put("/:id", requireAdminToken, async (req, res, next) => {
 	try {
-		const [numUpdated] = await Item.update(req.body, {
-			where: { id: req.params.id },
-		});
+		const { name, description, price, stock, imageUrl } = req.body;
+		const [numUpdated] = await Item.update(
+			{ name, description, price, stock, imageUrl },
+			{
+				where: { id: req.params.id },
+			}
+		);
 		if (numUpdated === 0) {
 			res.sendStatus(404);
 			return;
