@@ -66,7 +66,7 @@ const Cart = () => {
       <div className="container">
         <h1>Shopping Cart</h1>
         <h3 className="flex-end-column">{`Total: $${total.toFixed(2)}`}</h3>
-        <Link to="/home">
+        <Link to="/checkout">
           <button>Checkout</button>
         </Link>
       </div>
