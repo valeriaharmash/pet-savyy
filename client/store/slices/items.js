@@ -31,13 +31,8 @@ export const fetchItems = createAsyncThunk('getItems', async () => {
 });
 
 export const updateItem = createAsyncThunk('updateItem', async (item) => {
-  try {
-    const { data } = await axios.put(`/api/item/${item.id}`, item);
-    return data;
-  } catch (error) {
-    console.error('Unable to update item.', error);
-    return { error };
-  }
+  const { data } = await axios.put(`/api/items/${item.id}`, item);
+  return data;
 });
 
 export const deleteItem = createAsyncThunk('deleteItem', async (id) => {
