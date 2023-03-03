@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchSingleItem, addItemToCart  } from '../store/slices/items';
+import { fetchSingleItem, addItemToCart } from '../store/slices/items';
 import { Link } from 'react-router-dom';
 
 const SingleItem = () => {
@@ -51,7 +51,10 @@ const SingleItem = () => {
             : 'Out of Stock'}
         </div>
         <p>Price: {`${item.price}$`}</p>
-        <button onClick={() => handleAddToCart(item.id)}>Add to cart</button>  {/*just need to be able to pass a qty as a second argument in handleAddToCart to fix only adding one to cart*/}
+        <button onClick={() => handleAddToCart(item.id)}>
+          Add to cart
+        </button>{' '}
+        {/*just need to be able to pass a qty as a second argument in handleAddToCart to fix only adding one to cart*/}
         {user.role === 'admin' && (
           <Link to={`/items/${item.id}/update`}>
             <button type="button">Update</button>
