@@ -47,6 +47,9 @@ const auth = createSlice({
 		setUser: (state, { payload: user }) => {
 			return { ...state, user };
 		},
+		setError: (state, { payload: error }) => {
+			state.error = error;
+		},
 	},
 	extraReducers: (builder) => {
 		builder.addCase(getUserByToken.fulfilled, (state, { payload: user }) => {
@@ -54,14 +57,18 @@ const auth = createSlice({
 		});
 		builder.addCase(authenticate.fulfilled, (state, { payload }) => {
 			if (payload.error) {
-				return { ...state, error };
+				let errorMessage = "Something went wrong.";
+				if (payload.error.response.status === 401) {
+					errorMessage = "Unauthorized.";
+				}
+				return { ...state, error: errorMessage };
 			}
 			return state;
 		});
 	},
 });
 
-const { setUser } = auth.actions;
+const { setUser, setError } = auth.actions;
 
 export { setUser, getUserByToken, authenticate };
 
