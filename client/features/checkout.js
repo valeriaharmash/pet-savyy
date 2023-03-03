@@ -12,6 +12,19 @@ const Checkout = () => {
   const [address, setAddress] = useState("");
   const [payment, setPayment] = useState("");
 
+
+  const user = useSelector((state) => state.auth.user)
+  const cart = useSelector((state) => state.auth.user);
+  useEffect(() => {
+    if(user){
+    setFirstName(user.firstName)
+    setLastName(user.lastName)
+    setEmail(user.email)
+    setAddress(user.address)
+    }
+	}, [user]);
+
+
   return (
     <div>
       <h2>Checkout</h2>
@@ -43,43 +56,33 @@ const Checkout = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <label htmlFor="imageUrl" className="form-label">
-          Image:
+        <label htmlFor="address" className="form-label">
+        Shipping Address:
         </label>
         <input
           className="form"
-          name="imageUrl"
-          value={imageUrl}
-          onChange={(e) => setImageUrl(e.target.value)}
+          name="address"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
         />
-        <label htmlFor="gpa" className="form-label">
-          GPA:
+        <label htmlFor="payment" className="form-label">
+        Payment Method:
         </label>
         <input
           className="form"
-          name="gpa"
-          value={gpa}
-          onChange={(e) => setGpa(e.target.value)}
+          name="payment"
+          value={payment}
+          onChange={(e) => setPayment(e.target.value)}
         />
-        <label htmlFor="campus" className="form-label">
-          Campus:
-        </label>
-        <select
-          className="form"
-          name="campus"
-          value={selectedCampus}
-          onChange={(e) => {
-            console.log("VALUE------>", e.target.value);
-            setSelectedCampus(e.target.value);
-          }}
-        >
-          {campuses.map((campus) => (
-            <option key={campus.id} value={campus.id}>
-              {campus.name}
-            </option>
-          ))}
-        </select>
-        <button
+      </form>
+    </div>
+  );
+};
+
+export default Checkout;
+
+
+     {/* <button
           onClick={handleSave}
           disabled={!editAllowed}
           className="form-label"
@@ -91,10 +94,4 @@ const Checkout = () => {
         </button>
         <button onClick={handleCancel} className="form-label">
           Cancel
-        </button>
-      </form>
-    </div>
-  );
-};
-
-export default Checkout;
+        </button> */}
