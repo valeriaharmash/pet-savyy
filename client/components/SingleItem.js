@@ -53,9 +53,12 @@ const SingleItem = () => {
 						: "Out of Stock"}
 				</div>
 				<p>Price: {`${item.price}$`}</p>
-				<button onClick={() => handleAddToCart(item.id, itemQty)}>
-					Add to cart
-				</button>{" "}
+				{(!user || user.role !== "admin") && (
+					<button onClick={() => handleAddToCart(item.id, itemQty)}>
+						Add to cart
+					</button>
+				)}
+
 				{/*just need to be able to pass a qty as a second argument in handleAddToCart to fix only adding one to cart*/}
 				{user && user.role === "admin" && (
 					<Link to={`/items/${item.id}/update`}>
