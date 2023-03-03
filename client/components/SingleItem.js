@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchSingleItem, addItemToCart } from "../store/slices/items";
@@ -9,6 +9,8 @@ const SingleItem = () => {
 	const { itemId } = useParams();
 	const item = useSelector((state) => state.items.selectedItem);
 	const user = useSelector((state) => state.auth.user);
+	// TODO What is the default item qty in case if item is already in the cart?
+	const [itemQty, setItemQty] = useState(0);
 	let userId = null;
 	if (user) {
 		userId = user.id;
@@ -20,8 +22,8 @@ const SingleItem = () => {
 		}
 	}, [itemId]);
 
-	const handleAddToCart = async (itemId) => {
-		await dispatch(addItemToCart({ userId, itemId }));
+	const handleAddToCart = async (itemId, quantity) => {
+		await dispatch(addItemToCart({ userId, itemId, quantity }));
 	};
 
 	if (!item.id) return null;
@@ -37,7 +39,7 @@ const SingleItem = () => {
 						? "In Stock" && (
 								<div>
 									<label htmlFor="qty">Qty</label>
-									<select>
+									<select onChange={(e) => setItemQty(e.target.value)}>
 										{new Array(item.stock >= 5 ? 5 : item.stock)
 											.fill(0)
 											.map((val, idx) => (
@@ -51,7 +53,7 @@ const SingleItem = () => {
 						: "Out of Stock"}
 				</div>
 				<p>Price: {`${item.price}$`}</p>
-				<button onClick={() => handleAddToCart(item.id)}>
+				<button onClick={() => handleAddToCart(item.id, itemQty)}>
 					Add to cart
 				</button>{" "}
 				{/*just need to be able to pass a qty as a second argument in handleAddToCart to fix only adding one to cart*/}
