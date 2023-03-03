@@ -24,6 +24,16 @@ const Item = db.define("item", {
     type: Sequelize.INTEGER,
     allowNull: false,
   },
+  tag: {
+    type: Sequelize.STRING,
+    defaultValue: "misc",
+    allowNull: false,
+  },
+  favorite: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+    allowNull: false,
+  },
   imageUrl: {
     type: Sequelize.STRING,
     defaultValue:
