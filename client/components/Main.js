@@ -1,5 +1,5 @@
 import React from 'react';
-import Items from './Items';
+import Items from '../features/Items';
 import { AuthForm } from './AuthForm';
 
 const Main = () => {
