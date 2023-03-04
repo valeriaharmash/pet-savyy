@@ -70,7 +70,29 @@ form div {
   margin-top: 0px;
 }
 
+form input {
+  width: 80%;
+  height: 1.5rem;
+}
+
 /*^^^^^^^^ Form ^^^^^^^^^^*/
+
+
+button {
+  width: 7rem;
+  height: 2.5rem;
+  border-radius: 5px;
+  border-width: 0;
+  font-size: 1rem;
+  background-color: lightgray;
+}
+
+button:hover{
+  background-color: lightgoldenrodyellow;
+  cursor: pointer;
+}
+
+/*^^^^^^^^ Button ^^^^^^^^^^*/
 
 .main {
   display: flex;
@@ -140,6 +162,17 @@ form div {
   justify-content: space-between;
 }
 
+.around {
+  display: flex;
+  justify-content: space-around;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .item-img {
   width: 15rem;
   height: 15rem;
@@ -168,10 +201,11 @@ form div {
   display: flex;
   flex-flow: column;
   width: 160px;
-  height: 300px;
+  max-height: 18.75rem;
   margin-top: 10px;
   border: 1px solid black;
   background-color: rgb(125, 163, 234);
+  padding: 0.2rem;
 }
 
 #itemImage > img {
@@ -196,14 +230,14 @@ form div {
 }
 
 #itemFooter {
-  display: contents;
-  flex: 0 1 20px;
+  display: flex;
+  align-items: center;
+  align-content: center;
 }
 
 #itemFooter a {
   text-align: center;
-  border-top: 1px solid black;
-  padding-top: 16px;
+  padding: 0.4rem;
   width: 100%;
   height: 100%;
   background-color: #728372;
@@ -255,6 +289,3 @@ form div {
 }
 
 /*^^^^^^^^ ItemsPage (Store) ^^^^^^^^^^*/
-
-
-

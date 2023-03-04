@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { fetchSingleItem, addItemToCart } from "../store/slices/items";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { addItemToCart, fetchSingleItem } from '../store/slices/items';
 
 const SingleItem = () => {
   const dispatch = useDispatch();
   const { itemId } = useParams();
   const item = useSelector((state) => state.items.selectedItem);
   const user = useSelector((state) => state.auth.user);
+  const [itemQty, setItemQty] = useState(0);
+
   let userId = null;
   if (user) {
     userId = user.id;
   }
-
-  const [qty, setQty] = useState(0);
 
   useEffect(() => {
     if (itemId) {
@@ -22,50 +21,63 @@ const SingleItem = () => {
     }
   }, [itemId]);
 
-  const handleAddToCart = async (itemId) => {
-    const quantity = parseInt(qty, 10);
-    await dispatch(addItemToCart({ userId, itemId, quantity }));
-  };
-
-  const handleQuantityChange = async (quantity) => {
-    setQty(quantity);
+  const handleAddToCart = async (itemId, quantity) => {
+    if (user) {
+      dispatch(
+        addItemToCart({ userId, itemId, quantity: parseInt(quantity, 10) })
+      );
+    } else {
+      const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+      localStorage.setItem(
+        'cartItems',
+        JSON.stringify([...cartItems, { item, qty: quantity }])
+      );
+    }
   };
 
   if (!item.id) return null;
 
   return (
-    <div className="row apart">
-      <img className="item-img" src={item.imageUrl} />
-      <div style={{ flex: 2, padding: "2rem" }}>
+    <div className='row apart'>
+      <img className='item-img' src={item.imageUrl} />
+      <div style={{ flex: 2, padding: '2rem' }}>
         <h3>{item.name}</h3>
         <p>{item.description}</p>
         <div>
-          {item.stock
-            ? "In Stock" && (
+          {item.stock ? (
+            <div>
+              <p>In Stock</p>
+              {(!user || user.role !== 'admin') && (
                 <div>
-                  <label htmlFor="qty">Qty</label>
-                  <select
-                    onChange={(e) => handleQuantityChange(e.target.value)}
-                  >
-                    {new Array(item.stock >= 5 ? 5 : item.stock)
+                  <label htmlFor='qty'>Qty</label>
+                  <select onChange={(e) => setItemQty(e.target.value)}>
+                    {new Array(item.stock >= 5 ? 6 : item.stock + 1)
                       .fill(0)
                       .map((val, idx) => (
-                        <option key={idx} value={idx + 1}>
-                          {idx + 1}
+                        <option key={idx} value={idx}>
+                          {idx}
                         </option>
                       ))}
                   </select>
                 </div>
-              )
-            : "Out of Stock"}
+              )}
+            </div>
+          ) : (
+            'Out of Stock'
+          )}
         </div>
         <p>Price: {`$ ${item.price}`}</p>
-        <button onClick={() => handleAddToCart(item.id)}>
-          Add to cart
-        </button>{" "}
-        {user.role === "admin" && (
+        {(!user || user.role !== 'admin') && (
+          <button
+            disabled={!itemQty}
+            onClick={() => handleAddToCart(item.id, itemQty)}
+          >
+            Add to cart
+          </button>
+        )}
+        {user && user.role === 'admin' && (
           <Link to={`/items/${item.id}/update`}>
-            <button type="button">Update</button>
+            <button type='button'>Update</button>
           </Link>
         )}
       </div>

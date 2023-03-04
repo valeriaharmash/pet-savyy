@@ -47,10 +47,10 @@ const AuthForm = ({ mode }) => {
   if (!mode) return null;
 
   return (
-    <div>
+    <div className='column'>
       <form onSubmit={handleSubmit} name={name}>
         {authMode === 'signup' && (
-          <div>
+          <div className='row apart'>
             <label htmlFor='firstName'>
               <small>First name</small>
             </label>
@@ -63,7 +63,7 @@ const AuthForm = ({ mode }) => {
           </div>
         )}
         {authMode === 'signup' && (
-          <div>
+          <div className='row apart'>
             <label htmlFor='lastName'>
               <small>Last name</small>
             </label>
@@ -75,7 +75,7 @@ const AuthForm = ({ mode }) => {
             />
           </div>
         )}
-        <div>
+        <div className='row apart'>
           <label htmlFor='email'>
             <small>Email</small>
           </label>
@@ -86,7 +86,7 @@ const AuthForm = ({ mode }) => {
             onChange={(event) => setEmail(event.target.value)}
           />
         </div>
-        <div>
+        <div className='row apart'>
           <label htmlFor='password'>
             <small>Password</small>
           </label>

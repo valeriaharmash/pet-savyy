@@ -16,14 +16,16 @@ const Navbar = () => {
           <Link to='/home'>Home</Link>
           <Link to='/home'>Costumes</Link>
           <Link to='/home'>Supplies</Link>
+          {user && user.role !== 'admin' ? (
+            <Link to={`/user/${user.id}/cart`}>Cart</Link>
+          ) : (
+            <Link to='/user/guest/cart'>Cart</Link>
+          )}
         </div>
-        {/* We have to get rid of user.id here in order to support :guest" experience. */}
-        {user && user.role !== 'admin' && (
-          <Link to={`/user/${user.id}/cart`}>Cart</Link>
-        )}
         {user && user.role === 'admin' && <Link to={`/users`}>Users</Link>}
         {user ? (
           <div>
+            {/* The navbar will show these links after you log in */}
             <Link to='/home'>My Account</Link>
             <a
               onClick={() => {
@@ -37,6 +39,7 @@ const Navbar = () => {
           </div>
         ) : (
           <div>
+            {/* The navbar will show these links before you log in */}
             <Link to='/login'>Login</Link>
             <Link to='/signup'>Sign Up</Link>
           </div>

@@ -2,16 +2,18 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import {
+  AllUsers,
   AuthForm,
+  CreateItem,
   Home,
+  Main,
   SingleItem,
   UpdateItem,
-  Main,
-  AllUsers,
 } from './components';
 import { getUserByToken } from './store';
 import { isLoggedIn } from './utils';
-import { Cart, Checkout } from './features';
+import Cart from './features/cart';
+import { Checkout } from './features';
 
 const Router = ({}) => {
   const dispatch = useDispatch();
@@ -27,9 +29,10 @@ const Router = ({}) => {
     return (
       <Routes>
         <Route path='/home' element={<Home />} />
+        <Route exact path='/items/add' element={<CreateItem />} />
         <Route exact path='/items/:itemId' element={<SingleItem />} />
         <Route exact path='/items/:itemId/update' element={<UpdateItem />} />
-        <Route path='/users' element={<AllUsers />} />
+        <Route exact path='/users' element={<AllUsers />} />
         <Route path='*' element={<Main />} />
       </Routes>
     );
@@ -42,6 +45,7 @@ const Router = ({}) => {
         <Route path='/checkout' element={<Checkout />} />
         <Route exact path='/items/:itemId' element={<SingleItem />} />
         <Route path='/user/:userId/cart' element={<Cart />} />
+        <Route path='/user/guest/cart' element={<Cart />} />
         <Route path='*' element={<Main />} />
       </Routes>
     );

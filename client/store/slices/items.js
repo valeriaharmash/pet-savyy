@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = {
   allItems: [],
@@ -8,21 +8,21 @@ const initialState = {
 };
 
 export const fetchSingleItem = createAsyncThunk(
-  'fetchSingleItem',
+  "fetchSingleItem",
   async (itemId) => {
     try {
       const { data: item } = await axios.get(`/api/items/${itemId}`);
       return { item };
     } catch (error) {
-      console.error('Unable to fetch item.', error);
+      console.error("Unable to fetch item.", error);
       return { error };
     }
   }
 );
 
-export const fetchItems = createAsyncThunk('fetchItems', async () => {
+export const fetchItems = createAsyncThunk("fetchItems", async () => {
   try {
-    const { data } = await axios.get('/api/items');
+    const { data } = await axios.get("/api/items");
     return data;
   } catch (err) {
     //console.log(err)
@@ -31,7 +31,7 @@ export const fetchItems = createAsyncThunk('fetchItems', async () => {
 });
 
 export const addItemToCart = createAsyncThunk(
-  'cart/addItem',
+  "cart/addItem",
   async ({ userId, itemId, quantity = 1 }) => {
     try {
       const { data } = await axios.put(`/api/cart/${userId}/${itemId}`, {
@@ -45,28 +45,46 @@ export const addItemToCart = createAsyncThunk(
   }
 );
 
-export const updateItem = createAsyncThunk('updateItem', async (item) => {
+export const updateItem = createAsyncThunk("updateItem", async (item) => {
   try {
     const { data } = await axios.put(`/api/items/${item.id}`, item);
     return data;
   } catch (error) {
-    console.error('Unable to update item.', error);
+    console.error("Unable to update item.", error);
     return { error };
   }
 });
 
-export const deleteItem = createAsyncThunk('deleteItem', async (id) => {
+export const createItem = createAsyncThunk(
+  "createItem",
+  async ({ name, description, price, stock }) => {
+    try {
+      const { data: item } = await axios.post("/api/items", {
+        name,
+        description,
+        price,
+        stock,
+      });
+      return { item };
+    } catch (error) {
+      console.error("Unable to create item.", error);
+      return { error };
+    }
+  }
+);
+
+export const deleteItem = createAsyncThunk("deleteItem", async (id) => {
   try {
     const { data } = await axios.delete(`/api/items/${id}`);
     return { id, data };
   } catch (error) {
-    console.error('Unable to delete item.', error);
+    console.error("Unable to delete item.", error);
     return { error };
   }
 });
 
 const itemsSlice = createSlice({
-  name: 'items',
+  name: "items",
   initialState,
   reducers: {
     setError: (state, { payload: error }) => {
@@ -76,9 +94,9 @@ const itemsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchSingleItem.fulfilled, (state, { payload }) => {
       if (payload.error) {
-        let errorMessage = 'Something went wrong.';
+        let errorMessage = "Something went wrong.";
         if (payload.error.response.status === 500) {
-          errorMessage = 'No items found.';
+          errorMessage = "No items found.";
         }
         return { ...state, error: errorMessage };
       }
@@ -89,6 +107,16 @@ const itemsSlice = createSlice({
     });
     builder.addCase(updateItem.fulfilled, (state, { payload }) => {
       state.singleItem = payload;
+    });
+    builder.addCase(createItem.fulfilled, (state, { payload }) => {
+      if (payload.error) {
+        let errorMessage = "Something went wrong.";
+        if (payload.error.response.status === 500) {
+          errorMessage = "Can not create item.";
+        }
+        return { ...state, error: errorMessage };
+      }
+      state.allItems.push(payload);
     });
     builder.addCase(deleteItem.fulfilled, (state, { payload }) => {
       state.allItems = state.allItems.filter((item) => item.id !== payload.id);

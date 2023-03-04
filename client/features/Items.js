@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { selectItems, fetchItems, addItemToCart } from '../store/slices/items';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { addItemToCart, fetchItems, selectItems } from '../store/slices/items';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Items = () => {
+  const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
   let userId = null;
   if (user) {
@@ -26,6 +27,13 @@ const Items = () => {
       {items !== [] ? (
         <>
           <h1 className='itemsHeader'>Number of Items {`(${items.length})`}</h1>
+          <div className='center'>
+            {user && user.role === 'admin' && (
+              <button className='center' onClick={() => navigate('/items/add')}>
+                Add Item
+              </button>
+            )}
+          </div>
           <div className='items'>
             {items.map((item) => {
               return (

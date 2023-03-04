@@ -3,6 +3,7 @@ const {
   models: { User },
 } = require('../../db');
 const { requireAdminToken } = require('../middleware');
+const { requireAdminToken } = require('../middleware');
 
 // GET /api/users/
 router.get('/', requireAdminToken, async (req, res, next) => {

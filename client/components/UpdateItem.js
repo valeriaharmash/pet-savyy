@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, Navigate } from 'react-router-dom';
-import { fetchSingleItem, deleteItem, updateItem } from '../store/slices/items';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { deleteItem, fetchSingleItem, updateItem } from '../store/slices/items';
 
 const UpdateItem = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { itemId } = useParams();
+  const {itemId} = useParams();
 
   const item = useSelector((state) => state.items.selectedItem);
   const user = useSelector((state) => state.auth.user);
 
-  const [isItem, setIsItem] = useState(true);
   const [itemName, setItemName] = useState('');
   const [itemDescription, setItemDescription] = useState('');
   const [itemImageUrl, setItemImageUrl] = useState('');
@@ -47,8 +47,9 @@ const UpdateItem = () => {
             price: itemPrice,
           })
         );
+        navigate(`/items/${item.id}`);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
   };
@@ -56,28 +57,22 @@ const UpdateItem = () => {
   const handleDelete = async (id) => {
     try {
       await dispatch(deleteItem(id));
-      setIsItem(false);
+      navigate('/items');
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
-  if (user.role !== 'admin') {
-    return <Navigate to="/items" />;
-  }
-  if (!item.id) {
-    return <Navigate to="/items" />;
-  }
-  if (!isItem) {
-    return <Navigate to="/items" />;
+  if (user && user.role !== 'admin') {
+    return <Navigate to="/items"/>;
   }
 
   return (
     <div className="row apart">
-      <img className="item-img" src={item.imageUrl} />
-      <div style={{ flex: 2, padding: '2rem' }}>
+      <img className="item-img" src={item.imageUrl}/>
+      <div style={{flex: 2}}>
         <form onSubmit={handleUpdate}>
-          <div>
+          <div className="row apart">
             <label htmlFor="name">Name:</label>
             <input
               type="text"
@@ -87,7 +82,7 @@ const UpdateItem = () => {
               onChange={(e) => setItemName(e.target.value)}
             />
           </div>
-          <div>
+          <div className="row apart">
             <label htmlFor="description">Description:</label>
             <input
               id="description"
@@ -96,7 +91,7 @@ const UpdateItem = () => {
               onChange={(e) => setItemDescription(e.target.value)}
             />
           </div>
-          <div>
+          <div className="row apart">
             <label htmlFor="imageUrl">Image URL:</label>
             <input
               type="text"
@@ -106,7 +101,7 @@ const UpdateItem = () => {
               onChange={(e) => setItemImageUrl(e.target.value)}
             />
           </div>
-          <div>
+          <div className="row apart">
             <label htmlFor="stock">Stock:</label>
             <input
               type="number"
@@ -116,7 +111,7 @@ const UpdateItem = () => {
               onChange={(e) => setItemStock(e.target.value)}
             />
           </div>
-          <div>
+          <div className="row apart">
             <label htmlFor="price">Price:</label>
             <input
               type="number"
@@ -126,11 +121,13 @@ const UpdateItem = () => {
               onChange={(e) => setItemPrice(parseFloat(e.target.value))}
             />
           </div>
-          <button type="submit">Save changes</button>
+          <div className="row around">
+            <button type="submit">Save</button>
+            <button type="button" onClick={() => handleDelete(item.id)}>
+              Delete
+            </button>
+          </div>
         </form>
-        <div className="delete-button">
-          <button onClick={() => handleDelete(item.id)}>Delete</button>
-        </div>
       </div>
     </div>
   );
