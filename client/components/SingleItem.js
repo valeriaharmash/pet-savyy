@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { addItemToCart, fetchSingleItem } from "../store/slices/items";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { addItemToCart, fetchSingleItem } from '../store/slices/items';
 
 const SingleItem = () => {
   const dispatch = useDispatch();
@@ -9,6 +9,7 @@ const SingleItem = () => {
   const item = useSelector((state) => state.items.selectedItem);
   const user = useSelector((state) => state.auth.user);
   const [itemQty, setItemQty] = useState(0);
+
   let userId = null;
   if (user) {
     userId = user.id;
@@ -21,16 +22,24 @@ const SingleItem = () => {
   }, [itemId]);
 
   const handleAddToCart = async (itemId, quantity) => {
-    await dispatch(
-      addItemToCart({ userId, itemId, quantity: parseInt(quantity, 10) })
-    );
+    if (user) {
+      dispatch(
+        addItemToCart({ userId, itemId, quantity: parseInt(quantity, 10) })
+      );
+    } else {
+      const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+      localStorage.setItem(
+        'cartItems',
+        JSON.stringify([...cartItems, { item, qty: quantity }])
+      );
+    }
   };
 
   if (!item.id) return null;
 
   return (
-    <div className="row apart">
-      <img className="item-img" src={item.imageUrl}/>
+    <div className='row apart'>
+      <img className='item-img' src={item.imageUrl} />
       <div style={{ flex: 2, padding: '2rem' }}>
         <h3>{item.name}</h3>
         <p>{item.description}</p>
@@ -40,7 +49,7 @@ const SingleItem = () => {
               <p>In Stock</p>
               {(!user || user.role !== 'admin') && (
                 <div>
-                  <label htmlFor="qty">Qty</label>
+                  <label htmlFor='qty'>Qty</label>
                   <select onChange={(e) => setItemQty(e.target.value)}>
                     {new Array(item.stock >= 5 ? 6 : item.stock + 1)
                       .fill(0)
@@ -68,7 +77,7 @@ const SingleItem = () => {
         )}
         {user && user.role === 'admin' && (
           <Link to={`/items/${item.id}/update`}>
-            <button type="button">Update</button>
+            <button type='button'>Update</button>
           </Link>
         )}
       </div>
