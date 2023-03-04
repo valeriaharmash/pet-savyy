@@ -53,7 +53,7 @@ const Router = ({}) => {
         <Route exact path='/items/:itemId' element={<SingleItem />} />
         <Route path='/user/:userId/cart' element={<Cart />} />
         <Route path='/user/guest/cart' element={<Cart />} />
-        <Route exact path='/users/:userId' element={<SingleUser />} />
+        {user && <Route path='/users/:userId' element={<SingleUser />} />}
         <Route path='*' element={<Main />} />
       </Routes>
     );
