@@ -12,19 +12,16 @@ const AllUsers = () => {
   }, [dispatch]);
 
   return (
-    <div>
-      <h1>All Users</h1>
-      <div>
-        {users.map((user) => {
-          return (
-            <div key={user.id}>
-              <Link to={`/users/${user.id}`}>
-                {user.firstName} {user.lastName}
-              </Link>
-            </div>
-          );
-        })}
-      </div>
+    <div className='container'>
+      {users.map((user) => {
+        return (
+          <div className='user' key={user.id}>
+            <Link to={`/users/${user.id}`} className='link'>
+              {user.firstName} {user.lastName}
+            </Link>
+          </div>
+        );
+      })}
     </div>
   );
 };

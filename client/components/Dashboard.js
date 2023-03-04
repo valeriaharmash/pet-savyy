@@ -1,18 +1,31 @@
-// import React from 'react';
-// import AllUsers from '../features/AllUsers';
+import React from 'react';
+import AllUsers from './AllUsers';
+import { Link } from 'react-router-dom';
 
-// // this is needed for tier 2
-// // AllUsers and UpdateItem will go here
+export const Home = () => {
+  return (
+    <div className='dashboard'>
+      <div className='main'>
+        <div className='left'>
+          <h3>Items</h3>
+          <p>
+            <Link to='/items/add' className='link'>
+              Add Item
+            </Link>
+          </p>
+          <p>
+            <Link to='/items/' className='link'>
+              Update Items
+            </Link>
+          </p>
+        </div>
+        <div className='right'>
+          <h3>Users</h3>
+          <AllUsers />
+        </div>
+      </div>
+    </div>
+  );
+};
 
-// export const Home = () => {
-//   return (
-//     <div>
-//       <div className="banner">
-//         <h2>Admin Dashboard</h2>
-//       </div>
-//    components will be linked here
-//     </div>
-//   );
-// };
-
-// export default Home;
+export default Home;

@@ -9,7 +9,10 @@ import {
   Main,
   SingleItem,
   UpdateItem,
+  Dashboard,
+  SingleUser,
 } from './components';
+import { Items } from './features';
 import { getUserByToken } from './store';
 import { isLoggedIn } from './utils';
 import Cart from './features/cart';
@@ -29,10 +32,13 @@ const Router = ({}) => {
     return (
       <Routes>
         <Route path='/home' element={<Home />} />
+        <Route exact path='/dashboard' element={<Dashboard />} />
+        <Route exact path='/items' element={<Items />} />
         <Route exact path='/items/add' element={<CreateItem />} />
         <Route exact path='/items/:itemId' element={<SingleItem />} />
         <Route exact path='/items/:itemId/update' element={<UpdateItem />} />
         <Route exact path='/users' element={<AllUsers />} />
+        <Route exact path='/users/:userId' element={<SingleUser />} />
         <Route path='*' element={<Main />} />
       </Routes>
     );
@@ -43,9 +49,11 @@ const Router = ({}) => {
         <Route exact path='/signup' element={<AuthForm mode='signup' />} />
         <Route path='/home' element={<Home />} />
         <Route path='/checkout' element={<Checkout />} />
+        <Route exact path='/items' element={<CreateItem />} />
         <Route exact path='/items/:itemId' element={<SingleItem />} />
         <Route path='/user/:userId/cart' element={<Cart />} />
         <Route path='/user/guest/cart' element={<Cart />} />
+        <Route exact path='/users/:userId' element={<SingleUser />} />
         <Route path='*' element={<Main />} />
       </Routes>
     );

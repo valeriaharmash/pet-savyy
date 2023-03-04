@@ -30,6 +30,16 @@ export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
   }
 });
 
+export const updateUser = createAsyncThunk('updateUser', async (user) => {
+  try {
+    const { data } = await axios.put(`/api/users/${user.id}`, user);
+    return data;
+  } catch (error) {
+    console.error('Unable to update user.', error);
+    return { error };
+  }
+});
+
 const usersSlice = createSlice({
   name: 'users',
   initialState,
@@ -53,8 +63,8 @@ const usersSlice = createSlice({
       .addCase(fetchUsers.fulfilled, (state, action) => {
         state.allUsers = action.payload;
       })
-      .addCase(fetchUsers.rejected, (state, { error }) => {
-        state.error = error.message;
+      .addCase(updateUser.fulfilled, (state, { payload }) => {
+        state.selectedUser = payload;
       });
   },
 });

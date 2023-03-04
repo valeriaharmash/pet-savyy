@@ -2,7 +2,7 @@ const router = require('express').Router();
 const {
   models: { User },
 } = require('../../db');
-const { requireAdminToken } = require('../middleware');
+const { requireToken, requireAdminToken } = require('../middleware');
 
 // GET /api/users/
 router.get('/', requireAdminToken, async (req, res, next) => {
@@ -20,7 +20,7 @@ router.get('/', requireAdminToken, async (req, res, next) => {
 });
 
 // GET /api/users/:userId
-router.get('/:userId', requireAdminToken, async (req, res, next) => {
+router.get('/:userId', requireToken, async (req, res, next) => {
   try {
     const { userId } = req.params;
     const user = await User.findOne({
@@ -31,7 +31,11 @@ router.get('/:userId', requireAdminToken, async (req, res, next) => {
     });
 
     if (user) {
-      res.json(user);
+      if (req.user.role === 'admin' || req.user.id === user.id) {
+        res.json(user);
+      } else {
+        res.status(403).send('You are not authorized to access this resource.');
+      }
     } else {
       res.status(404).send("User doesn't exist.");
     }
