@@ -65,6 +65,11 @@ form div {
   display: inline-block;
 }
 
+.notif {
+  color: red;
+  margin-top: 0px;
+}
+
 /*^^^^^^^^ Form ^^^^^^^^^^*/
 
 .main {
