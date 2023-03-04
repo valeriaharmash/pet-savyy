@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Checkout = () => {
+  const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -13,16 +14,15 @@ const Checkout = () => {
   const [payment, setPayment] = useState("");
 
 
-  const user = useSelector((state) => state.auth.user)
-  const cart = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.auth.user);
   useEffect(() => {
-    if(user){
-    setFirstName(user.firstName)
-    setLastName(user.lastName)
-    setEmail(user.email)
-    setAddress(user.address)
+    if (user) {
+      setFirstName(user.firstName);
+      setLastName(user.lastName);
+      setEmail(user.email);
+      setAddress(user.address);
     }
-	}, [user]);
+  }, [user]);
 
 
   return (
@@ -57,7 +57,7 @@ const Checkout = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
         <label htmlFor="address" className="form-label">
-        Shipping Address:
+          Shipping Address:
         </label>
         <input
           className="form"
@@ -65,16 +65,15 @@ const Checkout = () => {
           value={address}
           onChange={(e) => setAddress(e.target.value)}
         />
-        <label htmlFor="payment" className="form-label">
-        Payment Method:
-        </label>
-        <input
-          className="form"
-          name="payment"
-          value={payment}
-          onChange={(e) => setPayment(e.target.value)}
-        />
       </form>
+      <button onClick={() => navigate("/checkout/pay", {
+        state: {
+          userId: user && user.id,
+          amount: Number(location.state.total) * 100
+        }
+      })}
+      >Continue to Payment
+      </button>
     </div>
   );
 };
@@ -82,7 +81,7 @@ const Checkout = () => {
 export default Checkout;
 
 
-     {/* <button
+{/* <button
           onClick={handleSave}
           disabled={!editAllowed}
           className="form-label"
@@ -94,4 +93,5 @@ export default Checkout;
         </button>
         <button onClick={handleCancel} className="form-label">
           Cancel
-        </button> */}
+        </button> */
+}

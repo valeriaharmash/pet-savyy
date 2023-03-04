@@ -42,6 +42,13 @@ const User = db.define('user', {
     defaultValue: 'customer',
     isIn: ['admin', 'customer'],
   },
+  stripeId: {
+    type: Sequelize.STRING,
+    allowNull: true,
+    validate: {
+      notEmpty: true,
+    },
+  },
 });
 
 module.exports = User;

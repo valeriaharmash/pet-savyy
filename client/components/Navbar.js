@@ -11,22 +11,21 @@ const Navbar = () => {
   return (
     <div>
       <h1>Grace Shopper Pet Store</h1>
-      <nav className='apart'>
+      <nav className="apart">
         <div>
-          <Link to='/home'>Home</Link>
-          <Link to='/home'>Costumes</Link>
-          <Link to='/home'>Supplies</Link>
-          {user && user.role !== 'admin' ? (
+          <Link to="/home">Home</Link>
+          <Link to="/home">Costumes</Link>
+          <Link to="/home">Supplies</Link>
+          {user && user.role !== 'admin' && (
             <Link to={`/user/${user.id}/cart`}>Cart</Link>
-          ) : (
-            <Link to='/user/guest/cart'>Cart</Link>
           )}
+          {!user && <Link to="/user/guest/cart">Cart</Link>}
         </div>
         {user && user.role === 'admin' && <Link to={`/users`}>Users</Link>}
         {user ? (
           <div>
             {/* The navbar will show these links after you log in */}
-            <Link to='/home'>My Account</Link>
+            <Link to="/home">My Account</Link>
             <a
               onClick={() => {
                 dispatch(setUser(null));
@@ -40,12 +39,12 @@ const Navbar = () => {
         ) : (
           <div>
             {/* The navbar will show these links before you log in */}
-            <Link to='/login'>Login</Link>
-            <Link to='/signup'>Sign Up</Link>
+            <Link to="/login">Login</Link>
+            <Link to="/signup">Sign Up</Link>
           </div>
         )}
       </nav>
-      <hr />
+      <hr/>
     </div>
   );
 };
