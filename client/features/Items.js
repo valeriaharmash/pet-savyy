@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { addItemToCart, fetchItems, selectItems } from '../store/slices/items';
 import { useDispatch, useSelector } from 'react-redux';
+import { Button } from 'react-bootstrap';
 
 const Items = () => {
   const navigate = useNavigate();
@@ -19,7 +20,24 @@ const Items = () => {
   let items = useSelector(selectItems);
 
   const handleAddToCart = async (itemId) => {
-    await dispatch(addItemToCart({ userId, itemId }));
+    if (user) {
+      dispatch(addItemToCart({ userId, itemId }));
+    } else {
+      let item = items.filter((item) => item.id === itemId);
+      item = item[0];
+
+      // grab the local cart items
+      let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+      // check if item is already in the cart
+      const itemIndex = cartItems.findIndex((item) => item.item.id === itemId);
+      if (itemIndex !== -1) {
+        cartItems[itemIndex].qty += 1;
+      } else {
+        cartItems.push({ item, qty: 1 });
+      }
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    }
   };
 
   return (
@@ -60,8 +78,20 @@ const Items = () => {
                       <div
                         id='itemFooter'
                         onClick={() => handleAddToCart(item.id)}
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          height: '100%',
+                        }}
                       >
-                        <Link to={`/user/${userId}/cart`}>Add to Cart</Link>
+                        <Button
+                          className='button'
+                          variant='secondary'
+                          style={{ alignSelf: 'center' }}
+                        >
+                          Add to Cart
+                        </Button>{' '}
                       </div>
                     )}
                   </div>

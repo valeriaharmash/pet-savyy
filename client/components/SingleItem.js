@@ -27,11 +27,17 @@ const SingleItem = () => {
         addItemToCart({ userId, itemId, quantity: parseInt(quantity, 10) })
       );
     } else {
-      const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-      localStorage.setItem(
-        'cartItems',
-        JSON.stringify([...cartItems, { item, qty: quantity }])
-      );
+      // grab the local cart items
+      let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+      // check if item is already in the cart
+      const itemIndex = cartItems.findIndex((item) => item.item.id === itemId);
+      if (itemIndex !== -1) {
+        cartItems[itemIndex].qty += parseInt(quantity);
+      } else {
+        cartItems.push({ item, qty: quantity });
+      }
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
     }
   };
 
