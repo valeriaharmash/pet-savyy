@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useParams, Link } from 'react-router-dom';
-import { fetchUserOrder, setOrderQty, deleteItem } from './cartSlice';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { deleteItem, fetchUserOrder, setOrderQty } from './cartSlice';
 
 const UserCart = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { userId } = useParams();
 
@@ -57,27 +58,25 @@ const UserCart = () => {
   };
 
   return (
-    <div className='content'>
-      <div className='container'>
+    <div className="content">
+      <div className="container">
         <h1>Shopping Cart</h1>
-        <h3 className='flex-end-column'>{`Total: $${total.toFixed(2)}`}</h3>
-        <Link to='/checkout'>
-          <button>Checkout</button>
-        </Link>
+        <h3 className="flex-end-column">{`Total: $${total.toFixed(2)}`}</h3>
+        <button onClick={() => navigate('/checkout', { state: { total } })}>Checkout</button>
       </div>
       <div>
         {cart.map((item) => {
           return (
-            <div key={item.itemId} className='cart-items'>
+            <div key={item.itemId} className="cart-items">
               <Link to={`/items/${item.itemId}`}>
                 <img
                   src={item.item.imageUrl}
                   alt={item.item.name}
-                  height='150'
-                  width='175'
+                  height="150"
+                  width="175"
                 />
               </Link>
-              <div className='item-description'>
+              <div className="item-description">
                 <Link to={`/items/${item.itemId}`}>
                   <h4>{item.item.name}</h4>
                 </Link>

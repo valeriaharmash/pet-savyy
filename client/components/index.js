@@ -6,6 +6,8 @@ import UpdateItem from './UpdateItem';
 import CreateItem from './CreateItem';
 import Main from './Main';
 import AllUsers from './AllUsers';
+import Payment from './Payment';
+import Completion from './Completion';
 
 export {
   AuthForm,
@@ -16,4 +18,6 @@ export {
   Main,
   AllUsers,
   CreateItem,
+  Payment,
+  Completion
 };
