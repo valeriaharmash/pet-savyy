@@ -1,7 +1,15 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
-import { AllUsers, AuthForm, CreateItem, Home, Main, SingleItem, UpdateItem, } from './components';
+import {
+  AllUsers,
+  AuthForm,
+  CreateItem,
+  Home,
+  Main,
+  SingleItem,
+  UpdateItem,
+} from './components';
 import { getUserByToken } from './store';
 import { isLoggedIn } from './utils';
 import Cart from './features/cart';
@@ -20,24 +28,25 @@ const Router = ({}) => {
   if (user && user.role === 'admin') {
     return (
       <Routes>
-        <Route path="/home" element={<Home/>}/>
-        <Route exact path="/items/add" element={<CreateItem/>}/>
-        <Route exact path="/items/:itemId" element={<SingleItem/>}/>
-        <Route exact path="/items/:itemId/update" element={<UpdateItem/>}/>
-        <Route exact path="/users" element={<AllUsers/>}/>
-        <Route path="*" element={<Main/>}/>
+        <Route path='/home' element={<Home />} />
+        <Route exact path='/items/add' element={<CreateItem />} />
+        <Route exact path='/items/:itemId' element={<SingleItem />} />
+        <Route exact path='/items/:itemId/update' element={<UpdateItem />} />
+        <Route exact path='/users' element={<AllUsers />} />
+        <Route path='*' element={<Main />} />
       </Routes>
     );
   } else {
     return (
       <Routes>
-        <Route exact path="/login" element={<AuthForm mode="login"/>}/>
-        <Route exact path="/signup" element={<AuthForm mode="signup"/>}/>
-        <Route path="/home" element={<Home/>}/>
-        <Route path="/checkout" element={<Checkout/>}/>
-        <Route exact path="/items/:itemId" element={<SingleItem/>}/>
-        <Route path="/user/:userId/cart" element={<Cart/>}/>
-        <Route path="*" element={<Main/>}/>
+        <Route exact path='/login' element={<AuthForm mode='login' />} />
+        <Route exact path='/signup' element={<AuthForm mode='signup' />} />
+        <Route path='/home' element={<Home />} />
+        <Route path='/checkout' element={<Checkout />} />
+        <Route exact path='/items/:itemId' element={<SingleItem />} />
+        <Route path='/user/:userId/cart' element={<Cart />} />
+        <Route path='/user/guest/cart' element={<Cart />} />
+        <Route path='*' element={<Main />} />
       </Routes>
     );
   }
