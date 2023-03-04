@@ -25,7 +25,7 @@ export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
     const { data } = await axios.get('/api/users');
     return data;
   } catch (error) {
-    //console.log(err)
+    console.error('Unable to fetch users.', error);
     return [];
   }
 });
@@ -52,6 +52,9 @@ const usersSlice = createSlice({
       })
       .addCase(fetchUsers.fulfilled, (state, action) => {
         state.allUsers = action.payload;
+      })
+      .addCase(fetchUsers.rejected, (state, { error }) => {
+        state.error = error.message;
       });
   },
 });

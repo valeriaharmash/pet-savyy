@@ -4,6 +4,7 @@ const {
 } = require('../../db');
 const { requireAdminToken } = require('../middleware');
 
+// GET /api/users/
 router.get('/', requireAdminToken, async (req, res, next) => {
   try {
     const users = await User.findAll({
@@ -26,13 +27,14 @@ router.get('/:userId', requireAdminToken, async (req, res, next) => {
       where: {
         id: userId,
       },
+      attributes: ['id', 'email', 'firstName', 'lastName'],
     });
 
     if (user) {
-      res.send(user);
-      return;
+      res.json(user);
+    } else {
+      res.status(404).send("User doesn't exist.");
     }
-    res.status(404).send("User doesn't exist.");
   } catch (error) {
     console.error(error);
     next(error);
