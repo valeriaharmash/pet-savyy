@@ -14,7 +14,7 @@ label {
 
 h1 {
   color: rgb(77, 103, 151);
-  text-shadow:0px 5px 10px #148cd7;
+  text-shadow: 0px 5px 10px #148cd7;
 }
 
 h2 {
@@ -103,7 +103,7 @@ button {
   background-color: lightgray;
 }
 
-button:hover{
+button:hover {
   background-color: lightgoldenrodyellow;
   cursor: pointer;
 }

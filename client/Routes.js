@@ -56,6 +56,8 @@ const Router = ({}) => {
         <Route path='/items/selection' element={<LimitedItems />} />
         <Route path='/user/:userId/cart' element={<Cart />} />
         <Route path='/user/guest/cart' element={<Cart />} />
+        <Route path='/checkout/pay' element={<Payment />} />
+        <Route path='/completion' element={<Completion />} />
         {user && <Route path='/users/:userId' element={<SingleUser />} />}
         <Route path='*' element={<Main />} />
       </Routes>

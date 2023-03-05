@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const GuestCart = () => {
+  const navigate = useNavigate();
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
   const qtyOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -55,25 +56,23 @@ const GuestCart = () => {
   };
 
   return (
-    <div className='content'>
-      <div className='container'>
+    <div className="content">
+      <div className="container">
         <h1>Shopping Cart</h1>
-        <h3 className='flex-end-column'>{`Total: $${total.toFixed(2)}`}</h3>
-        <Link to='/checkout'>
-          <button>Checkout</button>
-        </Link>
+        <h3 className="flex-end-column">{`Total: $${total.toFixed(2)}`}</h3>
+        <button onClick={() => navigate('/checkout', { state: { total } })}>Checkout</button>
       </div>
       <div>
         {cart.map((item) => {
           return (
-            <div key={item.item.id} className='cart-items'>
+            <div key={item.item.id} className="cart-items">
               <img
                 src={item.item.imageUrl}
                 alt={item.item.name}
-                height='150'
-                width='175'
+                height="150"
+                width="175"
               />
-              <div className='item-description'>
+              <div className="item-description">
                 <Link to={`/items/${item.itemId}`}>
                   <h4>Item: {item.item.name}</h4>
                 </Link>
