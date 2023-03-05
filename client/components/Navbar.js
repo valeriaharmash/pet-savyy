@@ -10,17 +10,18 @@ const Navbar = () => {
   const user = useSelector((state) => state.auth.user);
   return (
     <div>
-      <h1>Grace Shopper Pet Store</h1>
+      <h1>Grace Shopper Pet Store &#x1F436; &#x1F9B4;</h1>
       <nav>
         <div className='apart'>
-          <Link to='/home'>Home</Link>
+          <Link to='/'>Home</Link>
+          <Link to='/home'>Browse</Link>
           <Link to='/home'>Costumes</Link>
           <Link to='/home'>Supplies</Link>
         </div>
         <div className='apart'>
           {(!user || (user && user.role !== 'admin')) && (
             <Link to={user ? `/user/${user.id}/cart` : '/user/guest/cart'}>
-              Cart
+              Cart &#x1F6D2;
             </Link>
           )}
 

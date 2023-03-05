@@ -13,15 +13,17 @@ const AllUsers = () => {
 
   return (
     <div className='container'>
-      {users.map((user) => {
-        return (
-          <div className='user' key={user.id}>
-            <Link to={`/users/${user.id}`} className='link'>
-              {user.firstName} {user.lastName}
-            </Link>
-          </div>
-        );
-      })}
+      <ul className='user-list'>
+        {users.map((user) => {
+          return (
+            <li key={user.id}>
+              <Link to={`/users/${user.id}`} className='link'>
+                &#x1F464; {user.firstName} {user.lastName}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 };

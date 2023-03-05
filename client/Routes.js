@@ -11,6 +11,7 @@ import {
   UpdateItem,
   Dashboard,
   SingleUser,
+  LimitedItems,
 } from './components';
 import { Items } from './features';
 import { getUserByToken } from './store';
@@ -37,6 +38,7 @@ const Router = ({}) => {
         <Route exact path='/items/add' element={<CreateItem />} />
         <Route exact path='/items/:itemId' element={<SingleItem />} />
         <Route exact path='/items/:itemId/update' element={<UpdateItem />} />
+        <Route path='/items/selection' element={<LimitedItems />} />
         <Route exact path='/users' element={<AllUsers />} />
         <Route exact path='/users/:userId' element={<SingleUser />} />
         <Route path='*' element={<Main />} />
@@ -51,6 +53,7 @@ const Router = ({}) => {
         <Route path='/checkout' element={<Checkout />} />
         <Route exact path='/items' element={<CreateItem />} />
         <Route exact path='/items/:itemId' element={<SingleItem />} />
+        <Route path='/items/selection' element={<LimitedItems />} />
         <Route path='/user/:userId/cart' element={<Cart />} />
         <Route path='/user/guest/cart' element={<Cart />} />
         {user && <Route path='/users/:userId' element={<SingleUser />} />}

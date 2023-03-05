@@ -2,30 +2,38 @@ import React from 'react';
 import AllUsers from './AllUsers';
 import { Link } from 'react-router-dom';
 
-export const Home = () => {
+export const Dashboard = () => {
   return (
     <div className='dashboard'>
       <div className='main'>
         <div className='left'>
-          <h3>Items</h3>
-          <p>
-            <Link to='/items/add' className='link'>
-              Add Item
-            </Link>
-          </p>
-          <p>
-            <Link to='/items/' className='link'>
-              Update Items
-            </Link>
-          </p>
+          <h3>Item Management</h3>
+          <div className='inner-left'>
+            <ul>
+              <li>
+                {' '}
+                <Link to='/items/add' className='link'>
+                  &#x270E; Add Item
+                </Link>
+              </li>
+              <li>
+                {' '}
+                <Link to='/items/' className='link'>
+                  &#x270E; Edit Items
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
         <div className='right'>
-          <h3>Users</h3>
-          <AllUsers />
+          <h3>User Management</h3>
+          <div className='inner-right'>
+            <AllUsers />
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default Home;
+export default Dashboard;

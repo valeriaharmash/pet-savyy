@@ -56,7 +56,7 @@ router.post('/', requireAdminToken, async (req, res, next) => {
 });
 
 // PUT /api/users/:userId
-router.put('/:id', requireAdminToken, async (req, res, next) => {
+router.put('/:id', requireToken, async (req, res, next) => {
   try {
     const [numUpdated] = await User.update(req.body, {
       where: { id: req.params.id },

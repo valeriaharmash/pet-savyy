@@ -6,27 +6,35 @@ import { useParams } from 'react-router-dom';
 const SingleUser = () => {
   const dispatch = useDispatch();
   const { userId } = useParams();
-  const user = useSelector((state) => state.users.selectedUser);
+  const [user, setUser] = useState(null);
+  const loggedUser = useSelector((state) => state.auth.user);
+  const selectedUser = useSelector((state) => state.users.selectedUser);
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [update, setUpdate] = useState('');
 
   useEffect(() => {
     dispatch(fetchSingleUser(userId));
   }, [dispatch, userId]);
 
   useEffect(() => {
-    if (user) {
-      setFirstName(user.firstName);
-      setLastName(user.lastName);
-      setEmail(user.email);
+    if (selectedUser) {
+      setUser(selectedUser);
+      setFirstName(selectedUser.firstName);
+      setLastName(selectedUser.lastName);
+      setEmail(selectedUser.email);
     }
-  }, [user]);
+  }, [selectedUser]);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
     if (user && user.id) {
+      if (loggedUser.role !== 'admin' && user.id !== loggedUser.id) {
+        console.error('You cannot edit this profile!');
+        return;
+      }
       try {
         await dispatch(
           updateUser({
@@ -36,13 +44,14 @@ const SingleUser = () => {
             email,
           })
         );
+        setUpdate('User info has been updated.');
       } catch (error) {
         console.error(error);
       }
     }
   };
 
-  if (!user) {
+  if (!user || !user.id) {
     return 'User does not exist!';
   }
 
@@ -80,6 +89,7 @@ const SingleUser = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
+        {update && <div className='notif'>{update}</div>}
         <button type='submit'>Update</button>
       </form>
     </div>
