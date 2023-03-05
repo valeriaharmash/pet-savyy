@@ -12,6 +12,8 @@ import {
   Dashboard,
   SingleUser,
   LimitedItems,
+  Payment,
+  Completion,
 } from './components';
 import { Items } from './features';
 import { getUserByToken } from './store';
