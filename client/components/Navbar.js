@@ -10,41 +10,49 @@ const Navbar = () => {
   const user = useSelector((state) => state.auth.user);
   return (
     <div>
-      <h1>Grace Shopper Pet Store</h1>
-      <nav className="apart">
-        <div>
-          <Link to="/home">Home</Link>
-          <Link to="/home">Costumes</Link>
-          <Link to="/home">Supplies</Link>
-          {user && user.role !== 'admin' && (
-            <Link to={`/user/${user.id}/cart`}>Cart</Link>
-          )}
-          {!user && <Link to="/user/guest/cart">Cart</Link>}
+      <h1>Grace Shopper Pet Store &#x1F436; &#x1F9B4;</h1>
+      <nav>
+        <div className='apart'>
+          <Link to='/'>Home</Link>
+          <Link to='/home'>Browse</Link>
+          <Link to='/home'>Costumes</Link>
+          <Link to='/home'>Supplies</Link>
         </div>
-        {user && user.role === 'admin' && <Link to={`/users`}>Users</Link>}
-        {user ? (
-          <div>
-            {/* The navbar will show these links after you log in */}
-            <Link to="/home">My Account</Link>
-            <a
-              onClick={() => {
-                dispatch(setUser(null));
-                removeUserToken();
-                navigate('/');
-              }}
-            >
-              Logout
-            </a>
-          </div>
-        ) : (
-          <div>
-            {/* The navbar will show these links before you log in */}
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
-          </div>
-        )}
+        <div className='apart'>
+          {(!user || (user && user.role !== 'admin')) && (
+            <Link to={user ? `/user/${user.id}/cart` : '/user/guest/cart'}>
+              Cart &#x1F6D2;
+            </Link>
+          )}
+
+          {user && user.role === 'admin' && (
+            <Link to={`/dashboard`}>Admin Dashboard</Link>
+          )}
+
+          {user ? (
+            <div>
+              {/* The navbar will show these links after you log in */}
+              <Link to={`/users/${user.id}`}>My Account</Link>
+              <a
+                onClick={() => {
+                  dispatch(setUser(null));
+                  removeUserToken();
+                  navigate('/');
+                }}
+              >
+                Logout
+              </a>
+            </div>
+          ) : (
+            <div>
+              {/* The navbar will show these links before you log in */}
+              <Link to='/login'>Login</Link>
+              <Link to='/signup'>Sign Up</Link>
+            </div>
+          )}
+        </div>
       </nav>
-      <hr/>
+      <hr />
     </div>
   );
 };

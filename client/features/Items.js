@@ -45,13 +45,6 @@ const Items = () => {
       {items !== [] ? (
         <>
           <h1 className='itemsHeader'>Number of Items {`(${items.length})`}</h1>
-          <div className='center'>
-            {user && user.role === 'admin' && (
-              <button className='center' onClick={() => navigate('/items/add')}>
-                Add Item
-              </button>
-            )}
-          </div>
           <div className='items'>
             {items.map((item) => {
               return (
@@ -92,6 +85,12 @@ const Items = () => {
                         >
                           Add to Cart
                         </Button>{' '}
+                      </div>
+                    )}
+
+                    {user && user.role === 'admin' && (
+                      <div id='itemFooter'>
+                        <Link to={`/items/${item.id}/update`}>Update</Link>
                       </div>
                     )}
                   </div>

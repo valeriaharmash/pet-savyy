@@ -8,6 +8,9 @@ import Main from './Main';
 import AllUsers from './AllUsers';
 import Payment from './Payment';
 import Completion from './Completion';
+import Dashboard from './Dashboard';
+import SingleUser from './SingleUser';
+import LimitedItems from './LimitedItems';
 
 export {
   AuthForm,
@@ -18,6 +21,9 @@ export {
   Main,
   AllUsers,
   CreateItem,
+  Dashboard,
+  SingleUser,
+  LimitedItems,
   Payment,
-  Completion
+  Completion,
 };

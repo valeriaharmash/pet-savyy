@@ -12,19 +12,18 @@ const AllUsers = () => {
   }, [dispatch]);
 
   return (
-    <div>
-      <h1>All Users</h1>
-      <div>
+    <div className='container'>
+      <ul className='user-list'>
         {users.map((user) => {
           return (
-            <div key={user.id}>
-              <Link to={`/users/${user.id}`}>
-                {user.firstName} {user.lastName}
+            <li key={user.id}>
+              <Link to={`/users/${user.id}`} className='link'>
+                &#x1F464; {user.firstName} {user.lastName}
               </Link>
-            </div>
+            </li>
           );
         })}
-      </div>
+      </ul>
     </div>
   );
 };
