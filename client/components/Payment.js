@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import axios from 'axios';
-import { Elements, PaymentElement, useElements, useStripe, } from '@stripe/react-stripe-js';
+import {
+  Elements,
+  PaymentElement,
+  useElements,
+  useStripe,
+} from '@stripe/react-stripe-js';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { updateOrder } from '../store/slices/orders';
@@ -37,7 +42,8 @@ const CheckoutForm = ({ orderId }) => {
     if (error) {
       setMessage(error.message);
     } else if (paymentIntent && paymentIntent.status === 'succeeded') {
-      await dispatch(updateOrder({ paymentId: paymentIntent.id, orderId }));
+      let args = {paymentId: paymentIntent.id, orderId: orderId}
+      await dispatch(updateOrder(args));
       navigate('/completion');
     } else {
       setMessage('Unexpected state');
@@ -47,16 +53,16 @@ const CheckoutForm = ({ orderId }) => {
   };
 
   return (
-    <form id="payment-form" onSubmit={handleSubmit}>
-      <PaymentElement/>
-      <button disabled={isProcessing} id="submit">
-				<span id="button-text">
-					{isProcessing ? 'Processing ... ' : 'Pay now'}
-				</span>
+    <form id='payment-form' onSubmit={handleSubmit}>
+      <PaymentElement />
+      <button disabled={isProcessing} id='submit'>
+        <span id='button-text'>
+          {isProcessing ? 'Processing ... ' : 'Pay now'}
+        </span>
       </button>
 
       {/* Show any error or success messages */}
-      {message && <div id="payment-message">{message}</div>}
+      {message && <div id='payment-message'>{message}</div>}
     </form>
   );
 };
@@ -94,8 +100,8 @@ const Payment = () => {
     <div>
       {stripePromise && clientSecret && (
         <Elements stripe={stripePromise} options={{ clientSecret }}>
-          <p>{`Total: $${amount / 100}`}</p>
-          <CheckoutForm orderId={orderId}/>
+          <p>{`Total: $${(amount / 100).toFixed(2)}`}</p>
+          <CheckoutForm orderId={orderId} />
         </Elements>
       )}
     </div>
