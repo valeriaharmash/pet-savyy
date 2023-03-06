@@ -101,7 +101,7 @@ const Payment = () => {
       {stripePromise && clientSecret && (
         <Elements stripe={stripePromise} options={{ clientSecret }}>
           <p>{`Total: $${(amount / 100).toFixed(2)}`}</p>
-          <CheckoutForm orderId={orderId} />
+          <CheckoutForm orderId={orderId}/>
         </Elements>
       )}
     </div>
