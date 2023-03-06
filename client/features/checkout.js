@@ -74,6 +74,7 @@ const Checkout = () => {
 				</div>
 				<div className="row around">
 					<button
+						disabled={!firstName || !lastName || !email || !address}
 						onClick={() =>
 							navigate('/checkout/pay', {
 								state: {
