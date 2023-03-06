@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Completion = () => {
-  return <h1>Thank you for your order!</h1>;
+  return <h2>Thank you for your order!</h2>;
 };
 
 export default Completion;
