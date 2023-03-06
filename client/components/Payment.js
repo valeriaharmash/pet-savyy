@@ -16,7 +16,7 @@ import { updateOrder } from '../store/slices/orders';
 // failed 4000000000009995
 // auth 4000002500003155
 
-const CheckoutForm = ({ orderId }) => {
+const CheckoutForm = ({ orderId, shippingAddress }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const stripe = useStripe();
@@ -39,10 +39,12 @@ const CheckoutForm = ({ orderId }) => {
       redirect: 'if_required',
     });
 
+
+    
     if (error) {
       setMessage(error.message);
     } else if (paymentIntent && paymentIntent.status === 'succeeded') {
-      let args = {paymentId: paymentIntent.id, orderId: orderId}
+      let args = {paymentId: paymentIntent.id, orderId: orderId, shippingAddress: shippingAddress}
       await dispatch(updateOrder(args));
       navigate('/completion');
     } else {
@@ -69,7 +71,7 @@ const CheckoutForm = ({ orderId }) => {
 
 const Payment = () => {
   const location = useLocation();
-  const { userId, amount, orderId } = location.state;
+  const { userId, amount, orderId, shippingAddress } = location.state;
   const [stripePromise, setStripePromise] = useState(null);
   const [clientSecret, setClientSecret] = useState(null);
 
@@ -101,7 +103,7 @@ const Payment = () => {
       {stripePromise && clientSecret && (
         <Elements stripe={stripePromise} options={{ clientSecret }}>
           <p>{`Total: $${(amount / 100).toFixed(2)}`}</p>
-          <CheckoutForm orderId={orderId}/>
+          <CheckoutForm orderId={orderId} shippingAddress={shippingAddress}/>
         </Elements>
       )}
     </div>
