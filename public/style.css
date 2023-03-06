@@ -1,11 +1,16 @@
 body {
   font-family: sans-serif;
   background: rgb(207,223,247);
-  background: linear-gradient(90deg, rgba(207,223,247,1) 34%, rgba(112,166,247,1) 100%);
+  background: linear-gradient(90deg, rgb(175, 202, 242) 34%, rgb(101, 159, 245) 100%);
 }
 
 .link {
-  text-decoration: none;
+  text-decoration:none;
+  color:#3366ff;
+}
+
+.link:hover {
+  color:#6666ff;
 }
 
 label {
@@ -13,19 +18,33 @@ label {
 }
 
 h1 {
-  color: rgb(77, 103, 151);
-  text-shadow: 0px 5px 10px #148cd7;
+  font-size: 40px;
+  color: #0787ff;
+  font-family: "Arial Black", Gadget, sans-serif;
+  text-shadow: 0px 0px 0 rgb(-3,125,245),
+               1px 1px 0 rgb(-13,115,235),
+               2px 2px 0 rgb(-23,105,225),
+               3px 3px 0 rgb(-33,95,215),
+               4px 4px 0 rgb(-43,85,205),
+               5px 5px 0 rgb(-53,75,195),
+               6px 6px 0 rgb(-63,65,185),
+               7px 7px  0 rgb(-73,55,175),
+               8px 8px 7px rgba(0,42,133,0.34),
+               8px 8px 1px rgba(0,42,133,0.5),
+               0px 0px 7px rgba(0,42,133,.2);
 }
 
 h2 {
-  color: rgb(12, 62, 155);
-}
-
-h3 {
+  font-size: 20px;
   color: rgb(20, 57, 127);
   text-shadow:0px 5px 10px #148cd7;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 	font-weight: bold;
+}
+
+h3 {
+  font-size: 20px;
+  color: rgb(12, 62, 155);
 }
 
 ul {
@@ -151,9 +170,9 @@ button:hover {
   border-radius: 10px;
   color: #fff;
   font-size: 24px;
-  padding: 20px;
+  padding: 5px;
   margin: 0 auto;
-  width: 96%;
+  width: 99%;
   text-align: center;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
@@ -164,6 +183,11 @@ button:hover {
   flex: 1 0 0;
   border-radius: 10px;
   padding: 0 30px 20px 10px;
+}
+
+.item-list img {
+  width: 100%;
+  border-radius: 10px;
 }
 
 .welcome-page {
@@ -183,7 +207,7 @@ button:hover {
 .welcome-image {
   display: block;
   margin: 0 auto;
-  max-width: 90%;
+  max-width: 100%;
   border-radius: 10px;
   opacity: 0.9;
 }
@@ -194,6 +218,8 @@ button:hover {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  align-items: center;
+  padding: 1rem;
 }
 
 .flex-end-column {
@@ -203,7 +229,16 @@ button:hover {
 .cart-items {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  margin-bottom: 1rem;
+  background-color:rgb(197, 213, 236);
+}
+
+.cart-items img {
+  margin-right: 1rem;
+  border-radius: 10px;
 }
 
 .item-description {
@@ -247,15 +282,15 @@ button:hover {
 
 /*^^^^^^^^ Cart ^^^^^^^^^^*/
 
-.itemsHeader {
-  text-align: center;
+.items-header {
+  text-align: left;
 }
 
 .items {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
-  background-color: #cfdff7;
+  border-radius: 10px;
 }
 
 .itemContainer {
@@ -267,12 +302,13 @@ button:hover {
   border: 1px solid black;
   background-color: rgb(125, 163, 234);
   padding: 0.2rem;
+  border-radius: 5px;
 }
 
 #itemImage > img {
   width: 100%;
   height: 100%;
-  border-bottom: 1px solid black;
+  border-radius: 5px;
 }
 
 #itemDetails {

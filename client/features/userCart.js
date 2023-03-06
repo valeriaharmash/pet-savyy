@@ -58,26 +58,28 @@ const UserCart = () => {
   };
 
   return (
-    <div className="content">
-      <div className="container">
-        <h1>Shopping Cart</h1>
-        <h3 className="flex-end-column">{`Total: $${total.toFixed(2)}`}</h3>
-        <button onClick={() => navigate('/checkout', { state: { total } })}>Checkout</button>
+    <div className='content'>
+      <div className='container'>
+        <h2>Shopping Cart</h2>
+        <h3>{`Total: $${total.toFixed(2)}`}</h3>
+        <button onClick={() => navigate('/checkout', { state: { total } })}>
+          Checkout
+        </button>
       </div>
       <div>
         {cart.map((item) => {
           return (
-            <div key={item.itemId} className="cart-items">
+            <div key={item.itemId} className='cart-items'>
               <Link to={`/items/${item.itemId}`}>
                 <img
                   src={item.item.imageUrl}
                   alt={item.item.name}
-                  height="150"
-                  width="175"
+                  height='150'
+                  width='175'
                 />
               </Link>
-              <div className="item-description">
-                <Link to={`/items/${item.itemId}`}>
+              <div className='item-description'>
+                <Link to={`/items/${item.itemId}`} className='link'>
                   <h4>{item.item.name}</h4>
                 </Link>
                 <p>{item.item.stock > 0 ? 'In Stock' : 'Out of Stock'}</p>

@@ -57,7 +57,7 @@ const SingleUser = () => {
 
   return (
     <div>
-      <h1>Account Info</h1>
+      <h2>Account Info</h2>
       <form onSubmit={handleUpdate}>
         <div>
           <label htmlFor='firstName'>First Name:</label>

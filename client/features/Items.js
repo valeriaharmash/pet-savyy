@@ -44,7 +44,7 @@ const Items = () => {
     <>
       {items !== [] ? (
         <>
-          <h1 className='itemsHeader'>Number of Items {`(${items.length})`}</h1>
+          <h2 className='itemsHeader'>Number of Items {`(${items.length})`}</h2>
           <div className='items'>
             {items.map((item) => {
               return (
