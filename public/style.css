@@ -207,7 +207,7 @@ button:hover {
 .welcome-image {
   display: block;
   margin: 0 auto;
-  max-width: 90%;
+  max-width: 100%;
   border-radius: 10px;
   opacity: 0.9;
 }

@@ -22,7 +22,7 @@ const Main = () => {
               src='https://heydjangles.com/wp-content/uploads/2020/08/halloween-costumes-for-chihuahuas-21-768x702.png'
             />
           </p>
-          <p>Our pet site is unlike any other--because we made it that way.</p>
+          <p>Hi, I'm Palta!</p>
         </div>
       </div>
     </div>
