@@ -157,31 +157,26 @@ const USER_SEED_DATA = [
 
 const ORDER_SEED_DATA = [
   {
-    id: 1,
     total: 586.15,
     status: 'in progress',
     userId: 1,
   },
   {
-    id: 2,
     total: 1108.95,
     status: 'in progress',
     userId: 6,
   },
   {
-    id: 3,
     total: 765.71,
     status: 'in progress',
     userId: 2,
   },
   {
-    id: 4,
     total: 1226.9,
     status: 'in progress',
     userId: 8,
   },
   {
-    id: 5,
     total: 568.39,
     status: 'complete',
     userId: 4,
