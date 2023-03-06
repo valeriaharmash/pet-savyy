@@ -36,7 +36,7 @@ const LimitedItems = ({ maxItems }) => {
                   <div id='itemDetails'>
                     <ul>
                       <li>{item.name}</li>
-                      <li style={{ fontWeight: 'bold' }}>{`$${item.price}`}</li>
+                      <li style={{ fontWeight: 'bold' }}>{`$${(item.price).toFixed(2)}`}</li>
                       {(!user || user.role !== 'admin') && (
                         <li>Number in cart: {`0`}</li>
                       )}

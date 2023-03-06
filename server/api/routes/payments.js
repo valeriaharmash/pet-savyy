@@ -12,7 +12,7 @@ router.post('/intent', async (req, res, next) => {
     }
     const params = {
       currency: 'usd',
-      amount: amount,
+      amount: Math.round(amount),
       automatic_payment_methods: {
         enabled: true,
       }
