@@ -25,60 +25,71 @@ const Checkout = () => {
 	}, [user]);
 
 	return (
-		<div>
+		<div className="column">
 			<h2>Checkout</h2>
 			<form>
-				<label htmlFor="firstName" className="form-label">
-					First Name:
-				</label>
-				<input
-					className="form"
-					name="firstName"
-					value={firstName}
-					onChange={(e) => setFirstName(e.target.value)}
-				/>
-				<label htmlFor="lastName" className="form-label">
-					Last Name:
-				</label>
-				<input
-					className="form"
-					name="lastName"
-					value={lastName}
-					onChange={(e) => setLastName(e.target.value)}
-				/>
-				<label htmlFor="email" className="form-label">
-					Email:
-				</label>
-				<input
-					className="form"
-					name="email"
-					value={email}
-					onChange={(e) => setEmail(e.target.value)}
-				/>
-				<label htmlFor="address" className="form-label">
-					Shipping Address:
-				</label>
-				<input
-					className="form"
-					name="address"
-					value={address}
-					onChange={(e) => setAddress(e.target.value)}
-				/>
+				<div className="row apart">
+					<label htmlFor="firstName" className="form-label">
+						First Name:
+					</label>
+					<input
+						className="form"
+						name="firstName"
+						value={firstName}
+						onChange={(e) => setFirstName(e.target.value)}
+					/>
+				</div>
+				<div className="row apart">
+					<label htmlFor="lastName" className="form-label">
+						Last Name:
+					</label>
+					<input
+						className="form"
+						name="lastName"
+						value={lastName}
+						onChange={(e) => setLastName(e.target.value)}
+					/>
+				</div>
+				<div className="row apart">
+					<label htmlFor="email" className="form-label">
+						Email:
+					</label>
+					<input
+						className="form"
+						name="email"
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
+					/>
+				</div>
+				<div className="row apart">
+					<label htmlFor="address" className="form-label">
+						Shipping Address:
+					</label>
+					<input
+						className="form"
+						name="address"
+						value={address}
+						onChange={(e) => setAddress(e.target.value)}
+					/>
+				</div>
+				<div className="row around">
+					<button
+						onClick={() =>
+							navigate('/checkout/pay', {
+								state: {
+									userId: user && user.id,
+									amount: Number(location.state.total) * 100,
+									orderId,
+									shippingAddress: address,
+								},
+							})
+						}
+					>
+						Continue to Payment
+					</button>
+					<button onClick={() => navigate('/')}>Cancel</button>
+				</div>
 			</form>
-			<button
-				onClick={() =>
-					navigate('/checkout/pay', {
-						state: {
-							userId: user && user.id,
-							amount: Number(location.state.total) * 100,
-							orderId,
-							shippingAddress: address,
-						},
-					})
-				}
-			>
-				Continue to Payment
-			</button>
 		</div>
 	);
 };
