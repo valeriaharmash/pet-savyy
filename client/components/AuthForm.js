@@ -105,9 +105,9 @@ const AuthForm = ({ mode }) => {
         </div>
         <div>
           {notification && <div className='notif'>{notification}</div>}
-          <p>
+          <div className='row around'>
             <button type='submit'>{authMode}</button>
-          </p>
+          </div>
         </div>
         {/* {error && error.response && <div> {error.response.data} </div>} */}
       </form>
