@@ -55,9 +55,11 @@ router.put('/:id', requireToken, async (req, res, next) => {
 	try {
 		const { id } = req.params;
 		const { paymentId } = req.body;
+		const { shippingAddress } = req.body
+		console.log("in route", shippingAddress)
 		await Order.update(
 			{
-				paymentId,
+				paymentId: paymentId, status: "complete", shippingAddress: shippingAddress
 			},
 			{
 				where: {

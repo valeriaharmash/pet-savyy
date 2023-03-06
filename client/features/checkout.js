@@ -72,6 +72,7 @@ const Checkout = () => {
 							userId: user && user.id,
 							amount: Number(location.state.total) * 100,
 							orderId,
+							shippingAddress: address,
 						},
 					})
 				}
