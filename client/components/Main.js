@@ -1,13 +1,15 @@
 import React from 'react';
 import LimitedItems from './LimitedItems';
+import { Link } from 'react-router-dom';
 
 const Main = () => {
   return (
     <div className='main'>
       <div className='item-list'>
-        <div className='banner'>
-          <h2>Your pet deserves the best, and so do you.</h2>
-        </div>
+        <Link to='/signup'>
+          {' '}
+          <img src='https://i.ibb.co/F4TMvxF/CODE-AVOCADO-1.png'></img>
+        </Link>
         <LimitedItems maxItems={12} />
       </div>
       <div className='welcome-page'>
