@@ -72,7 +72,7 @@ const SingleItem = () => {
             'Out of Stock'
           )}
         </div>
-        <p>Price: {`$ ${item.price}`}</p>
+        <p>Price: {`$ ${(item.price).toFixed(2)}`}</p>
         {(!user || user.role !== 'admin') && (
           <button
             disabled={!itemQty}
