@@ -16,7 +16,7 @@ import { updateOrder } from '../store/slices/orders';
 // failed 4000000000009995
 // auth 4000002500003155
 
-const CheckoutForm = ({ orderId, shippingAddress }) => {
+const CheckoutForm = ({ orderId, shippingAddress, userId }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const stripe = useStripe();
@@ -31,27 +31,36 @@ const CheckoutForm = ({ orderId, shippingAddress }) => {
 
     setIsProcessing(true);
 
-    const { error, paymentIntent } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        return_url: `${window.location.origin}/completion`,
-      },
-      redirect: 'if_required',
-    });
+    if (userId) {
+      const { error, paymentIntent } = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          return_url: `${window.location.origin}/completion`,
+        },
+        redirect: 'if_required',
+      });
 
+      if (error) {
+        setMessage(error.message);
+      } else if (paymentIntent && paymentIntent.status === 'succeeded') {
+        let args = {
+          paymentId: paymentIntent.id,
+          orderId: orderId,
+          shippingAddress: shippingAddress,
+          userId: userId,
+        };
+        await dispatch(updateOrder(args));
+        navigate('/completion');
+      } else {
+        setMessage('Unexpected state');
+      }
 
-    
-    if (error) {
-      setMessage(error.message);
-    } else if (paymentIntent && paymentIntent.status === 'succeeded') {
-      let args = {paymentId: paymentIntent.id, orderId: orderId, shippingAddress: shippingAddress}
-      await dispatch(updateOrder(args));
-      navigate('/completion');
+      setIsProcessing(false);
     } else {
-      setMessage('Unexpected state');
+      localStorage.clear();
+      setIsProcessing(false);
+      navigate('/completion');
     }
-
-    setIsProcessing(false);
   };
 
   return (
@@ -103,7 +112,11 @@ const Payment = () => {
       {stripePromise && clientSecret && (
         <Elements stripe={stripePromise} options={{ clientSecret }}>
           <p>{`Total: $${(amount / 100).toFixed(2)}`}</p>
-          <CheckoutForm orderId={orderId} shippingAddress={shippingAddress}/>
+          <CheckoutForm
+            orderId={orderId}
+            shippingAddress={shippingAddress}
+            userId={userId}
+          />
         </Elements>
       )}
     </div>

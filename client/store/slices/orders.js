@@ -9,12 +9,13 @@ const initialState = {
 
 export const updateOrder = createAsyncThunk(
   'updateOrder',
-  async ({ paymentId, orderId, shippingAddress }) => {
-	console.log("in slice", shippingAddress)
+  async ({ paymentId, orderId, shippingAddress, userId }) => {
+    console.log('in slice', shippingAddress);
     try {
       const { data } = await axios.put(`/api/orders/${orderId}`, {
         paymentId,
         shippingAddress,
+        userId,
       });
       return data;
     } catch (error) {

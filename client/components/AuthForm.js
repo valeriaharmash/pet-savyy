@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { authenticate, getUserByToken } from '../store';
+import { mergeLocalCart } from '../features/cartSlice';
 
 const AuthForm = ({ mode }) => {
   const navigate = useNavigate();
@@ -34,7 +35,12 @@ const AuthForm = ({ mode }) => {
       if (result.payload && result.payload.error) {
         setNotification('Invalid username or password.');
       } else {
-        await dispatch(getUserByToken());
+        const user = await dispatch(getUserByToken());
+        const localCartItems = JSON.parse(localStorage.getItem('cartItems'));
+        if (localCartItems.length > 0) {
+          const input = { userId: user.payload.id, cartItems: localCartItems };
+          dispatch(mergeLocalCart(input));
+        }
         setFirstName('');
         setLastName('');
         setEmail('');
