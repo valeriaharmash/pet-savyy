@@ -22,7 +22,6 @@ const GuestCart = () => {
 
 	const handleDelete = async (itemId) => {
 		const updatedCart = cart.filter((item) => {
-			console.log('****', item.item.id, itemId);
 			return item.item.id !== itemId;
 		});
 		setCart(updatedCart);

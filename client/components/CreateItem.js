@@ -91,20 +91,10 @@ const CreateItem = ({ mode }) => {
           />
         </div>
 
-        <div className='row apart'>
-          <label htmlFor='imageUrl'>Image:</label>
-          <input
-            name='itemUrl'
-            value={imageUrl}
-            onChange={(e) => setImageUrl(e.target.value)}
-          />
-        </div>
-
         {notification && <div className='notif'>{notification}</div>}
 
         <div className='row around'>
           <button
-            disabled={!name && !description && !price && !stock}
             type='submit'
           >
             Submit

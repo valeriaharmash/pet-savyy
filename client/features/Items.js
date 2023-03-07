@@ -71,10 +71,7 @@ const Items = () => {
                           <li>{item.name}</li>
                           <li
                             style={{ fontWeight: 'bold' }}
-                          >{`$${item.price.toFixed(2)}`}</li>
-                          {(!user || user.role !== 'admin') && (
-                            <li>Number in cart: {`0`}</li>
-                          )}
+                          >{`$${(item.price).toFixed(2)}`}</li>
                         </ul>
                       </div>
                     </Link>

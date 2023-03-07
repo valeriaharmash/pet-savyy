@@ -15,8 +15,8 @@ const Navbar = () => {
         <div className='apart'>
           <Link to='/'>Home</Link>
           <Link to='/home'>Browse</Link>
-          <Link to='/home'>Costumes</Link>
-          <Link to='/home'>Supplies</Link>
+          {/* <Link to='/home'>Costumes</Link>
+          <Link to='/home'>Supplies</Link> */}
         </div>
         <div className='apart'>
           {(!user || (user && user.role !== 'admin')) && (

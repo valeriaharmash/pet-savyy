@@ -70,9 +70,6 @@ const LimitedItems = ({ maxItems }) => {
                       <li
                         style={{ fontWeight: 'bold' }}
                       >{`$${item.price.toFixed(2)}`}</li>
-                      {(!user || user.role !== 'admin') && (
-                        <li>Number in cart: {`0`}</li>
-                      )}
                     </ul>
                   </div>
                 </Link>

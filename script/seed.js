@@ -345,7 +345,6 @@ const ITEM_SEED_DATA = [
     stock: 57,
     tag: 'supplies',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Poop Bags',
@@ -355,7 +354,6 @@ const ITEM_SEED_DATA = [
     stock: 95,
     tag: 'supplies',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/718pT-gJrnL._AC_UL320_.jpg',
   },
   {
     name: 'Stain & Odor Eliminator',
@@ -365,7 +363,6 @@ const ITEM_SEED_DATA = [
     stock: 16,
     tag: 'supplies',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/61pzPQSDW4L._AC_UL320_.jpg',
   },
   {
     name: 'Probiotics for Dogs',
@@ -375,7 +372,6 @@ const ITEM_SEED_DATA = [
     stock: 96,
     tag: 'health',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/81qFYmji07L._AC_UL320_.jpg',
   },
   {
     name: 'Hair Clippers',
@@ -385,7 +381,6 @@ const ITEM_SEED_DATA = [
     stock: 40,
     tag: 'grooming',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/718b82U4VAL._AC_UL320_.jpg',
   },
   {
     name: 'Dog Leash',
@@ -395,7 +390,6 @@ const ITEM_SEED_DATA = [
     stock: 48,
     tag: 'leash',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/81v9mds0ixL._AC_UL320_.jpg',
   },
   {
     name: 'Reflective Dog Collar',
@@ -405,7 +399,6 @@ const ITEM_SEED_DATA = [
     stock: 34,
     tag: 'collar',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/81nBOXVG35L._AC_UL320_.jpg',
   },
   {
     name: 'Round Cushion Bed',
@@ -415,7 +408,6 @@ const ITEM_SEED_DATA = [
     stock: 9,
     tag: 'bed',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/91ohn1BKStL._AC_UL320_.jpg',
   },
   {
     name: 'Woven Storage Basket',
@@ -425,7 +417,6 @@ const ITEM_SEED_DATA = [
     stock: 55,
     tag: 'misc',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/61Ya2J9RBUL._AC_UL320_.jpg',
   },
   {
     name: 'Toothpaste, Toothbrush & Fingerbrush',
@@ -435,7 +426,6 @@ const ITEM_SEED_DATA = [
     stock: 97,
     tag: 'grooming',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/81ftCgpNyaL._AC_UL320_.jpg',
   },
   {
     name: 'Pet Hair Remover',
@@ -445,7 +435,6 @@ const ITEM_SEED_DATA = [
     stock: 40,
     tag: 'supplies',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/81oHgwM8sXL._AC_UL320_.jpg',
   },
   {
     name: 'Pet Blanket',
@@ -454,7 +443,6 @@ const ITEM_SEED_DATA = [
     stock: 55,
     tag: 'bed',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/81KsGeP3sFS._AC_UL320_.jpg',
   },
   {
     name: 'Pet Grooming Wipes',
@@ -464,7 +452,6 @@ const ITEM_SEED_DATA = [
     stock: 41,
     tag: 'grooming',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/61kFAFClkSL._AC_UL320_.jpg',
   },
   {
     name: 'Washable Pee Pads',
@@ -474,7 +461,6 @@ const ITEM_SEED_DATA = [
     stock: 69,
     tag: 'supplies',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/91kYnDdTsXL._AC_UL320_.jpg',
   },
   {
     name: 'Nail Grinder',
@@ -483,7 +469,6 @@ const ITEM_SEED_DATA = [
     stock: 59,
     tag: 'grooming',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/614jcZ0hSzL._AC_UL320_.jpg',
   },
   {
     name: '20 Pack Chew Toys',
@@ -493,7 +478,6 @@ const ITEM_SEED_DATA = [
     stock: 58,
     tag: 'toy',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/81QKE8wwpSL._AC_UL320_.jpg',
   },
   {
     name: 'Alaskan Salmon Oil',
@@ -502,7 +486,6 @@ const ITEM_SEED_DATA = [
     stock: 73,
     tag: 'food',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71egU7ceR3L._AC_UL320_.jpg',
   },
   {
     name: 'Pet Camera',
@@ -512,7 +495,6 @@ const ITEM_SEED_DATA = [
     stock: 44,
     tag: 'food',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/61Vha+doc4L._AC_UL320_.jpg',
   },
   {
     name: 'Lettuce - Romaine',
@@ -522,7 +504,6 @@ const ITEM_SEED_DATA = [
     stock: 99,
     tag: 'toy',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Stock - Beef, White',
@@ -532,7 +513,6 @@ const ITEM_SEED_DATA = [
     stock: 85,
     tag: 'bed',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Schnappes - Peach, Walkers',
@@ -542,7 +522,6 @@ const ITEM_SEED_DATA = [
     stock: 54,
     tag: 'costume',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Sandwich Wrap',
@@ -552,7 +531,6 @@ const ITEM_SEED_DATA = [
     stock: 96,
     tag: 'costume',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Mushroom - Enoki, Dry',
@@ -562,7 +540,6 @@ const ITEM_SEED_DATA = [
     stock: 20,
     tag: 'food',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Coriander - Seed',
@@ -572,7 +549,6 @@ const ITEM_SEED_DATA = [
     stock: 47,
     tag: 'bed',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Soup - Campbells Chili Veg',
@@ -582,7 +558,6 @@ const ITEM_SEED_DATA = [
     stock: 39,
     tag: 'costume',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Pork - Back, Long Cut, Boneless',
@@ -592,7 +567,6 @@ const ITEM_SEED_DATA = [
     stock: 5,
     tag: 'clothing',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Table Cloth 81x81 White',
@@ -602,7 +576,6 @@ const ITEM_SEED_DATA = [
     stock: 43,
     tag: 'toy',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Rice - Brown',
@@ -612,7 +585,6 @@ const ITEM_SEED_DATA = [
     stock: 77,
     tag: 'clothing',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Straws - Cocktale',
@@ -622,7 +594,6 @@ const ITEM_SEED_DATA = [
     stock: 11,
     tag: 'toy',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Pork - Side Ribs',
@@ -632,7 +603,6 @@ const ITEM_SEED_DATA = [
     stock: 94,
     tag: 'costume',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Trout - Hot Smkd, Dbl Fillet',
@@ -642,7 +612,6 @@ const ITEM_SEED_DATA = [
     stock: 41,
     tag: 'food',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Cheese - Parmesan Cubes',
@@ -652,7 +621,6 @@ const ITEM_SEED_DATA = [
     stock: 22,
     tag: 'toy',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Cheese - Brick With Onion',
@@ -662,7 +630,6 @@ const ITEM_SEED_DATA = [
     stock: 35,
     tag: 'costume',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Compound - Passion Fruit',
@@ -672,7 +639,6 @@ const ITEM_SEED_DATA = [
     stock: 79,
     tag: 'costume',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Snapple - Mango Maddness',
@@ -682,7 +648,6 @@ const ITEM_SEED_DATA = [
     stock: 19,
     tag: 'bed',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Apple - Custard',
@@ -692,7 +657,6 @@ const ITEM_SEED_DATA = [
     stock: 3,
     tag: 'costume',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Muffin - Mix - Mango Sour Cherry',
@@ -702,7 +666,6 @@ const ITEM_SEED_DATA = [
     stock: 33,
     tag: 'costume',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Tart Shells - Savory, 2',
@@ -712,7 +675,6 @@ const ITEM_SEED_DATA = [
     stock: 97,
     tag: 'grooming',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Soup - Campbells, Butternut',
@@ -722,7 +684,6 @@ const ITEM_SEED_DATA = [
     stock: 10,
     tag: 'costume',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Stock - Fish',
@@ -732,7 +693,6 @@ const ITEM_SEED_DATA = [
     stock: 82,
     tag: 'toy',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Shrimp - Black Tiger 6 - 8',
@@ -742,7 +702,6 @@ const ITEM_SEED_DATA = [
     stock: 98,
     tag: 'food',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Sprouts - Pea',
@@ -752,7 +711,6 @@ const ITEM_SEED_DATA = [
     stock: 80,
     tag: 'toy',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Anisette - Mcguiness',
@@ -762,7 +720,6 @@ const ITEM_SEED_DATA = [
     stock: 24,
     tag: 'clothing',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Tomato Paste',
@@ -772,7 +729,6 @@ const ITEM_SEED_DATA = [
     stock: 88,
     tag: 'clothing',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Sauce - Chili',
@@ -782,7 +738,6 @@ const ITEM_SEED_DATA = [
     stock: 76,
     tag: 'food',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Sachet',
@@ -792,7 +747,6 @@ const ITEM_SEED_DATA = [
     stock: 9,
     tag: 'leash',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Petit Baguette',
@@ -802,7 +756,6 @@ const ITEM_SEED_DATA = [
     stock: 72,
     tag: 'grooming',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Crab - Back Fin Meat, Canned',
@@ -811,7 +764,6 @@ const ITEM_SEED_DATA = [
     stock: 76,
     tag: 'grooming',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Salt - Celery',
@@ -821,7 +773,6 @@ const ITEM_SEED_DATA = [
     stock: 50,
     tag: 'grooming',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Appetizer - Seafood Assortment',
@@ -831,7 +782,6 @@ const ITEM_SEED_DATA = [
     stock: 70,
     tag: 'costume',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Broom - Push',
@@ -841,7 +791,6 @@ const ITEM_SEED_DATA = [
     stock: 36,
     tag: 'bed',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Paper Cocktail Umberlla 80 - 180',
@@ -851,7 +800,6 @@ const ITEM_SEED_DATA = [
     stock: 75,
     tag: 'leash',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Sobe - Liz Blizz',
@@ -861,7 +809,6 @@ const ITEM_SEED_DATA = [
     stock: 70,
     tag: 'leash',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Halibut - Steaks',
@@ -871,7 +818,6 @@ const ITEM_SEED_DATA = [
     stock: 19,
     tag: 'clothing',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Wine - Cotes Du Rhone',
@@ -881,7 +827,6 @@ const ITEM_SEED_DATA = [
     stock: 8,
     tag: 'food',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Artichokes - Knobless, White',
@@ -891,7 +836,6 @@ const ITEM_SEED_DATA = [
     stock: 34,
     tag: 'clothing',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Rappini - Andy Boy',
@@ -901,7 +845,6 @@ const ITEM_SEED_DATA = [
     stock: 12,
     tag: 'grooming',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Carbonated Water - Lemon Lime',
@@ -911,7 +854,6 @@ const ITEM_SEED_DATA = [
     stock: 5,
     tag: 'costume',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Wine - Kwv Chenin Blanc South',
@@ -921,7 +863,6 @@ const ITEM_SEED_DATA = [
     stock: 41,
     tag: 'bed',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Gingerale - Schweppes, 355 Ml',
@@ -931,7 +872,6 @@ const ITEM_SEED_DATA = [
     stock: 68,
     tag: 'leash',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Bread - White Epi Baguette',
@@ -941,7 +881,6 @@ const ITEM_SEED_DATA = [
     stock: 93,
     tag: 'clothing',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Rappini - Andy Boy',
@@ -951,7 +890,6 @@ const ITEM_SEED_DATA = [
     stock: 90,
     tag: 'bed',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Containter - 3oz Microwave Rect.',
@@ -960,7 +898,6 @@ const ITEM_SEED_DATA = [
     stock: 57,
     tag: 'costume',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Chips Potato Swt Chilli Sour',
@@ -970,7 +907,6 @@ const ITEM_SEED_DATA = [
     stock: 62,
     tag: 'clothing',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Corn Kernels - Frozen',
@@ -980,7 +916,6 @@ const ITEM_SEED_DATA = [
     stock: 60,
     tag: 'leash',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Sauce - Cranberry',
@@ -990,7 +925,6 @@ const ITEM_SEED_DATA = [
     stock: 66,
     tag: 'bed',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Trueblue - Blueberry',
@@ -1000,7 +934,6 @@ const ITEM_SEED_DATA = [
     stock: 31,
     tag: 'clothing',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Mints - Striped Red',
@@ -1010,7 +943,6 @@ const ITEM_SEED_DATA = [
     stock: 88,
     tag: 'food',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Flour - Fast / Rapid',
@@ -1020,7 +952,6 @@ const ITEM_SEED_DATA = [
     stock: 5,
     tag: 'bed',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Lentils - Green Le Puy',
@@ -1029,7 +960,6 @@ const ITEM_SEED_DATA = [
     stock: 59,
     tag: 'food',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Mix Pina Colada',
@@ -1039,7 +969,6 @@ const ITEM_SEED_DATA = [
     stock: 58,
     tag: 'grooming',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Crush - Orange, 355ml',
@@ -1049,7 +978,6 @@ const ITEM_SEED_DATA = [
     stock: 36,
     tag: 'toy',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Kaffir Lime Leaves',
@@ -1059,7 +987,6 @@ const ITEM_SEED_DATA = [
     stock: 16,
     tag: 'food',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Bacon Strip Precooked',
@@ -1069,7 +996,6 @@ const ITEM_SEED_DATA = [
     stock: 26,
     tag: 'toy',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Coriander - Seed',
@@ -1079,7 +1005,6 @@ const ITEM_SEED_DATA = [
     stock: 76,
     tag: 'clothing',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Heavy Duty Dust Pan',
@@ -1089,7 +1014,6 @@ const ITEM_SEED_DATA = [
     stock: 70,
     tag: 'food',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Chips Potato All Dressed - 43g',
@@ -1099,7 +1023,6 @@ const ITEM_SEED_DATA = [
     stock: 24,
     tag: 'food',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Soup - Campbells Beef Strogonoff',
@@ -1109,7 +1032,6 @@ const ITEM_SEED_DATA = [
     stock: 2,
     tag: 'clothing',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Salmon - Canned',
@@ -1119,7 +1041,6 @@ const ITEM_SEED_DATA = [
     stock: 20,
     tag: 'bed',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Longos - Chicken Caeser Salad',
@@ -1129,7 +1050,6 @@ const ITEM_SEED_DATA = [
     stock: 27,
     tag: 'bed',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Chip - Potato Dill Pickle',
@@ -1139,7 +1059,6 @@ const ITEM_SEED_DATA = [
     stock: 9,
     tag: 'leash',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Beer - True North Lager',
@@ -1149,7 +1068,6 @@ const ITEM_SEED_DATA = [
     stock: 60,
     tag: 'toy',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Wine - Vovray Sec Domaine Huet',
@@ -1159,7 +1077,6 @@ const ITEM_SEED_DATA = [
     stock: 8,
     tag: 'clothing',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Horseradish - Prepared',
@@ -1169,7 +1086,6 @@ const ITEM_SEED_DATA = [
     stock: 5,
     tag: 'bed',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Pastry - Choclate Baked',
@@ -1179,7 +1095,6 @@ const ITEM_SEED_DATA = [
     stock: 39,
     tag: 'bed',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Shrimp - Black Tiger 8 - 12',
@@ -1189,7 +1104,6 @@ const ITEM_SEED_DATA = [
     stock: 49,
     tag: 'clothing',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Stock - Veal, White',
@@ -1198,7 +1112,6 @@ const ITEM_SEED_DATA = [
     stock: 46,
     tag: 'leash',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Oil - Truffle, White',
@@ -1208,7 +1121,6 @@ const ITEM_SEED_DATA = [
     stock: 39,
     tag: 'bed',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Latex Rubber Gloves Size 9',
@@ -1218,7 +1130,6 @@ const ITEM_SEED_DATA = [
     stock: 74,
     tag: 'leash',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Napkin - Beverge, White 2 - Ply',
@@ -1228,7 +1139,6 @@ const ITEM_SEED_DATA = [
     stock: 71,
     tag: 'costume',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Truffle - Whole Black Peeled',
@@ -1238,7 +1148,6 @@ const ITEM_SEED_DATA = [
     stock: 22,
     tag: 'toy',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Raspberries - Frozen',
@@ -1248,7 +1157,6 @@ const ITEM_SEED_DATA = [
     stock: 27,
     tag: 'toy',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Wine - Chateau Aqueria Tavel',
@@ -1258,7 +1166,6 @@ const ITEM_SEED_DATA = [
     stock: 12,
     tag: 'grooming',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Water - Tonic',
@@ -1268,7 +1175,6 @@ const ITEM_SEED_DATA = [
     stock: 23,
     tag: 'clothing',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Vanilla Beans',
@@ -1278,7 +1184,6 @@ const ITEM_SEED_DATA = [
     stock: 50,
     tag: 'clothing',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Puree - Guava',
@@ -1288,7 +1193,6 @@ const ITEM_SEED_DATA = [
     stock: 50,
     tag: 'food',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Jam - Blackberry, 20 Ml Jar',
@@ -1298,7 +1202,6 @@ const ITEM_SEED_DATA = [
     stock: 20,
     tag: 'food',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Pomegranates',
@@ -1308,7 +1211,6 @@ const ITEM_SEED_DATA = [
     stock: 68,
     tag: 'clothing',
     favorite: false,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Banana Turning',
@@ -1318,7 +1220,6 @@ const ITEM_SEED_DATA = [
     stock: 73,
     tag: 'toy',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
   {
     name: 'Pork - Bacon,back Peameal',
@@ -1328,6 +1229,5 @@ const ITEM_SEED_DATA = [
     stock: 7,
     tag: 'bed',
     favorite: true,
-    imageUrl: 'https://m.media-amazon.com/images/I/71Z-lMc5IOS._AC_UL320_.jpg',
   },
 ];
