@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { createItem } from "../store/slices/items";
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { createItem } from '../store/slices/items';
 
 const CreateItem = () => {
   const navigate = useNavigate();
@@ -10,14 +10,16 @@ const CreateItem = () => {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [stock, setStock] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await dispatch(createItem({name, description, price, stock}));
+    await dispatch(createItem({ name, description, price, stock, imageUrl }));
     setName('');
     setDescription('');
     setPrice('');
     setStock('');
+    setImageUrl('');
     navigate('/');
   };
 
@@ -57,6 +59,15 @@ const CreateItem = () => {
             name="itemStock"
             value={stock}
             onChange={(e) => setStock(e.target.value)}
+          />
+        </div>
+
+        <div className="row apart">
+          <label htmlFor="imageUrl">Image:</label>
+          <input
+            name="itemUrl"
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
           />
         </div>
 
