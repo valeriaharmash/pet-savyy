@@ -18,6 +18,7 @@ const CreateItem = ({ mode }) => {
   useEffect(() => {
     setAuthMode(mode);
   }, [mode]);
+  const [imageUrl, setImageUrl] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,12 +32,13 @@ const CreateItem = ({ mode }) => {
       setNotification('Please enter number of items in stock.');
     } else {
       const { payload } = await dispatch(
-        createItem({ name, description, price, stock })
+        createItem({ name, description, price, stock, imageUrl })
       );
       setName('');
       setDescription('');
       setPrice('');
       setStock('');
+      setImageUrl('');
       navigate(`/items/${payload.item.id}`);
     }
   };
@@ -77,6 +79,24 @@ const CreateItem = ({ mode }) => {
             name='itemStock'
             value={stock}
             onChange={(e) => setStock(e.target.value)}
+          />
+        </div>
+
+        <div className='row apart'>
+          <label htmlFor='imageUrl'>Image:</label>
+          <input
+            name='itemUrl'
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
+          />
+        </div>
+
+        <div className='row apart'>
+          <label htmlFor='imageUrl'>Image:</label>
+          <input
+            name='itemUrl'
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
           />
         </div>
 
