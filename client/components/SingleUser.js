@@ -89,7 +89,7 @@ const SingleUser = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        {update && <div className='notif'>{update}</div>}
+        {update && <div className='notif-go'>{update}</div>}
         <button type='submit'>Update</button>
       </form>
     </div>
