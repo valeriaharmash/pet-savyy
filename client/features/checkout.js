@@ -95,19 +95,3 @@ const Checkout = () => {
 };
 
 export default Checkout;
-
-{
-	/* <button
-          onClick={handleSave}
-          disabled={!editAllowed}
-          className="form-label"
-        >
-          Save Edit
-        </button>
-        <button onClick={handleDelete} className="form-label">
-          Delete
-        </button>
-        <button onClick={handleCancel} className="form-label">
-          Cancel
-        </button> */
-}

@@ -13,6 +13,30 @@ const LimitedItems = ({ maxItems }) => {
     userId = user.id;
   }
 
+
+  const handleAddToCart = async (itemId) => {
+    if (user) {
+      dispatch(addItemToCart({ userId, itemId }));
+    } else {
+      let item = items.filter((item) => item.id === itemId);
+      item = item[0];
+
+      // grab the local cart items
+      let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+      // check if item is already in the cart
+      const itemIndex = cartItems.findIndex((item) => item.item.id === itemId);
+      if (itemIndex !== -1) {
+        cartItems[itemIndex].qty += 1;
+      } else {
+        cartItems.push({ item, qty: 1 });
+      }
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    }
+  };
+
+
+
   useEffect(() => {
     dispatch(fetchItems());
   }, [dispatch]);
@@ -36,10 +60,9 @@ const LimitedItems = ({ maxItems }) => {
                   <div id='itemDetails'>
                     <ul>
                       <li>{item.name}</li>
-                      <li style={{ fontWeight: 'bold' }}>{`$${(item.price).toFixed(2)}`}</li>
-                      {(!user || user.role !== 'admin') && (
-                        <li>Number in cart: {`0`}</li>
-                      )}
+                      <li
+                        style={{ fontWeight: 'bold' }}
+                      >{`$${item.price.toFixed(2)}`}</li>
                     </ul>
                   </div>
                 </Link>
