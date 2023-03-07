@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { addItemToCart, fetchItems, selectItems } from '../store/slices/items';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button } from 'react-bootstrap';
+import { Button, Overlay, Popover } from 'react-bootstrap';
 
 const Items = () => {
   const navigate = useNavigate();
+
   const user = useSelector((state) => state.auth.user);
   let userId = null;
   if (user) {
@@ -13,11 +14,19 @@ const Items = () => {
   }
 
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchItems());
   }, [dispatch]);
 
   let items = useSelector(selectItems);
+
+  const [confirmation, setConfirmation] = useState(false);
+  const [target, setTarget] = useState(null);
+
+  const handlePopover = (event) => {
+    setTarget(event.target);
+  };
 
   const handleAddToCart = async (itemId) => {
     if (user) {
@@ -38,6 +47,9 @@ const Items = () => {
       }
       localStorage.setItem('cartItems', JSON.stringify(cartItems));
     }
+    setTarget(event.target);
+    setConfirmation(true);
+    setTimeout(() => setConfirmation(false), 2000);
   };
 
   return (
@@ -79,9 +91,17 @@ const Items = () => {
                           className='button'
                           variant='secondary'
                           style={{ alignSelf: 'center' }}
+                          onMouseEnter={handlePopover}
                         >
                           Add to Cart
                         </Button>{' '}
+                        <Overlay
+                          show={confirmation}
+                          target={target}
+                          placement='top'
+                        >
+                          <Popover id='popover1'>Item added to cart!</Popover>
+                        </Overlay>
                       </div>
                     )}
 

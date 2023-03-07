@@ -18,7 +18,7 @@ const AllUsers = () => {
           return (
             <li key={user.id}>
               <Link to={`/users/${user.id}`} className='link'>
-                &#x1F464; {user.firstName} {user.lastName}
+                👤 {user.firstName} {user.lastName}
               </Link>
             </li>
           );

@@ -5,7 +5,6 @@ import axios from 'axios';
 export const mergeLocalCart = createAsyncThunk(
   'cart/mergeCart',
   async ({ userId, cartItems }) => {
-    console.log('in the slice', typeof userId, cartItems);
     try {
       const { data } = await axios.put(`/api/cart/login/${userId}`, cartItems);
       return data;
@@ -84,7 +83,6 @@ export const userOrderSlice = createSlice({
       .addCase(fetchUserOrder.rejected, (state, action) => {
         state.status = 'failed';
         state.error = new Error(action.error.message);
-        console.log(action.error.message);
       })
       .addCase(setOrderQty.fulfilled, (state, action) => {
         state.status = 'succeeded';

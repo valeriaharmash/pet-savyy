@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { selectItems, fetchItems } from '../store/slices/items';
+import { selectItems, fetchItems, addItemToCart } from '../store/slices/items';
 import { useSelector, useDispatch } from 'react-redux';
-import { Button } from 'react-bootstrap';
+import { Button, Overlay, Popover } from 'react-bootstrap';
 
 const LimitedItems = ({ maxItems }) => {
   const dispatch = useDispatch();
@@ -13,6 +13,20 @@ const LimitedItems = ({ maxItems }) => {
     userId = user.id;
   }
 
+  useEffect(() => {
+    dispatch(fetchItems());
+  }, [dispatch]);
+
+  const items = useSelector(selectItems);
+
+  const limitedItems = items.slice(0, maxItems);
+
+  const [confirmation, setConfirmation] = useState(false);
+  const [target, setTarget] = useState(null);
+
+  const handlePopover = (event) => {
+    setTarget(event.target);
+  };
 
   const handleAddToCart = async (itemId) => {
     if (user) {
@@ -33,17 +47,10 @@ const LimitedItems = ({ maxItems }) => {
       }
       localStorage.setItem('cartItems', JSON.stringify(cartItems));
     }
+    setTarget(event.target);
+    setConfirmation(true);
+    setTimeout(() => setConfirmation(false), 2000);
   };
-
-
-
-  useEffect(() => {
-    dispatch(fetchItems());
-  }, [dispatch]);
-
-  const items = useSelector(selectItems);
-
-  const limitedItems = items.slice(0, maxItems);
 
   return (
     <>
@@ -81,9 +88,17 @@ const LimitedItems = ({ maxItems }) => {
                       className='button'
                       variant='secondary'
                       style={{ alignSelf: 'center' }}
+                      onMouseEnter={handlePopover}
                     >
                       Add to Cart
                     </Button>{' '}
+                    <Overlay
+                      show={confirmation}
+                      target={target}
+                      placement='top'
+                    >
+                      <Popover id='popover1'>Item added to cart!</Popover>
+                    </Overlay>
                   </div>
                 )}
 

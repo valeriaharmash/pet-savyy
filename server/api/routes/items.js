@@ -1,11 +1,11 @@
-const router = require("express").Router();
+const router = require('express').Router();
 const {
   models: { Item },
-} = require("../../db");
-const { requireAdminToken } = require("../middleware");
+} = require('../../db');
+const { requireAdminToken } = require('../middleware');
 
 // GET /api/items/
-router.get("/", async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const items = await Item.findAll({});
     res.send(items);
@@ -15,7 +15,7 @@ router.get("/", async (req, res, next) => {
 });
 
 // GET /api/items/:itemId
-router.get("/:itemId", async (req, res, next) => {
+router.get('/:itemId', async (req, res, next) => {
   try {
     const { itemId } = req.params;
     const item = await Item.findOne({
@@ -28,7 +28,7 @@ router.get("/:itemId", async (req, res, next) => {
       res.send(item);
       return;
     }
-    res.status(404).send("Item doesn't exist.");
+    res.status(404).send('Item doesn\'t exist.');
   } catch (error) {
     console.error(error);
     next(error);
@@ -36,14 +36,15 @@ router.get("/:itemId", async (req, res, next) => {
 });
 
 // POST /api/items/
-router.post("/", requireAdminToken, async (req, res, next) => {
+router.post('/', requireAdminToken, async (req, res, next) => {
   try {
-    const { name, description, price, stock } = req.body;
+    const { name, description, price, stock, imageUrl } = req.body;
     const newItem = await Item.create({
       name,
       description,
       price,
       stock,
+      imageUrl,
     });
     res.status(201).json(newItem);
   } catch (e) {
@@ -52,7 +53,7 @@ router.post("/", requireAdminToken, async (req, res, next) => {
 });
 
 // PUT /api/items/:itemId
-router.put("/:id", requireAdminToken, async (req, res, next) => {
+router.put('/:id', requireAdminToken, async (req, res, next) => {
   try {
     const { name, description, price, stock, imageUrl } = req.body;
     const [numUpdated] = await Item.update(
@@ -73,7 +74,7 @@ router.put("/:id", requireAdminToken, async (req, res, next) => {
 });
 
 // DELETE /api/items/:itemId
-router.delete("/:id", requireAdminToken, async (req, res, next) => {
+router.delete('/:id', requireAdminToken, async (req, res, next) => {
   try {
     const item = await Item.findByPk(req.params.id);
     await item.destroy();

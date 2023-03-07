@@ -25,7 +25,7 @@ export const fetchItems = createAsyncThunk("fetchItems", async () => {
     const { data } = await axios.get("/api/items");
     return data;
   } catch (err) {
-    //console.log(err)
+    console.log(err)
     return [];
   }
 });
@@ -57,13 +57,14 @@ export const updateItem = createAsyncThunk("updateItem", async (item) => {
 
 export const createItem = createAsyncThunk(
   "createItem",
-  async ({ name, description, price, stock }) => {
+  async ({ name, description, price, stock, imageUrl}) => {
     try {
       const { data: item } = await axios.post("/api/items", {
         name,
         description,
         price,
         stock,
+        imageUrl,
       });
       return { item };
     } catch (error) {
@@ -116,7 +117,7 @@ const itemsSlice = createSlice({
         }
         return { ...state, error: errorMessage };
       }
-      state.allItems.push(payload);
+      state.allItems.push(payload.item);
     });
     builder.addCase(deleteItem.fulfilled, (state, { payload }) => {
       state.allItems = state.allItems.filter((item) => item.id !== payload.id);
