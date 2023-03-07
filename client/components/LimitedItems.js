@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { selectItems, fetchItems } from '../store/slices/items';
+import { selectItems, fetchItems, addItemToCart } from '../store/slices/items';
 import { useSelector, useDispatch } from 'react-redux';
-import { Button } from 'react-bootstrap';
+import { Button, Overlay, Popover } from 'react-bootstrap';
 
 const LimitedItems = ({ maxItems }) => {
   const dispatch = useDispatch();
@@ -21,6 +21,37 @@ const LimitedItems = ({ maxItems }) => {
 
   const limitedItems = items.slice(0, maxItems);
 
+  const [confirmation, setConfirmation] = useState(false);
+  const [target, setTarget] = useState(null);
+
+  const handlePopover = (event) => {
+    setTarget(event.target);
+  };
+
+  const handleAddToCart = async (itemId) => {
+    if (user) {
+      dispatch(addItemToCart({ userId, itemId }));
+    } else {
+      let item = items.filter((item) => item.id === itemId);
+      item = item[0];
+
+      // grab the local cart items
+      let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+      // check if item is already in the cart
+      const itemIndex = cartItems.findIndex((item) => item.item.id === itemId);
+      if (itemIndex !== -1) {
+        cartItems[itemIndex].qty += 1;
+      } else {
+        cartItems.push({ item, qty: 1 });
+      }
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    }
+    setTarget(event.target);
+    setConfirmation(true);
+    setTimeout(() => setConfirmation(false), 2000);
+  };
+
   return (
     <>
       <h2 className='items-header'>Today's Items</h2>
@@ -36,7 +67,9 @@ const LimitedItems = ({ maxItems }) => {
                   <div id='itemDetails'>
                     <ul>
                       <li>{item.name}</li>
-                      <li style={{ fontWeight: 'bold' }}>{`$${(item.price).toFixed(2)}`}</li>
+                      <li
+                        style={{ fontWeight: 'bold' }}
+                      >{`$${item.price.toFixed(2)}`}</li>
                       {(!user || user.role !== 'admin') && (
                         <li>Number in cart: {`0`}</li>
                       )}
@@ -58,9 +91,17 @@ const LimitedItems = ({ maxItems }) => {
                       className='button'
                       variant='secondary'
                       style={{ alignSelf: 'center' }}
+                      onMouseEnter={handlePopover}
                     >
                       Add to Cart
                     </Button>{' '}
+                    <Overlay
+                      show={confirmation}
+                      target={target}
+                      placement='top'
+                    >
+                      <Popover id='popover1'>Item added to cart!</Popover>
+                    </Overlay>
                   </div>
                 )}
 

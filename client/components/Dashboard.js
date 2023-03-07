@@ -13,13 +13,13 @@ export const Dashboard = () => {
               <li>
                 {' '}
                 <Link to='/items/add' className='link'>
-                  &#x270E; Add Item
+                  ✎ Add Item
                 </Link>
               </li>
               <li>
                 {' '}
                 <Link to='/items/' className='link'>
-                  &#x270E; Edit Items
+                  ✎ Edit Items
                 </Link>
               </li>
             </ul>
