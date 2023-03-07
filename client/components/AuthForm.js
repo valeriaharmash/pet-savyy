@@ -36,7 +36,8 @@ const AuthForm = ({ mode }) => {
         setNotification('Invalid username or password.');
       } else {
         const user = await dispatch(getUserByToken());
-        const localCartItems = JSON.parse(localStorage.getItem('cartItems'));
+        const localCartItems =
+          JSON.parse(localStorage.getItem('cartItems')) || [];
         if (localCartItems.length > 0) {
           const input = { userId: user.payload.id, cartItems: localCartItems };
           dispatch(mergeLocalCart(input));
