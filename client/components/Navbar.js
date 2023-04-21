@@ -10,7 +10,7 @@ const Navbar = () => {
   const user = useSelector((state) => state.auth.user);
   return (
     <div>
-      <h1>Grace Shopper Pet Store 🐶 🦴</h1>
+      <h1>Pet Savyy 🐶 🦴</h1>
       <nav>
         <div className='apart'>
           <Link to='/'>Home</Link>

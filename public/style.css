@@ -1,7 +1,7 @@
 body {
   font-family: sans-serif;
-  background: rgb(207,223,247);
-  background: linear-gradient(90deg, rgb(175, 202, 242) 34%, rgb(101, 159, 245) 100%);
+  background: red;
+  background: white;
 }
 
 .link {
