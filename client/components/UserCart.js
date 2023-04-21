@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { deleteItem, fetchUserOrder, setOrderQty } from './cartSlice';
+import { deleteItem, fetchUserOrder, setOrderQty } from '../store/slices/cart';
 
 const UserCart = () => {
 	const navigate = useNavigate();

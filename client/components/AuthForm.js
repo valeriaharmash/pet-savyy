@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { authenticate, getUserByToken } from '../store';
-import { mergeLocalCart } from '../features/cartSlice';
+import { mergeLocalCart } from '../store/slices/cart';
 
 const AuthForm = ({ mode }) => {
   const navigate = useNavigate();

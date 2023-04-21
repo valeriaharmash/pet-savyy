@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import UserCart from './userCart';
-import GuestCart from './guestCart';
+import UserCart from './UserCart';
+import GuestCart from './GuestCart';
 
 const Cart = () => {
   const user = useSelector((state) => state.auth.user);

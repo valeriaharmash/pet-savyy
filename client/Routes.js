@@ -13,12 +13,12 @@ import {
   SingleUser,
   Payment,
   Completion,
+  Items,
+  Checkout
 } from './components';
-import { Items } from './features';
 import { getUserByToken } from './store';
 import { isLoggedIn } from './utils';
-import Cart from './features/cart';
-import { Checkout } from './features';
+import Cart from './components/cart';
 
 const Router = ({}) => {
   const dispatch = useDispatch();
