@@ -10,7 +10,6 @@ import Payment from './Payment';
 import Completion from './Completion';
 import Dashboard from './Dashboard';
 import SingleUser from './SingleUser';
-import LimitedItems from './LimitedItems';
 
 export {
   AuthForm,
@@ -23,7 +22,6 @@ export {
   CreateItem,
   Dashboard,
   SingleUser,
-  LimitedItems,
   Payment,
   Completion,
 };

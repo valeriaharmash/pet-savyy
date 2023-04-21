@@ -1,14 +1,12 @@
 import React from 'react';
-import LimitedItems from './LimitedItems';
 import { Link } from 'react-router-dom';
-import { avocadoPic, saleBanner } from './Images';
+import { avocadoPic } from './Images';
 
 const Main = () => {
 	return (
 		<div className="main">
 			<div className="item-list">
 				<Link to="/signup"> </Link>
-				<LimitedItems maxItems={12} />
 			</div>
 			<div className="welcome-page">
 				<div className="welcome">
