@@ -5,6 +5,7 @@ const {
   models: { User, Item_Order, Order, Item },
 } = require('../../db');
 
+// TODO unused code. Enhance by adding strict filtering.
 //GET: /api/cart/orders
 router.get('/orders', async (req, res, next) => {
   try {

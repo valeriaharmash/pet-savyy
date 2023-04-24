@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { authenticate, getUserByToken } from '../store';
 import { mergeLocalCart } from '../store/slices/cart';
+import { createOrder } from '../store/slices/orders';
 
 const AuthForm = ({ mode }) => {
   const navigate = useNavigate();
@@ -35,7 +36,15 @@ const AuthForm = ({ mode }) => {
       if (result.payload && result.payload.error) {
         setNotification('Invalid username or password.');
       } else {
-        const user = await dispatch(getUserByToken());
+        const {payload: user} = await dispatch(getUserByToken());
+
+        // create blank order on sign up
+        if(authMode === 'signup') {
+          // TODO merge local cart if any
+          dispatch(createOrder({userId: user.id}))
+        }
+
+        // TODO refactor merge local cart logic
         const localCartItems =
           JSON.parse(localStorage.getItem('cartItems')) || [];
         if (localCartItems.length > 0) {

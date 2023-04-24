@@ -35,14 +35,12 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-// POST /api/orders/
+// POST /api/orders
 router.post('/', async (req, res, next) => {
   try {
-    if (!req.user) {
-      return res.status(401).send('Access denied');
-    }
+    const {userId} = req.body;
     const order = await Order.create({
-      userId: req.user.id,
+      userId: userId,
     });
     res.status(201).json(order);
   } catch (e) {
@@ -69,7 +67,6 @@ router.put('/:id', requireToken, async (req, res, next) => {
         },
       }
     );
-    const newOrder = await Order.create({ userId: userId });
     res.sendStatus(204);
   } catch (e) {
     next(e);

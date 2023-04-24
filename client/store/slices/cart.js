@@ -97,6 +97,4 @@ export const userOrderSlice = createSlice({
   },
 });
 
-export const selectUserCart = (state) => state.cart.order;
-
 export default userOrderSlice.reducer;
