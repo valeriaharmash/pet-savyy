@@ -35,7 +35,7 @@ export const fetchOrders = createAsyncThunk(
       }, );
       return data;
     } catch (error) {
-      console.error('Unable to create order.', error);
+      console.error('Unable to fetch order.', error);
       return { error };
     }
   }
