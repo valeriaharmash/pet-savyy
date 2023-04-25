@@ -4,14 +4,21 @@ const {
 } = require('../../db');
 const { requireToken } = require('../middleware/auth');
 
-// GET /api/orders/
+// GET /api/orders?status=&userId=
 router.get('/', async (req, res, next) => {
   try {
-    if (!req.user) {
-      return res.status(401).send('Access denied');
+    const { status, userId } = req.query
+
+    const whereClause = {}
+    if (status) {
+      whereClause.status = status
     }
+    if (userId) {
+      whereClause.userId = userId
+    }
+
     const orders = await Order.findAll({
-      where: { userId: red.user.id },
+      where: whereClause,
     });
     res.json(orders);
   } catch (err) {
@@ -20,7 +27,7 @@ router.get('/', async (req, res, next) => {
 });
 
 // GET /api/orders/:orderId
-router.get('/:id', async (req, res, next) => {
+router.get('/:orderId', async (req, res, next) => {
   try {
     const order = await Order.findByPk(req.params.id);
     if (!order) {

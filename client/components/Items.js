@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Overlay, Popover } from 'react-bootstrap';
 
 const Items = () => {
-  const navigate = useNavigate();
 
   const user = useSelector((state) => state.auth.user);
   let userId = null;

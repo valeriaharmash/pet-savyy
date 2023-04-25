@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { deleteItem, fetchUserOrder, mergeLocalCart, setOrderQty } from './cart';
 
 const initialState = {
-  allOrders: [],
+  allOrders: null,
   selectedOrder: {},
+  pendingOrder: null,
   error: null,
 };
 
@@ -15,6 +15,24 @@ export const createOrder = createAsyncThunk(
       const { data } = await axios.post(`/api/orders`, {
         userId,
       });
+      return data;
+    } catch (error) {
+      console.error('Unable to create order.', error);
+      return { error };
+    }
+  }
+);
+
+export const fetchOrders = createAsyncThunk(
+  'fetchOrders',
+  async ({ status ,userId }) => {
+    try {
+      const { data } = await axios.get(`/api/orders`, {
+        params: {
+          status,
+          userId
+        }
+      }, );
       return data;
     } catch (error) {
       console.error('Unable to create order.', error);
@@ -44,6 +62,9 @@ const orderSlice = createSlice({
   name: 'orders',
   initialState,
   reducers: {
+    setPendingOrder: (state, { payload: pendingOrder }) => {
+      state.pendingOrder = pendingOrder;
+    },
     setError: (state, { payload: error }) => {
       state.error = error;
     },
@@ -53,10 +74,13 @@ const orderSlice = createSlice({
       .addCase(createOrder.fulfilled, (state, {payload}) => {
         state.selectedOrder = payload;
         state.error = null;
-      })
+      }).addCase(fetchOrders.fulfilled, (state, {payload}) => {
+      state.allOrders = payload;
+      state.error = null;
+    })
   },
 });
 
-export const { setError } = orderSlice.actions;
+export const { setError, setPendingOrder } = orderSlice.actions;
 
 export default orderSlice.reducer;

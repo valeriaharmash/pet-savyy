@@ -19,16 +19,44 @@ import {
 import { getUserByToken } from './store';
 import { isLoggedIn } from './utils';
 import Cart from './components/cart';
+import { fetchOrders, setPendingOrder } from './store/slices/orders';
 
 const Router = ({}) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+  const orders = useSelector((state) => state.orders.allOrders);
 
+  // fetch user info from user token if exists
   useEffect(() => {
     if (isLoggedIn()) {
       dispatch(getUserByToken());
+    } else {
+    //  TODO fetch guest cart from local storage if any otherwise create blank guest order on local storage
     }
   }, []);
+
+  // fetch pending user orders once logged in
+  useEffect(() => {
+    if (user) {
+      dispatch(fetchOrders({userId: user.id, status: "in progress"}))
+    }
+  }, [user])
+
+  // find pending user's order and set it to redux state (it's guaranteed that logged in use has exactly one
+  // "in progress" order at any time)
+  useEffect(() => {
+    if (orders) {
+      const pendingOrder = orders.reduce((acc, order) => {
+        if (order.status === "in progress") {
+          return order
+        }
+        return acc
+      }, null)
+      if (pendingOrder) {
+        dispatch(setPendingOrder(pendingOrder))
+      }
+    }
+  }, [orders])
 
   if (user && user.role === 'admin') {
     return (
