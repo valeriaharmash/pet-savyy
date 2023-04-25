@@ -48,7 +48,7 @@ const AuthForm = ({ mode }) => {
         const localCartItems =
           JSON.parse(localStorage.getItem('cartItems')) || [];
         if (localCartItems.length > 0) {
-          const input = { userId: user.payload.id, cartItems: localCartItems };
+          const input = { userId: user.id, cartItems: localCartItems };
           dispatch(mergeLocalCart(input));
         }
         setFirstName('');
