@@ -17,7 +17,7 @@ const Navbar = () => {
         </div>
         <div className='apart'>
           {(!user || (user && user.role !== 'admin')) && (
-            <Link to={user ? `/user/${user.id}/cart` : '/user/guest/cart'}>
+            <Link to="/cart">
               Cart 🛒
             </Link>
           )}

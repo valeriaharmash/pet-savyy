@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { deleteItem, fetchUserOrder, setOrderQty } from '../store/slices/cart';
 
 const UserCart = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const { userId } = useParams();
 
 	const [cart, setCart] = useState([]);
 	const [total, setTotal] = useState(0);
 	const qtyOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
+  const user = useSelector((state) => state.auth.user);
+
 	// ensures orders are displayed
 	useEffect(() => {
 		const getOrder = async () => {
 			try {
-				const userOrder = await dispatch(fetchUserOrder(userId));
+				const userOrder = await dispatch(fetchUserOrder(user.id));
 				setCart(userOrder.payload);
 				setTotal(userOrder.payload[0].order.total);
 			} catch (err) {
@@ -36,7 +37,7 @@ const UserCart = () => {
 		setTotal(subTotal);
 
 		// updating the back end
-		dispatch(deleteItem({ userId, itemId, subTotal }));
+		dispatch(deleteItem({ userId: user.id, itemId, subTotal }));
 	};
 
 	const handleQuantityChange = async (itemId, quantity) => {
@@ -54,7 +55,7 @@ const UserCart = () => {
 		setTotal(subTotal);
 
 		// updating the back end
-		dispatch(setOrderQty({ userId, itemId, quantity }));
+		dispatch(setOrderQty({ userId: user.id, itemId, quantity }));
 	};
 
 	return (

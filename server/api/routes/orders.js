@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-  models: { Order },
+  models: { Order, Item_Order, Item },
 } = require('../../db');
 const { requireToken } = require('../middleware/auth');
 
@@ -29,14 +29,70 @@ router.get('/', async (req, res, next) => {
 // GET /api/orders/:orderId
 router.get('/:orderId', async (req, res, next) => {
   try {
-    const order = await Order.findByPk(req.params.id);
+    const {
+      orderId
+    } = req.params
+
+    const order = await Order.findByPk(orderId, {
+      include: Item,
+    });
+
     if (!order) {
-      return res.status(404).send('Order not found');
+      res.status(404).send("order not found")
+      return
     }
-    if (order.userId !== req.user.id) {
-      return res.status(403).send('Access denied');
+
+    // convert Sequelize order object into JS Object
+    const formattedOrder = order.toJSON()
+
+    // format order items to exclude "Item_Order"
+    formattedOrder.items = order.items.map(item => {
+      const formattedItem = {...item.dataValues}
+      formattedItem.qty = item.Item_Order.qty
+      delete formattedItem["Item_Order"]
+      return formattedItem
+    })
+    // calculate Order total
+    formattedOrder.total = order.getTotal()
+
+    res.json(formattedOrder);
+  } catch (e) {
+    next(e);
+  }
+});
+
+// PUT /api/orders/:orderId; Update Order Item quantity.
+router.put('/:orderId/items/:itemId', async (req, res, next) => {
+  try {
+    const { orderId, itemId } = req.params
+
+    const { qty } = req.body
+
+    // delete item from order if qty is 0
+    if (!qty) {
+      await Item_Order.destroy({
+        where: {
+          orderId: orderId,
+          itemId: itemId
+        }
+      })
+
+    } else {
+      // get/create order item from db
+      const orderItem = await Item_Order.findOrCreate({
+        where: {
+          orderId: orderId,
+          itemId: itemId
+        }
+      })
+
+      // update order item quantity
+      await orderItem[0].update({
+        qty
+      })
     }
-    res.json(order);
+
+    res.sendStatus(204);
   } catch (e) {
     next(e);
   }
