@@ -45,7 +45,7 @@ export const updateOrder = createAsyncThunk(
   'updateOrder',
   async ({ paymentId, orderId, shippingAddress, userId }) => {
     try {
-      const { data } = await axios.put(`/api/orders/${orderId}`, {
+      const { data } = await axios.put(`/api/orders`, {
         paymentId,
         shippingAddress,
         userId,
@@ -57,6 +57,21 @@ export const updateOrder = createAsyncThunk(
     }
   }
 );
+
+export const deleteItem = createAsyncThunk(
+  'deleteItem',
+  async ({ itemId, subTotal }) => {
+    try {
+      const { data } = await axios.delete(`/api/orders`, {
+        data: { itemId: itemId, total: subTotal },
+      });
+      return data;
+    } catch (err) {
+      throw err.message;
+    }
+  }
+);
+
 
 const orderSlice = createSlice({
   name: 'orders',
@@ -74,10 +89,14 @@ const orderSlice = createSlice({
       .addCase(createOrder.fulfilled, (state, {payload}) => {
         state.selectedOrder = payload;
         state.error = null;
-      }).addCase(fetchOrders.fulfilled, (state, {payload}) => {
+      })
+      .addCase(fetchOrders.fulfilled, (state, {payload}) => {
       state.allOrders = payload;
       state.error = null;
     })
+      .addCase(deleteItem.fulfilled, (state,{payload}) => {
+        state.status = 'succeeded';
+      })
   },
 });
 

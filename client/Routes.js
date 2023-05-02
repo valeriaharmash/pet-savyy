@@ -5,8 +5,6 @@ import {
   AllUsers,
   AuthForm,
   CreateItem,
-  Home,
-  Main,
   SingleItem,
   UpdateItem,
   Dashboard,
@@ -61,7 +59,6 @@ const Router = ({}) => {
   if (user && user.role === 'admin') {
     return (
       <Routes>
-        <Route path='/home' element={<Home />} />
         <Route exact path='/dashboard' element={<Dashboard />} />
         <Route exact path='/items' element={<Items />} />
         <Route exact path='/items/add' element={<CreateItem />} />
@@ -69,7 +66,7 @@ const Router = ({}) => {
         <Route exact path='/items/:itemId/update' element={<UpdateItem />} />
         <Route exact path='/users' element={<AllUsers />} />
         <Route exact path='/users/:userId' element={<SingleUser />} />
-        <Route path='*' element={<Main />} />
+        <Route path='*' element={<Items />} />
       </Routes>
     );
   } else {
@@ -77,7 +74,6 @@ const Router = ({}) => {
       <Routes>
         <Route exact path='/login' element={<AuthForm mode='login' />} />
         <Route exact path='/signup' element={<AuthForm mode='signup' />} />
-        <Route path='/home' element={<Home />} />
         <Route path='/checkout' element={<Checkout />} />
         <Route exact path='/items' element={<CreateItem />} />
         <Route exact path='/items/:itemId' element={<SingleItem />} />
@@ -86,7 +82,7 @@ const Router = ({}) => {
         <Route path='/checkout/pay' element={<Payment />} />
         <Route path='/completion' element={<Completion />} />
         {user && <Route path='/users/:userId' element={<SingleUser />} />}
-        <Route path='*' element={<Main />} />
+        <Route path='*' element={<Items />} />
       </Routes>
     );
   }
