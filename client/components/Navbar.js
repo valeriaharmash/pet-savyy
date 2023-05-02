@@ -13,10 +13,7 @@ const Navbar = () => {
       <h1>Pet Savyy 🐶 🦴</h1>
       <nav>
         <div className='apart'>
-          <Link to='/'>Home</Link>
-          <Link to='/home'>Browse</Link>
-          {/* <Link to='/home'>Costumes</Link>
-          <Link to='/home'>Supplies</Link> */}
+          <Link to='/'>Products</Link>
         </div>
         <div className='apart'>
           {(!user || (user && user.role !== 'admin')) && (
