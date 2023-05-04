@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const initialState = {
   allOrders: null,
-  selectedOrder: {},
+  selectedOrder: null,
   pendingOrder: null,
   error: null,
 };
@@ -25,14 +25,14 @@ export const createOrder = createAsyncThunk(
 
 export const fetchOrders = createAsyncThunk(
   'fetchOrders',
-  async ({ status ,userId }) => {
+  async ({ status, userId }) => {
     try {
       const { data } = await axios.get(`/api/orders`, {
         params: {
           status,
           userId
         }
-      }, );
+      },);
       return data;
     } catch (error) {
       console.error('Unable to fetch order.', error);
@@ -57,6 +57,20 @@ export const updateOrder = createAsyncThunk(
     }
   }
 );
+export const updateOrderItem = createAsyncThunk(
+  'updateOrderItem',
+  async ({ orderId, itemId, qty }) => {
+    try {
+      const { data } = await axios.put(`/api/orders/${orderId}/items/${itemId}`, {
+        qty
+      });
+      return data;
+    } catch (error) {
+      console.error('Unable to update order item.', error);
+      return { error };
+    }
+  }
+);
 
 export const deleteItem = createAsyncThunk(
   'deleteItem',
@@ -68,6 +82,19 @@ export const deleteItem = createAsyncThunk(
       return data;
     } catch (err) {
       throw err.message;
+    }
+  }
+);
+
+export const fetchOrder = createAsyncThunk(
+  'fetchOrder',
+  async (orderId) => {
+    try {
+      const { data: order } = await axios.get(`/api/orders/${orderId}`);
+      return order;
+    } catch (error) {
+      console.error('Unable to fetch order.', error);
+      return { error };
     }
   }
 );
@@ -86,17 +113,24 @@ const orderSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(createOrder.fulfilled, (state, {payload}) => {
+      .addCase(createOrder.fulfilled, (state, { payload }) => {
         state.selectedOrder = payload;
         state.error = null;
       })
-      .addCase(fetchOrders.fulfilled, (state, {payload}) => {
-      state.allOrders = payload;
-      state.error = null;
-    })
-      .addCase(deleteItem.fulfilled, (state,{payload}) => {
+      .addCase(fetchOrders.fulfilled, (state, { payload }) => {
+        state.allOrders = payload;
+        state.error = null;
+      })
+      .addCase(fetchOrder.fulfilled, (state, { payload: order }) => {
+        state.selectedOrder = order;
+        state.error = null;
+      })
+      .addCase(deleteItem.fulfilled, (state, { payload }) => {
         state.status = 'succeeded';
       })
+      .addCase(updateOrderItem.fulfilled, (state, { payload }) => {
+        state.error = null;
+      });
   },
 });
 
