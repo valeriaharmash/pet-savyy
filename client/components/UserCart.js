@@ -2,33 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { fetchOrder, updateOrderItem } from '../store/slices/orders';
-
-const renderItemSelectOption = (item, handleQuantityChange) => {
-  switch (item.stock) {
-    case 0:
-      return <p>Out of Stock</p>;
-    case 1:
-      return <p>Only One left in stock</p>;
-    default:
-      let itemOptions;
-      if (item.stock >= 10) {
-        itemOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-      } else {
-        itemOptions = new Array(item.stock).fill(0).map((v, idx) => idx + 1);
-      }
-      return <select
-        style={{ marginBottom: '1rem' }}
-        value={item.qty}
-        onChange={(event) => handleQuantityChange(item.id, event.target.value)}
-      >
-        {itemOptions.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>;
-  }
-};
+import { ItemSelectOption } from './shared';
 
 const UserCart = () => {
   const navigate = useNavigate();
@@ -86,7 +60,13 @@ const UserCart = () => {
                 <Link to={`/items/${item.id}`} className="link">
                   <h4>{item.name}</h4>
                 </Link>
-                {renderItemSelectOption(item, handleQuantityChange)}
+                <ItemSelectOption
+                  itemId={item.id}
+                  qty={item.qty}
+                  stock={item.stock}
+                  limit={item.stock}
+                  handleQuantityChange={handleQuantityChange}
+                />
                 <button onClick={() => handleDelete(item.id)}>
                   Remove from Cart
                 </button>
