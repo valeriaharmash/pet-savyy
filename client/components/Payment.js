@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import axios from 'axios';
-import {
-  Elements,
-  PaymentElement,
-  useElements,
-  useStripe,
-} from '@stripe/react-stripe-js';
+import { Elements, PaymentElement, useElements, useStripe, } from '@stripe/react-stripe-js';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { updateOrder } from '../store/slices/orders';
+import { createOrder, updateOrder } from '../store/slices/orders';
 
 // Test cards
 // success 4242424242424242
 // failed 4000000000009995
 // auth 4000002500003155
 
-const CheckoutForm = ({ orderId, shippingAddress, userId }) => {
+const CheckoutForm = ({ orderId, shippingAddress, userId, recipientName }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const stripe = useStripe();
@@ -43,13 +38,15 @@ const CheckoutForm = ({ orderId, shippingAddress, userId }) => {
       if (error) {
         setMessage(error.message);
       } else if (paymentIntent && paymentIntent.status === 'succeeded') {
-        let args = {
+        await dispatch(updateOrder({
           paymentId: paymentIntent.id,
-          orderId: orderId,
-          shippingAddress: shippingAddress,
-          userId: userId,
-        };
-        await dispatch(updateOrder(args));
+          status: 'complete',
+          shippingAddress,
+          orderId,
+          recipientName
+        }));
+        await dispatch((createOrder({ userId })));
+        // TODO clean up Redux state.
         navigate('/completion');
       } else {
         setMessage('Unexpected state');
@@ -64,23 +61,23 @@ const CheckoutForm = ({ orderId, shippingAddress, userId }) => {
   };
 
   return (
-    <form id='payment-form' onSubmit={handleSubmit}>
-      <PaymentElement />
-      <button disabled={isProcessing} id='submit'>
-        <span id='button-text'>
+    <form id="payment-form" onSubmit={handleSubmit}>
+      <PaymentElement/>
+      <button disabled={isProcessing} id="submit">
+        <span id="button-text">
           {isProcessing ? 'Processing ... ' : 'Pay now'}
         </span>
       </button>
 
       {/* Show any error or success messages */}
-      {message && <div id='payment-message'>{message}</div>}
+      {message && <div id="payment-message">{message}</div>}
     </form>
   );
 };
 
 const Payment = () => {
   const location = useLocation();
-  const { userId, amount, orderId, shippingAddress } = location.state;
+  const { userId, amount, orderId, shippingAddress, recipientName } = location.state;
   const [stripePromise, setStripePromise] = useState(null);
   const [clientSecret, setClientSecret] = useState(null);
 
@@ -116,6 +113,7 @@ const Payment = () => {
             orderId={orderId}
             shippingAddress={shippingAddress}
             userId={userId}
+            recipientName={recipientName}
           />
         </Elements>
       )}

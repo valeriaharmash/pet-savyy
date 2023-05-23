@@ -43,12 +43,13 @@ export const fetchOrders = createAsyncThunk(
 
 export const updateOrder = createAsyncThunk(
   'updateOrder',
-  async ({ paymentId, orderId, shippingAddress, userId }) => {
+  async ({ paymentId, orderId, shippingAddress, status, recipientName }) => {
     try {
-      const { data } = await axios.put(`/api/orders`, {
+      const { data } = await axios.put(`/api/orders/${orderId}`, {
         paymentId,
         shippingAddress,
-        userId,
+        status,
+        recipientName
       });
       return data;
     } catch (error) {

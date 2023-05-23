@@ -4,17 +4,17 @@ const {
 } = require('../../db');
 const { requireToken } = require('../middleware/auth');
 
-// GET /api/orders?status=&userId=
+// GET /api/orders?status=&userId=; Get user orders by filters.
 router.get('/', async (req, res, next) => {
   try {
-    const { status, userId } = req.query
+    const { status, userId } = req.query;
 
-    const whereClause = {}
+    const whereClause = {};
     if (status) {
-      whereClause.status = status
+      whereClause.status = status;
     }
     if (userId) {
-      whereClause.userId = userId
+      whereClause.userId = userId;
     }
 
     const orders = await Order.findAll({
@@ -26,34 +26,34 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-// GET /api/orders/:orderId
+// GET /api/orders/:orderId; Get order.
 router.get('/:orderId', async (req, res, next) => {
   try {
     const {
       orderId
-    } = req.params
+    } = req.params;
 
     const order = await Order.findByPk(orderId, {
       include: Item,
     });
 
     if (!order) {
-      res.status(404).send("order not found")
-      return
+      res.status(404).send('order not found');
+      return;
     }
 
     // convert Sequelize order object into JS Object
-    const formattedOrder = order.toJSON()
+    const formattedOrder = order.toJSON();
 
     // format order items to exclude "Item_Order"
     formattedOrder.items = order.items.map(item => {
-      const formattedItem = {...item.dataValues}
-      formattedItem.qty = item.Item_Order.qty
-      delete formattedItem["Item_Order"]
-      return formattedItem
-    })
+      const formattedItem = { ...item.dataValues };
+      formattedItem.qty = item.Item_Order.qty;
+      delete formattedItem['Item_Order'];
+      return formattedItem;
+    });
     // calculate Order total
-    formattedOrder.total = order.getTotal()
+    formattedOrder.total = order.getTotal();
 
     res.json(formattedOrder);
   } catch (e) {
@@ -64,9 +64,9 @@ router.get('/:orderId', async (req, res, next) => {
 // PUT /api/orders/:orderId; Update Order Item quantity.
 router.put('/:orderId/items/:itemId', async (req, res, next) => {
   try {
-    const { orderId, itemId } = req.params
+    const { orderId, itemId } = req.params;
 
-    const { qty } = req.body
+    const { qty } = req.body;
 
     // delete item from order if qty is 0
     if (!qty) {
@@ -75,7 +75,7 @@ router.put('/:orderId/items/:itemId', async (req, res, next) => {
           orderId: orderId,
           itemId: itemId
         }
-      })
+      });
 
     } else {
       // get/create order item from db
@@ -84,12 +84,12 @@ router.put('/:orderId/items/:itemId', async (req, res, next) => {
           orderId: orderId,
           itemId: itemId
         }
-      })
+      });
 
       // update order item quantity
       await orderItem[0].update({
         qty
-      })
+      });
     }
 
     res.sendStatus(204);
@@ -98,10 +98,10 @@ router.put('/:orderId/items/:itemId', async (req, res, next) => {
   }
 });
 
-// POST /api/orders
+// POST /api/orders; Create order.
 router.post('/', async (req, res, next) => {
   try {
-    const {userId} = req.body;
+    const { userId } = req.body;
     const order = await Order.create({
       userId: userId,
     });
@@ -111,22 +111,37 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-// PUT /api/orders/:id
-router.put('/:id', requireToken, async (req, res, next) => {
+// PUT /api/orders/:orderId; Update order data.
+router.put('/:orderId', requireToken, async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const { paymentId } = req.body;
-    const { shippingAddress } = req.body;
-    const { userId } = req.body;
+    const { orderId } = req.params;
+
+    const {
+      paymentId,
+      recipientName,
+      shippingAddress,
+      status
+    } = req.body;
+
+    const updateData = {};
+    if (paymentId) {
+      updateData.paymentId = paymentId;
+    }
+    if (shippingAddress) {
+      updateData.shippingAddress = shippingAddress;
+    }
+    if (status) {
+      updateData.status = status;
+    }
+    if (recipientName) {
+      updateData.recipientName = recipientName;
+    }
+
     await Order.update(
-      {
-        paymentId: paymentId,
-        status: 'complete',
-        shippingAddress: shippingAddress,
-      },
+      updateData,
       {
         where: {
-          id,
+          id: orderId,
         },
       }
     );
