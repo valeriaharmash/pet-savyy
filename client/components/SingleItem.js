@@ -34,32 +34,18 @@ const SingleItem = () => {
   }, [itemId]);
 
   useEffect(() => {
-    if (user) {
+    if (pendingOrder) {
       dispatch(fetchOrder(pendingOrder.id));
     }
   }, [pendingOrder, refresh]);
 
 
   const handleAddToCart = async () => {
-    if (user) {
-      await dispatch(
-        updateOrderItem({ orderId: pendingOrder.id, itemId, qty: itemQty + qtyInCart })
-      );
-      setRefresh(!refresh);
-      setItemQty(1);
-    } else {
-      // grab the local cart items
-      let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-
-      // check if item is already in the cart
-      const itemIndex = cartItems.findIndex((item) => item.item.id === itemId);
-      if (itemIndex !== -1) {
-        cartItems[itemIndex].qty += parseInt(quantity);
-      } else {
-        cartItems.push({ item, qty: quantity });
-      }
-      localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    }
+    await dispatch(
+      updateOrderItem({ orderId: pendingOrder.id, itemId, qty: itemQty + qtyInCart })
+    );
+    setRefresh(!refresh);
+    setItemQty(1);
   };
 
   if (!item.id) return null;

@@ -106,6 +106,8 @@ router.post('/', async (req, res, next) => {
     const order = await Order.create({
       userId: userId,
     });
+    // default empty array of items to avoid re-fetching the order
+    order.dataValues.items = [];
     res.status(201).json(order);
   } catch (e) {
     next(e);

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import {
@@ -15,30 +15,37 @@ import {
   UpdateItem
 } from './components';
 import { getUserByToken } from './store';
-import { isLoggedIn } from './utils';
+import { doesGuestOrderExit, getGuestOrderId, isLoggedIn, setGuestOrderId } from './utils';
 import Cart from './components/cart';
-import { fetchOrders, setPendingOrder } from './store/slices/orders';
+import { createOrder, fetchOrder, fetchOrders, setPendingOrder } from './store/slices/orders';
 
 const Router = ({}) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
-  const orders = useSelector((state) => state.orders.allOrders);
+  const { allOrders: orders, selectedOrder } = useSelector((state) => state.orders);
+
+  const [initialLoad, setInitialLoad] = useState(true);
 
   // fetch user info from user token if exists
   useEffect(() => {
     if (isLoggedIn()) {
       dispatch(getUserByToken());
     } else {
-      //  TODO fetch guest cart from local storage if any otherwise create blank guest order on local storage
+      if (doesGuestOrderExit()) {
+        dispatch(fetchOrder(getGuestOrderId()));
+      } else {
+        dispatch(createOrder({}));
+      }
     }
   }, []);
 
   // fetch pending user orders once logged in
   useEffect(() => {
-    if (user) {
+    if (initialLoad && user) {
       dispatch(fetchOrders({ userId: user.id, status: 'in progress' }));
+      setInitialLoad(false);
     }
-  }, [user]);
+  }, [user, initialLoad]);
 
   // find pending user's order and set it to redux state (it's guaranteed that logged in use has exactly one
   // "in progress" order at any time)
@@ -56,6 +63,15 @@ const Router = ({}) => {
     }
   }, [orders]);
 
+  // set guest's pending order on initial load.
+  useEffect(() => {
+    if (initialLoad && !user && selectedOrder && selectedOrder.status === 'in progress') {
+      setGuestOrderId(selectedOrder.id);
+      dispatch(setPendingOrder(selectedOrder));
+      setInitialLoad(false);
+    }
+  }, [selectedOrder, initialLoad]);
+
   if (user && user.role === 'admin') {
     return (
       <Routes>
@@ -72,13 +88,13 @@ const Router = ({}) => {
   } else {
     return (
       <Routes>
-        <Route exact path="/login" element={<AuthForm mode="login"/>}/>
-        <Route exact path="/signup" element={<AuthForm mode="signup"/>}/>
+        <Route exact path="/login" element={<AuthForm mode="login" onSuccess={() => setInitialLoad(true)}/>}/>
+        <Route exact path="/signup" element={<AuthForm mode="signup" onSuccess={() => setInitialLoad(true)}/>}/>
         <Route exact path="/items" element={<CreateItem/>}/>
         <Route exact path="/items/:itemId" element={<SingleItem/>}/>
         <Route path="/cart" element={<Cart/>}/>
         <Route path="/checkout" element={<Checkout/>}/>
-        <Route path="/checkout/pay" element={<Payment/>}/>
+        <Route path="/checkout/pay" element={<Payment onSuccess={() => setInitialLoad(true)}/>}/>
         <Route path="/completion" element={<Completion/>}/>
         {user && <Route path="/users/:userId" element={<SingleUser/>}/>}
         <Route path="*" element={<Items/>}/>

@@ -8,8 +8,7 @@ import Payment from './Payment';
 import Completion from './Completion';
 import Dashboard from './Dashboard';
 import SingleUser from './SingleUser';
-import GuestCart from './GuestCart';
-import UserCart from './UserCart';
+import Cart from './Cart';
 import Checkout from './Checkout';
 import Items from './Items';
 
@@ -25,8 +24,7 @@ export {
   SingleUser,
   Payment,
   Completion,
-  GuestCart,
-  UserCart,
+  Cart,
   Checkout,
   Items
 };

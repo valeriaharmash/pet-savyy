@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { fetchOrder, updateOrderItem } from '../store/slices/orders';
 import { ItemSelectOption } from './shared';
 
-const UserCart = () => {
+const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -83,4 +83,4 @@ const UserCart = () => {
   );
 };
 
-export default UserCart;
+export default Cart;

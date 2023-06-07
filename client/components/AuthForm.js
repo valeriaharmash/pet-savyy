@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { authenticate, getUserByToken } from '../store';
-import { mergeLocalCart } from '../store/slices/cart';
 import { createOrder } from '../store/slices/orders';
 
-const AuthForm = ({ mode }) => {
+const AuthForm = ({ mode, onSuccess }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [authMode, setAuthMode] = useState(mode);
@@ -36,26 +35,22 @@ const AuthForm = ({ mode }) => {
       if (result.payload && result.payload.error) {
         setNotification('Invalid username or password.');
       } else {
-        const {payload: user} = await dispatch(getUserByToken());
+        const { payload: user } = await dispatch(getUserByToken());
 
         // create blank order on sign up
-        if(authMode === 'signup') {
+        if (authMode === 'signup') {
           // TODO merge local cart if any
-          dispatch(createOrder({userId: user.id}))
+          dispatch(createOrder({ userId: user.id }));
         }
+        onSuccess();
 
-        // TODO refactor merge local cart logic
-        const localCartItems =
-          JSON.parse(localStorage.getItem('cartItems')) || [];
-        if (localCartItems.length > 0) {
-          const input = { userId: user.id, cartItems: localCartItems };
-          dispatch(mergeLocalCart(input));
-        }
+        // TODO merge local cart if any
+
         setFirstName('');
         setLastName('');
         setEmail('');
         setPassword('');
-        navigate('/home');
+        navigate('/');
       }
     }
   };
@@ -63,60 +58,60 @@ const AuthForm = ({ mode }) => {
   if (!mode) return null;
 
   return (
-    <div className='column'>
+    <div className="column">
       <form onSubmit={handleSubmit} name={name}>
         {authMode === 'signup' && (
-          <div className='row apart'>
-            <label htmlFor='firstName'>
+          <div className="row apart">
+            <label htmlFor="firstName">
               <small>First name</small>
             </label>
             <input
-              name='firstName'
-              type='text'
+              name="firstName"
+              type="text"
               value={firstName}
               onChange={(event) => setFirstName(event.target.value)}
             />
           </div>
         )}
         {authMode === 'signup' && (
-          <div className='row apart'>
-            <label htmlFor='lastName'>
+          <div className="row apart">
+            <label htmlFor="lastName">
               <small>Last name</small>
             </label>
             <input
-              name='lastName'
-              type='text'
+              name="lastName"
+              type="text"
               value={lastName}
               onChange={(event) => setLastName(event.target.value)}
             />
           </div>
         )}
-        <div className='row apart'>
-          <label htmlFor='email'>
+        <div className="row apart">
+          <label htmlFor="email">
             <small>Email</small>
           </label>
           <input
-            name='email'
-            type='email'
+            name="email"
+            type="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
           />
         </div>
-        <div className='row apart'>
-          <label htmlFor='password'>
+        <div className="row apart">
+          <label htmlFor="password">
             <small>Password</small>
           </label>
           <input
-            name='password'
-            type='password'
+            name="password"
+            type="password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
         </div>
         <div>
-          {notification && <div className='notif'>{notification}</div>}
-          <div className='row around'>
-            <button type='submit'>{authMode}</button>
+          {notification && <div className="notif">{notification}</div>}
+          <div className="row around">
+            <button type="submit">{authMode}</button>
           </div>
         </div>
         {/* {error && error.response && <div> {error.response.data} </div>} */}

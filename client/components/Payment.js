@@ -11,7 +11,7 @@ import { createOrder, updateOrder } from '../store/slices/orders';
 // failed 4000000000009995
 // auth 4000002500003155
 
-const CheckoutForm = ({ orderId, shippingAddress, userId, recipientName }) => {
+const CheckoutForm = ({ orderId, shippingAddress, userId, recipientName, onSuccess }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const stripe = useStripe();
@@ -26,38 +26,33 @@ const CheckoutForm = ({ orderId, shippingAddress, userId, recipientName }) => {
 
     setIsProcessing(true);
 
-    if (userId) {
-      const { error, paymentIntent } = await stripe.confirmPayment({
-        elements,
-        confirmParams: {
-          return_url: `${window.location.origin}/completion`,
-        },
-        redirect: 'if_required',
-      });
+    const { error, paymentIntent } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: `${window.location.origin}/completion`,
+      },
+      redirect: 'if_required',
+    });
 
-      if (error) {
-        setMessage(error.message);
-      } else if (paymentIntent && paymentIntent.status === 'succeeded') {
-        await dispatch(updateOrder({
-          paymentId: paymentIntent.id,
-          status: 'complete',
-          shippingAddress,
-          orderId,
-          recipientName
-        }));
-        await dispatch((createOrder({ userId })));
-        // TODO clean up Redux state.
-        navigate('/completion');
-      } else {
-        setMessage('Unexpected state');
-      }
-
-      setIsProcessing(false);
-    } else {
-      localStorage.clear();
-      setIsProcessing(false);
+    if (error) {
+      setMessage(error.message);
+    } else if (paymentIntent && paymentIntent.status === 'succeeded') {
+      await dispatch(updateOrder({
+        paymentId: paymentIntent.id,
+        status: 'complete',
+        shippingAddress,
+        orderId,
+        recipientName
+      }));
+      await dispatch(createOrder({ userId }));
+      onSuccess();
       navigate('/completion');
+    } else {
+      setMessage('Unexpected state');
     }
+
+    setIsProcessing(false);
+
   };
 
   return (
@@ -75,7 +70,7 @@ const CheckoutForm = ({ orderId, shippingAddress, userId, recipientName }) => {
   );
 };
 
-const Payment = () => {
+const Payment = ({ onSuccess }) => {
   const location = useLocation();
   const { userId, amount, orderId, shippingAddress, recipientName } = location.state;
   const [stripePromise, setStripePromise] = useState(null);
@@ -114,6 +109,7 @@ const Payment = () => {
             shippingAddress={shippingAddress}
             userId={userId}
             recipientName={recipientName}
+            onSuccess={onSuccess}
           />
         </Elements>
       )}

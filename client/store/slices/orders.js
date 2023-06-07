@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { setGuestOrderId } from '../../utils';
 
 const initialState = {
   allOrders: null,
@@ -15,6 +16,9 @@ export const createOrder = createAsyncThunk(
       const { data } = await axios.post(`/api/orders`, {
         userId,
       });
+      if (!userId) {
+        setGuestOrderId(data.id);
+      }
       return data;
     } catch (error) {
       console.error('Unable to create order.', error);
