@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const {
+  db,
   models: { Order, Item_Order, Item },
 } = require('../../db');
 const { requireToken } = require('../middleware/auth');
@@ -113,6 +114,9 @@ router.post('/', async (req, res, next) => {
 
 // PUT /api/orders/:orderId; Update order data.
 router.put('/:orderId', requireToken, async (req, res, next) => {
+
+  const tx = await db.transaction();
+
   try {
     const { orderId } = req.params;
 
@@ -143,10 +147,36 @@ router.put('/:orderId', requireToken, async (req, res, next) => {
         where: {
           id: orderId,
         },
+      },
+      {
+        transaction: tx
       }
     );
+
+    if (status === 'complete') {
+      const orderItems = await Item_Order.findAll({
+          where: {
+            orderId,
+          },
+          include: Item
+        }
+      );
+
+      for (let orderItem of orderItems) {
+        await orderItem.item.update({
+            stock: orderItem.item.stock - orderItem.qty
+          },
+          {
+            transaction: tx
+          });
+      }
+    }
+
+    await tx.commit();
+
     res.sendStatus(204);
   } catch (e) {
+    await tx.rollback();
     next(e);
   }
 });
